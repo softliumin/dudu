@@ -16,13 +16,27 @@
       select * from  notice
     </select>
 
-    <insert id="insertNotice">
-          insert into notice (title,content,main_pic,gmt_create,gmt_modified) values (#{title},#{content},{mainPic},now(),now(),);
+    <insert id="insertNotice" >
+          insert into notice
+          (title,content,main_pic,gmt_create,gmt_modified)
+           values
+           (#{title},#{content},#{mainPic},now(),now())
     </insert>
 
     <update id="updateNotice">
        update notice
-      title = #{title},content=#{content},main_pic=#{mainPic},gmt_modified = now()
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                title = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="mainPic != null">
+                main_pic = #{mainPic,jdbcType=VARCHAR},
+            </if>
+        </set>
+     ,gmt_modified = now()
       where  id = #{id}
     </update>
 

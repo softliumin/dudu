@@ -27,7 +27,7 @@ public class UserLevel implements Serializable {
      */
     public Date gmtModified;
 
-    public Integer levelNum;
+    public String levelNum;
 
     public String levelName;
 

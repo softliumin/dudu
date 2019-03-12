@@ -14,7 +14,7 @@
     </resultMap>
 
     <insert id="inertAdmin">
-        insert into admin (username,password,tel_num,gmt_create,gmt_modified) values (username,password,telNum,now(),now())
+        insert into admin (username,password,tel_num,gmt_create,gmt_modified) values (#{username},#{password},#{telNum},now(),now())
     </insert>
 
     <select id="selectOneAdmin" resultMap="adminDO">

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- *
+ *公告相关操作
  */
 @Mapper
 public interface NoticeMapper {

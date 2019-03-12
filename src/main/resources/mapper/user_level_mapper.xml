@@ -13,7 +13,7 @@
     </resultMap>
 
     <insert id="insertUserLevel">
-        insert into  (level_num,level_name,gmt_create,gmt_modified) values (levelNum,levelName,now(),now())
+        insert into user_level (level_num,level_name,gmt_create,gmt_modified) values (#{levelNum},#{levelName},now(),now())
     </insert>
 
     <select id="selectAllUserLevel" resultMap="levelDo">
@@ -21,7 +21,17 @@
     </select>
 
     <update id="updateUserLevel">
-        update  user_level  level_num=#{levelNum},level_name=#{levelName}  where id=#{id}
+        update  user_level
+        <set>
+            <if test="levelNum != null">
+                level_num = #{levelNum,jdbcType=VARCHAR},
+            </if>
+            <if test="levelName != null">
+                level_name = #{levelName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        ,gmt_modified=now()
+         where id=#{id}
     </update>
 
     <delete id="delUserLevel">

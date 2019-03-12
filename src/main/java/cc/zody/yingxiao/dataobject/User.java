@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * 注册用户
+ *
  * @author liumin
  * @since 2019-02-26
  */
@@ -23,10 +24,7 @@ public class User implements Serializable {
 
     public String aliPay;
 
-    public String address;
-
     public String username;
-
     /**
      * 头像地址
      */
@@ -36,16 +34,16 @@ public class User implements Serializable {
     public String password;
 
     /**
-     * 推荐人（手机号）
+     * 推荐人(uid)
      */
-    public String referrer;
+    public Integer referrerId;
 
     /**
      * 用户级别
-     * @see  UserLevel
+     *
+     * @see UserLevel
      */
     public Integer level;
-
 
 
     /**

@@ -1,6 +1,8 @@
 package cc.zody.yingxiao;
 
+import cc.zody.yingxiao.dataobject.User;
 import cc.zody.yingxiao.mapper.UserMapper;
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,31 @@ public class UserTest {
 
 
     @Test
-    public void testInsertUser(){
-
+    public void testInsertUser() {
+        User user = new User();
+        user.setTelNum("11111");
+        user.setPassword("pwd");
+        user.setUsername("username");
+        user.setWeChat("weChat");
+        user.setAliPay("aliPay");
+        user.setReferrerId(2);
+        Integer result = userMapper.insertUser(user);
+        System.out.println(result);
     }
 
     @Test
-    public void testLogin(){
-
+    public void testLogin() {
+        User user = userMapper.selectForLogin("11111");
+        System.out.println(JSON.toJSON(user));
     }
 
     @Test
-    public void testUpdateUser(){
+    public void testUpdateUserLevel() {
+        User user = new User();
+        user.setId(2);
+        user.setLevel(2);
+        Integer result = userMapper.updateUserLevel(user);
+        System.out.println(result);
 
     }
 
@@ -69,9 +85,6 @@ public class UserTest {
     /**
      * 自己注册
      */
-
-
-
 
 
 }

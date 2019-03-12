@@ -3,17 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cc.zody.yingxiao.mapper.UserMapper">
-    
+
     <resultMap id="userDo" type="cc.zody.yingxiao.dataobject.User">
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="tel_num" jdbcType="VARCHAR" property="telNum"/>
         <result column="we_chat" jdbcType="VARCHAR" property="weChat"/>
         <result column="ali_pay" jdbcType="VARCHAR" property="aliPay"/>
-        <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="referrer" jdbcType="VARCHAR" property="referrer"/>
+        <result column="referrer_id" jdbcType="INTEGER" property="referrerId"/>
         <result column="level" jdbcType="INTEGER" property="level"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
@@ -25,22 +24,16 @@
         <if test='aliPay != null and aliPay != "" '>
             ali_pay,
         </if>
-        <if test='address != null and address != "" '>
-            address,
-        </if>
-        username,password,referrer,gmt_create,gmt_modified)
+        username,password,referrer_id,gmt_create,gmt_modified)
         values
-        (,#{telNum},#{weChat},
+        (#{telNum},#{weChat},
         <if test='aliPay != null and aliPay != "" '>
             #{aliPay},
         </if>
-        <if test='address != null and address != "" '>
-            #{address},
-        </if>
-        #{username},#{password},#{},now(),now())
+        #{username},#{password},#{referrerId},now(),now())
     </insert>
 
-    <select id="selectUserForPage" resultMap="userDo" >
+    <select id="selectUserForPage" resultMap="userDo">
         select * from user where 1=1
 
         <if test="id != null">
@@ -51,8 +44,8 @@
             and tel_num = #{telNum}
         </if>
 
-        <if test="referrer != null">
-            and referrer = #{referrer}
+        <if test="referrerId != null">
+            and referrer_id = #{referrerId}
         </if>
 
         <if test="level != null">
@@ -61,18 +54,19 @@
         limit 100
     </select>
 
-    <update id="updateUser">
-      update user
-      level = #{level}
-      ,gmt_modified = now()
-      where  1=1 and
-       id = #{id}
+    <update id="updateUserLevel">
+        update user
+        <set>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+        </set>
+        ,gmt_modified = now()
+        where id = #{id}
     </update>
 
     <select id="selectForLogin" resultMap="userDo">
-        select * from user where username = #{username} limit 1;
+        select * from user where tel_num = #{telNum} limit 1;
     </select>
-
-
 
 </mapper>

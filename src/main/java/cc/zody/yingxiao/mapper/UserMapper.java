@@ -18,8 +18,8 @@ public interface UserMapper {
 
     List<User> selectUserForPage(User user);
 
-    User selectForLogin( @Param("username")String username);
+    User selectForLogin( @Param("telNum")String telNum);
 
-    Integer updateUser(User user);
+    Integer updateUserLevel(User user);
 
 }

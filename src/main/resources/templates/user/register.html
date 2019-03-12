@@ -1,0 +1,47 @@
+<h1>欢迎注册</h1>
+<form action="/user/register" method="post">
+    <li class="setting-item flex_panel">
+        <input type="text" name="telNum" id="re-telNum" value="" placeholder="请输入手机号码">
+        <span id="telNum_notice"></span>
+    </li>
+
+    <li class="setting-item flex_panel">
+        <input type="text" name="username" id="re-password" value="" placeholder="请设置登录密码">
+        <span id="password_notice"></span>
+    </li>
+
+    <li class="setting-item flex_panel">
+        <input type="text" name="username" id="re-repassword" value="" placeholder="请再次确认登录密码">
+        <span id="repassword_notice"></span>
+    </li>
+    <li class="setting-item flex_panel">
+        <input type="text" name="username" id="re-username" value="" placeholder="请输入您的昵称" class="c-form-txt-normal main" onkeyup="this.value=this.value.replace(/\s+/g,'')">
+        <span id="username_notice"></span>
+    </li>
+
+    <li class="setting-item flex_panel">
+        <input type="text" name="referrer" id="re-referrer"  maxlength="11"   value=""  placeholder="填写邀请人手机号码"  >
+        <span id="referrer_notice"></span>
+    </li>
+
+    <li class="setting-item flex_panel">
+        <input type="text"  name="weChat" id="re-weChat" value="" maxlength="16"  placeholder="请填写微信号"   class="main">
+        <span id="weChat_notice"></span>
+
+    </li>
+
+    <li class="setting-item flex_panel">
+        <input type="text"  name="aliPay" id="re-aliPay" value="" maxlength="16" placeholder="请填写支付宝号"  class="main">
+        <span id="aliPay_notice"></span>
+
+    </li>
+    <li class="setting-item flex_panel" style="display:none;">
+        <label>
+            <i class="check_a"></i> <input type="checkbox" style="display: none;" value="1" onclick="agree(this)" name="agree_pact" checked> <span>同意拓客新零售平台服务协议</span>
+        </label>
+    </li>
+</form>
+
+<div class="lsu-submit">
+    <input type="button" class="btn" name="" id="" onclick="checkSubmit()" value="注 册" />
+</div>

@@ -1,0 +1,142 @@
+<html xmlns:th=http://www.thymeleaf.org></html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+
+</head>
+<body class="">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image:url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+
+<div class="body_bg"></div>
+
+
+<div class="logo-wrap-bg">
+    <a class="login-logo-wrap" href="javascript:void(0);">
+        <div>
+            <img  src="/static/img/theme/login_logo.png" alt="LOGO" >
+        </div>
+    </a>
+    <p>嘟嘟闯关游戏</p>
+</div>
+<div class="loginsingup-input loginsingup-input_login">
+    <!--登录表单-s-->
+    <h1>登录</h1>
+    <form  id="loginform" method="post"  >
+        <input type="hidden" name="referurl" id="referurl" value="/Mobile/User/index.html">
+        <div class="lsu">
+            <span class="ico ico-username"></span>
+            <input type="text" name="username" id="username" value=""  placeholder="请输入您的账号" maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+        </div>
+        <div class="lsu">
+            <span class="ico ico-password"></span>
+            <input type="password" name="password" id="password" value="" placeholder="请输入您的登录密码"  onkeyup="this.value=this.value.replace(/\s+/g,'')">
+        </div>
+
+    </form>
+    <div class="signup-find p">
+        <a class="note fl" href="/mobile/User/reg.html">注册账号</a>
+    </div>
+    <div class="lsu-submit">
+        <input type="button"  value="登 录"  onclick="submitverify()" class="btn_big1"  />
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    function verify(){
+        $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&r='+Math.random());
+    }
+
+    //复选框状态
+    function remember(obj){
+        var che= $(obj).attr("class");
+        if(che == 'che check_t'){
+            $("#autologin").prop('checked',false);
+        }else{
+            $("#autologin").prop('checked',true);
+        }
+    }
+    function submitverify()
+    {
+        var username = $.trim($('#username').val());
+        var password = $.trim($('#password').val());
+        var remember = $('#remember').val();
+        var referurl = $('#referurl').val();
+        var verify_code = $.trim($('#verify_code').val());
+        if(username == ''){
+            showErrorMsg('用户名不能为空!');
+            return false;
+        }
+        if(!checkMobile(username) && !checkEmail(username)){
+            showErrorMsg('账号格式不匹配!');
+            return false;
+        }
+        if(password == ''){
+            showErrorMsg('密码不能为空!');
+            return false;
+        }
+        var codeExist = $('#verify_code').length;
+        if (codeExist && verify_code == ''){
+            showErrorMsg('验证码不能为空!');
+            return false;
+        }
+
+        var data = {username:username,password:password,referurl:encodeURIComponent(referurl)};
+        if (codeExist) {
+            data.verify_code = verify_code;
+        }
+        $.ajax({
+            type : 'post',
+            url : '/index.php?m=Mobile&c=User&a=do_login&t='+Math.random(),
+            data : data,
+            dataType : 'json',
+            success : function(data){
+                if(data.status == 1){
+                    var url = decodeURIComponent(data.url);
+
+                    if (url.indexOf('user') >= 0 && url.indexOf('login') >= 0 || url == '') {
+                        window.location.href = '/index.php/mobile';
+                    }else{
+                        window.location.href = '/index.php/mobile';
+                        // window.location.href = "/mobile/user/index.html";
+
+                    }
+                }else if(data.status == -3){
+                    // console.log(data);
+                    window.location.href = data.url;
+                    // layer.open({content: data.msg,time:5});
+                }else{
+                    layer.open({content: data.msg,time:2,end:function () {
+                            if (codeExist) {
+                                // verify();
+                            } else {
+                                // location.reload();
+                            }
+                        }});
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                showErrorMsg('网络异常，请稍候重试');
+            }
+        })
+    }
+</script>
+
+</body>

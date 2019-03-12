@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.zody.yingxiao.mapper.UserMapper">
+    
+    <resultMap id="userDo" type="cc.zody.yingxiao.dataobject.User">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="tel_num" jdbcType="VARCHAR" property="telNum"/>
+        <result column="we_chat" jdbcType="VARCHAR" property="weChat"/>
+        <result column="ali_pay" jdbcType="VARCHAR" property="aliPay"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="referrer" jdbcType="VARCHAR" property="referrer"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="insertUser">
+        insert into user
+        (tel_num,we_chat,
+        <if test='aliPay != null and aliPay != "" '>
+            ali_pay,
+        </if>
+        <if test='address != null and address != "" '>
+            address,
+        </if>
+        username,password,referrer,gmt_create,gmt_modified)
+        values
+        (,#{telNum},#{weChat},
+        <if test='aliPay != null and aliPay != "" '>
+            #{aliPay},
+        </if>
+        <if test='address != null and address != "" '>
+            #{address},
+        </if>
+        #{username},#{password},#{},now(),now())
+    </insert>
+
+    <select id="selectUserForPage" resultMap="userDo" >
+        select * from user where 1=1
+
+        <if test="id != null">
+            and id = #{id}
+        </if>
+
+        <if test="telNum != null">
+            and tel_num = #{telNum}
+        </if>
+
+        <if test="referrer != null">
+            and referrer = #{referrer}
+        </if>
+
+        <if test="level != null">
+            and level = #{level}
+        </if>
+        limit 100
+    </select>
+
+    <update id="updateUser">
+      update user
+      level = #{level}
+      ,gmt_modified = now()
+      where  1=1 and
+       id = #{id}
+    </update>
+
+    <select id="selectForLogin" resultMap="userDo">
+        select * from user where username = #{username} limit 1;
+    </select>
+
+
+
+</mapper>

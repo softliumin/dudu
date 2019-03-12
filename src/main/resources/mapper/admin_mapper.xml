@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.zody.yingxiao.mapper.AdminMapper">
+
+    <resultMap id="adminDO" type="cc.zody.yingxiao.dataobject.Admin">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="tel_num" jdbcType="VARCHAR" property="telNum"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="inertAdmin">
+        insert into admin (username,password,tel_num,gmt_create,gmt_modified) values (username,password,telNum,now(),now())
+    </insert>
+
+    <select id="selectOneAdmin" resultMap="adminDO">
+      select * from admin where id=#{id} limit 1
+    </select>
+
+    <select id="selectAllAdmin" resultMap="adminDO">
+      select * from admin
+    </select>
+
+
+    <delete id="delAdmin">
+        delete from  admin  where id=#{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.zody.yingxiao.mapper.UserLevelMapper">
+
+    <resultMap id="levelDo" type="cc.zody.yingxiao.dataobject.UserLevel">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="level_num" jdbcType="VARCHAR" property="levelNum"/>
+        <result column="level_name" jdbcType="VARCHAR" property="levelName"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="insertUserLevel">
+        insert into  (level_num,level_name,gmt_create,gmt_modified) values (levelNum,levelName,now(),now())
+    </insert>
+
+    <select id="selectAllUserLevel" resultMap="levelDo">
+        select * from user_level
+    </select>
+
+    <update id="updateUserLevel">
+        update  user_level  level_num=#{levelNum},level_name=#{levelName}  where id=#{id}
+    </update>
+
+    <delete id="delUserLevel">
+        delete from user_level where id=#{id}
+    </delete>
+</mapper>

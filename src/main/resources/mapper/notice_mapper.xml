@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.zody.yingxiao.mapper.NoticeMapper">
+    <resultMap id="noticeDo" type="cc.zody.yingxiao.dataobject.Notice">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="main_pic" jdbcType="VARCHAR" property="mainPic"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <select id="selectAllNotice" resultMap="noticeDo">
+      select * from  notice
+    </select>
+
+    <insert id="insertNotice">
+          insert into notice (title,content,main_pic,gmt_create,gmt_modified) values (#{title},#{content},{mainPic},now(),now(),);
+    </insert>
+
+    <update id="updateNotice">
+       update notice
+      title = #{title},content=#{content},main_pic=#{mainPic},gmt_modified = now()
+      where  id = #{id}
+    </update>
+
+    <delete id="delNotice">
+        delete  from notice where id=#{id}
+    </delete>
+
+</mapper>

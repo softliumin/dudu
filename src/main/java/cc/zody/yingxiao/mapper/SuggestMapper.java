@@ -17,6 +17,6 @@ public interface SuggestMapper {
 
     Integer delSuggest(Suggest suggest);
 
-    List<Suggest> querySuggest(Suggest suggest);
+    List<Suggest> querySuggest();
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.zody.yingxiao.mapper.IndexImgMapper">
+
+    <resultMap id="indexImgDO" type="cc.zody.yingxiao.dataobject.IndexImg">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
+        <result column="href_url" jdbcType="VARCHAR" property="hrefUrl"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="insertIndexImg">
+        insert into img_index (title,pic_url,href_url,gmt_create,gmt_modified) values (#{title},#{picUrl},#{hrefUrl},now(),now())
+    </insert>
+
+    <select id="queryAllIndexImg" resultMap="indexImgDO">
+      select * from img_index
+    </select>
+
+
+    <delete id="delIndexImg">
+        delete from  img_index  where id=#{id}
+    </delete>
+
+</mapper>

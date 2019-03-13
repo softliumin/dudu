@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.zody.yingxiao.mapper.SuggestMapper">
+
+    <resultMap id="suggestDo" type="cc.zody.yingxiao.dataobject.Suggest">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="user_tel" jdbcType="VARCHAR" property="userTel"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+    <insert id="insertSuggest">
+       insert into suggest
+          (user_id,user_tel,title,content,pic_url,gmt_create,gmt_modified)
+           values
+           (#{userId},#{userTel},#{title},#{content},#{picUrl},now(),now())
+    </insert>
+
+    <select id="querySuggest" resultMap="suggestDo">
+        select  * from suggest where 1=1
+    </select>
+
+    <delete id="delSuggest">
+      delete  from suggest where id=#{id}
+    </delete>
+
+</mapper>

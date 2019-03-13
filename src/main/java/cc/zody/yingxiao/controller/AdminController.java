@@ -26,7 +26,6 @@ import java.util.Map;
  * @author liumin
  * @since 2019-02-26
  */
-@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -45,7 +44,6 @@ public class AdminController {
      * 管理员登录
      */
     @RequestMapping("/login")
-    @ResponseBody
     public String login(String telNum, String password) {
 
         try {
@@ -117,6 +115,10 @@ public class AdminController {
         return null;
     }
 
+    public String addIndexImgPage(){
+        return "admin/indexImgPage";
+    }
+
 
     /**
      * 增加主要轮播对象
@@ -124,6 +126,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/indexImg/add")
+    @ResponseBody
     public DdResult<Boolean> addIndexImg() {
         DdResult<Boolean> result = DdResult.getSuccessResult();
         try {
@@ -149,6 +152,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/indexImg/del")
+    @ResponseBody
     public DdResult delIndexImg(Integer id) {
         DdResult<Boolean> result = DdResult.getSuccessResult();
         try {

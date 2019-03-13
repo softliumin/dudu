@@ -130,9 +130,8 @@ public class YingxiaoApplicationTests {
     @Test
     @Ignore
     public void testAdminSelectOne(){
-        Admin admin = new Admin();
-        admin.setId(2);
-        Admin result = adminMapper.selectOneAdmin(admin);
+
+        Admin result = adminMapper.selectOneAdmin("123");
         System.out.println("===================="+result);
     }
 

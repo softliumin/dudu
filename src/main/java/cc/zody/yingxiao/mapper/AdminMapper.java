@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
 
-    Admin selectOneAdmin(Admin admin);
+    Admin selectOneAdmin(String telNum);
 
     List<Admin> selectAllAdmin();
 

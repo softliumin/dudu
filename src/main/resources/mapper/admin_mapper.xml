@@ -18,7 +18,7 @@
     </insert>
 
     <select id="selectOneAdmin" resultMap="adminDO">
-      select * from admin where id=#{id} limit 1
+      select * from admin where tel_num=#{telNum} limit 1
     </select>
 
     <select id="selectAllAdmin" resultMap="adminDO">

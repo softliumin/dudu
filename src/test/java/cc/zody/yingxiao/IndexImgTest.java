@@ -23,7 +23,7 @@ public class IndexImgTest {
     IndexImgMapper indexImgMapper;
 
     @Test
-    public void testAdd(){
+    public void testAdd() throws Exception{
         for(int x=0;x<10;x++){
             IndexImg indexImg = new IndexImg();
             indexImg.setTitle("ttt");
@@ -36,13 +36,13 @@ public class IndexImgTest {
     }
 
     @Test
-    public void testSelectAll(){
+    public void testSelectAll()throws Exception{
         System.out.println(JSON.toJSON(indexImgMapper.queryAllIndexImg()));
     }
 
 
     @Test
-    public void testDel(){
+    public void testDel()throws Exception{
         IndexImg indexImg = new IndexImg();
         indexImg.setId(1);
         Integer result = indexImgMapper.delIndexImg(indexImg);

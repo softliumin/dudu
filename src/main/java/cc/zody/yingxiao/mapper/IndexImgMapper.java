@@ -13,9 +13,9 @@ import java.util.List;
 @Mapper
 public interface IndexImgMapper {
 
-    Integer insertIndexImg(IndexImg indexImg);
+    Integer insertIndexImg(IndexImg indexImg)throws Exception;
 
-    Integer delIndexImg(IndexImg indexImg);
+    Integer delIndexImg(IndexImg indexImg)throws Exception;
 
-    List<IndexImg> queryAllIndexImg();
+    List<IndexImg> queryAllIndexImg()throws Exception;
 }

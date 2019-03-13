@@ -56,9 +56,6 @@ public class AdminController {
         return "login";
     }
 
-    public AdminController() {
-    }
-
 
     /**
      * 查询所有用户信息
@@ -115,6 +112,7 @@ public class AdminController {
         return null;
     }
 
+    @RequestMapping(value = "/indexImg/page")
     public String addIndexImgPage(){
         return "admin/indexImgPage";
     }

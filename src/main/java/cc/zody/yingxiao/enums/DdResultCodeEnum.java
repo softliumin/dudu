@@ -7,7 +7,8 @@ package cc.zody.yingxiao.enums;
  */
 public enum  DdResultCodeEnum {
     SUCCESS(1, "成功"),
-    UNKNOW_EXCEPTION(-1, "未知错误"),;
+    UNKNOW_EXCEPTION(-1, "未知错误"),
+    DB_ERROR_EXCEPTION(-2, "数据库错误"),;
 
     private Integer code;
     private String msg;

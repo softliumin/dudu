@@ -1,11 +1,13 @@
 package cc.zody.yingxiao.controller;
 
+import cc.zody.yingxiao.dataobject.IndexImg;
 import cc.zody.yingxiao.dataobject.User;
 import cc.zody.yingxiao.dataobject.UserLevel;
 import cc.zody.yingxiao.enums.DdResultCodeEnum;
 import cc.zody.yingxiao.model.DdResult;
 import cc.zody.yingxiao.model.UserVO;
 import cc.zody.yingxiao.service.AdminService;
+import cc.zody.yingxiao.service.IndexImgService;
 import cc.zody.yingxiao.service.UserLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -34,6 +36,10 @@ public class AdminController {
 
     @Autowired
     private UserLevelService userLevelService;
+
+    @Autowired
+    IndexImgService indexImgService;
+
 
     /**
      * 管理员登录
@@ -70,11 +76,11 @@ public class AdminController {
 
             List<User> list = adminService.queryAllUser();
             if (!CollectionUtils.isEmpty(list)) {
-                Map<Integer,String> levelMap = new HashMap<>();
-                List<UserLevel> userLevelList=userLevelService.queryAllLevel();
-                if (!CollectionUtils.isEmpty(userLevelList)){
-                    for (UserLevel level:userLevelList){
-                        levelMap.put(level.getId(),level.getLevelName());
+                Map<Integer, String> levelMap = new HashMap<>();
+                List<UserLevel> userLevelList = userLevelService.queryAllLevel();
+                if (!CollectionUtils.isEmpty(userLevelList)) {
+                    for (UserLevel level : userLevelList) {
+                        levelMap.put(level.getId(), level.getLevelName());
                     }
                 }
 
@@ -110,6 +116,55 @@ public class AdminController {
         }
         return null;
     }
+
+
+    /**
+     * 增加主要轮播对象
+     *
+     * @return
+     */
+    @RequestMapping(value = "/indexImg/add")
+    public DdResult<Boolean> addIndexImg() {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            IndexImg indexImg = new IndexImg();
+//            indexImg.setTitle();
+//            indexImg.setHrefUrl();
+//            indexImg.setPicUrl();
+
+            Integer dbResult =  indexImgService.insertIndexImg(indexImg);
+            if (null == dbResult || dbResult != 1){
+                result = DdResult.getFailureResult(DdResultCodeEnum.DB_ERROR_EXCEPTION.code(), DdResultCodeEnum.DB_ERROR_EXCEPTION.name());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+    /**
+     * 删除主要轮播对象
+     *
+     * @return
+     */
+    @RequestMapping(value = "/indexImg/del")
+    public DdResult delIndexImg(Integer id) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            IndexImg indexImg = new IndexImg();
+            indexImg.setId(id);
+            Integer dbResult = indexImgService.delIndexImg(indexImg);
+            if (null == dbResult || dbResult != 1){
+                result = DdResult.getFailureResult(DdResultCodeEnum.DB_ERROR_EXCEPTION.code(), DdResultCodeEnum.DB_ERROR_EXCEPTION.name());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
+        }
+        return result;
+    }
+
 
     private String dateToStr(Date date) throws Exception {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -1,0 +1,85 @@
+.classreturn {
+    /*background: rgba(255, 255, 255, .1);*/
+}
+.credit_index{
+    height: calc(100vh - 1.87733rem);
+    /*background: rgba(255, 255, 255, .1);*/
+    padding-top: .853rem;
+}
+.credit_list_box{
+    margin: 0 .427rem .853rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    padding-bottom: .853rem;
+}
+.credit_list{
+    margin: 0 .427rem;
+    padding: 0 .427rem;
+    /* background: rgba(255, 255, 255, .1); */
+    border-radius: .3rem;
+}
+.credit_list li{
+    padding: .5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    /* border-bottom: 1px solid rgba(255, 255, 255, .1); */
+}
+.credit_list li:last-child{
+    border: none;
+}
+.credit_list li > div{
+    background: #6356E2;
+    height: 1.493rem;
+    border-radius: .3rem;
+    width: 3.84rem;
+    color: #BCB5FF;
+    font-size: .597rem;
+    text-align: center;
+    line-height:1.493rem;
+}
+.credit_list li > div.item{
+    background: #6356E2;
+    height: 1.493rem;
+    border-radius: .3rem;
+    width: 3.84rem;
+    font-weight: 600;
+    font-size: .512rem;
+    color: #fff;
+}
+.credit_list li > div  img{
+    width: .768rem;
+    height: .768rem;
+    vertical-align: middle;
+    margin-right: .341rem;
+}
+.credit_list li > div.score{
+    width: 100%;
+}
+.credit_list li > div.score span{
+    width: 100%;
+    font-weight: 600;
+    color: #fff;
+}
+.credit_rules_box{
+    padding: 0 1.28rem;
+    color: rgba(255, 255, 255, .8);
+}
+.credit_rules_box  .title{
+    border-left: 2px solid #FF8C00;
+    font-size: .555rem;
+    padding-left: .5rem;
+    margin: .64rem 0;
+}
+.credit_rules_box .credit_rules{
+    color: rgba(255, 255, 255, .6);
+}
+.credit_rules_box .credit_rules li{
+    font-size: .512rem;
+    margin-bottom: .384rem;
+    letter-spacing: 1px;
+}
+.credit_rules_box textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: .554667rem;
+}

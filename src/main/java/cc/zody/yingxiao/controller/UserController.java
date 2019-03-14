@@ -167,6 +167,22 @@ public class UserController {
     }
 
     /**
+     * 综合信用评分
+     * @return
+     */
+    @RequestMapping("/credit")
+    public String credit() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/credit";
+    }
+
+
+
+    /**
      * 收货地址管理
      * @param
      * @return

@@ -1,0 +1,124 @@
+.identity-input input{
+    line-height: 1.92rem;
+    height: 1.92rem;
+    vertical-align: middle;
+    background-color: transparent;
+    padding-left: 0.384rem;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    outline: none;
+}
+.identity-input{
+    border-bottom: 1px solid #999;
+}
+.addIdentity{
+    padding:0.6rem 0.386rem 0;
+}
+.addIdentity .id_card_dl{
+    width: 100%;
+    margin-top: 0.6rem;
+}
+.id_card_content{
+    margin: .2rem 1rem 1rem;
+
+}
+.id_card_dl .shcph img{
+    width: 100%;
+    height: 100%;
+}
+.addIdentity .identityTitle{
+    color: rgba(255,255,255,0.8);
+}
+.realNameModule{
+}
+.authenticated_name,.authenticated_identity{
+    line-height: 1.92rem;
+    height: 1.92rem;
+    vertical-align: middle;
+    background-color: transparent;
+    padding-left: 0.384rem;
+    color: rgba(255,255,255,0.8);
+}
+.authenticatedModule{
+    margin: 0.386rem;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 0.2rem;
+    padding: 0.4rem;
+}
+.authenticated_name{
+    border-bottom: 1px solid  rgba(255,255,255,1);
+    position: relative;
+
+}
+.authenticatedModule span{
+    padding-left: 0.3rem;
+}
+.authenticatedModule .authenticated_icon{
+    position: absolute;
+    top: -0.2rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background-image: url(../images/authenticated.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+/* 弹窗 */
+/* 认证提交之后 成功--失败*/
+.mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 90;
+}
+
+#realName_submitEnd1 .realName_submitEndCotent {
+    background: #fff;
+    position: fixed;
+    width: 10.667rem;
+    border-radius: .3rem;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+#realName_submitEnd1 .realName_submitEndCotent .title1{
+    height: 1.963rem;
+    font-size: .683rem;
+    text-align: center;
+    line-height: 1.963rem;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+#realName_submitEnd1 .realName_submitEndCotent .info1{
+    font-size: .512rem;
+    color: #666;
+    padding: .427rem .853rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+#realName_submitEnd1 .realName_submitEndCotent .info1 p{
+    line-height: .85rem;
+}
+.realName_submitEndCotent  > a{
+    display: inline-block;
+    width: 100%;
+    height: 1.92rem;
+    color: #6E71F6;
+    font-size: .683rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.92rem;
+    letter-spacing: 1px;
+}
+#realName_submitEnd2 .realName_submitEndCotent .info2{
+    font-size: .597rem;
+    color: #fff;
+    font-weight: 600;
+}
+.coupon_endStyle.layermchild{
+    max-width: 61.33%;
+}

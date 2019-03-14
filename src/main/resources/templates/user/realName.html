@@ -38,16 +38,15 @@
 <div class="classreturn loginsignup ">
     <div class="content">
         <div class="ds-in-bl return [back]">
-            <a id="[back]" href="/index.php/Mobile/User/userDetail.html">
+            <a id="[back]" href="/user/userDetail">
                 <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
-                <!-- <img src="/template/mobile/rainbow/static/images/return.png" alt="返回"> -->
             </a>
         </div>
         <div class="ds-in-bl search center">
             <span>实名认证</span>
         </div>
         <div class="ds-in-bl menu hide">
-            <a href="javascript:void(0);"><img src="/template/mobile/rainbow/static/images/class1.png" alt="菜单"></a>
+            <a href="javascript:void(0);"><img src="/static/img/theme/class1.png" alt="菜单"></a>
         </div>
     </div>
 </div>
@@ -55,38 +54,7 @@
     <div class="footer up-tpnavf-head">
         <div class="up-tpnavf-i"> </div>
         <ul>
-            <li>
-                <a class="yello" href="/index.php/mobile/Index/index.html">
-                    <div class="icon">
-                        <i class="icon-shouye iconfont"></i>
-                        <p>首页</p>
-                    </div>
-                </a>
-            </li>
-            <!--  <li>
-                 <a href="/index.php/mobile/Goods/categoryList.html">
-                     <div class="icon">
-                         <i class="icon-fenlei iconfont"></i>
-                         <p>分类</p>
-                     </div>
-                 </a>
-             </li> -->
-            <li>
-                <a href="/index.php/mobile/Cart/index.html">
-                    <div class="icon">
-                        <i class="icon-gouwuche iconfont"></i>
-                        <p>购物车</p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="/index.php/mobile/User/index.html">
-                    <div class="icon">
-                        <i class="icon-wode iconfont"></i>
-                        <p>我的</p>
-                    </div>
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>
@@ -100,7 +68,7 @@
         })
     })
 </script>
-<link rel="stylesheet" href="/template/mobile/rainbow/static/css/realName.css">
+<link rel="stylesheet" href="/static/css/realName.css">
 <div class="realNameModule">
     <!--上传身份证图片认证-->
     <form method="post" action="/index.php/mobile/User/upIdentityCard.html" style="display: none;" id="card_form" enctype="multipart/form-data">
@@ -117,18 +85,16 @@
                 <div class="id_card_dl fl">
                     <label class="file"  for="file_img_list1" style="cursor:pointer;">
                         <div class="shcph" id="fileList1">
-                            <img src="" onerror="this.src='/template/mobile/rainbow/static/images/zhengm.png'" alt="" style="object-fit: initial;">
+                            <img src=""  alt="" style="object-fit: initial;">
                             <input type="file" accept="image/*" id="file_img_list1" name="file_img_list1" style="display:none;" onchange="uploadVoucher(this,1)">
-                            <!-- <input type="hidden" name="img_list1" id="img_list1" /> -->
                         </div>
                     </label>
                 </div>
                 <div class="id_card_dl fl">
                     <label class="file"  for="file_img_list2" style="cursor:pointer;">
                         <div class="shcph" id="fileList2">
-                            <img src="" onerror="this.src='/template/mobile/rainbow/static/images/beim.png'" alt="" style="object-fit: initial;">
+                            <img src=""  alt="" style="object-fit: initial;">
                             <input type="file" accept="image/*" id="file_img_list2" name="file_img_list2" style="display:none;" onchange="uploadVoucher(this,2)">
-                            <!-- <input type="hidden" name="img_list2" id="img_list2" /> -->
                         </div>
                     </label>
                 </div>
@@ -167,7 +133,6 @@
     <a href="javascript:;" class="btn" id="submit">提交申请</a>
 </div>
 
-<!-- <script src="/template/mobile/rainbow/static/js/uploader_mobile.js"></script> -->
 <script type="text/javascript">
 
 </script>
@@ -212,12 +177,6 @@
         $("#fileList"+index).find('img').remove();
         $("#fileList"+index).append(img);
     }
-    // function handleFiles2(id) {
-    //     mobUploader("#file_img_list" + id, "#fileList" + id, function (r) {
-    //         $("#img_list" + id).val(r.url);
-    //         console.log(r.url);
-    //     });
-    // };
 
     //显示上传照片
     var img_list = 0;
@@ -333,31 +292,7 @@
         }
 
         $('#card_form').submit();
-        // return;
-        // $.ajax({
-        //     type: "post",
-        //     url: "/index.php/mobile/User/upIdentityCard.html",
-        //     data: {
-        //         true_name: name,
-        //         card_number: card_id,
-        //     },
-        //     dataType: 'json',
-        //     success: function (data) {
-        //         if (data.code == 1) {
-        //             layer.open({
-        //                 content: data.msg,
-        //                 skin: 'msg',
-        //                 time: 2 //2秒后自动关闭
-        //                     ,
-        //                 end: function () {
-        //                     window.location.href = '/index.php/mobile/User/userinfo.html';
-        //                 }
-        //             });
-        //         } else {
-        //             showErrorMsg(data.msg);
-        //         }
-        //     }
-        // });
+
     });
 </script>
 <script>

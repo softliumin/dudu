@@ -10,6 +10,7 @@ import cc.zody.yingxiao.service.AdminService;
 import cc.zody.yingxiao.service.IndexImgService;
 import cc.zody.yingxiao.service.UserLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ import java.util.Map;
  * @since 2019-02-26
  */
 @RequestMapping("/admin")
+@Controller
 public class AdminController {
 
     @Autowired
@@ -112,7 +114,7 @@ public class AdminController {
         return null;
     }
 
-    @RequestMapping(value = "/indexImg/page")
+    @RequestMapping("/indexImg/page")
     public String addIndexImgPage(){
         return "admin/indexImgPage";
     }

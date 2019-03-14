@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js" type="text/javascript"></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="">
+<style>
+    .body_bg {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="/index.php/mobile/Index/index.html">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>投诉列表</span>
+        </div>
+        <div class="ds-in-bl menu tpnavf">
+            <a href="javascript:void(0);">
+                <img src="/static/img/theme/class1.png" alt="菜单">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"></div>
+        <ul>
+
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() >= 1) {
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+<link rel="stylesheet" href="/template/mobile/rainbow/static/css/order.css">
+<style>
+    .classreturn {
+        background-color: rgba(255, 255, 255, .1);
+    }
+</style>
+<div class="compaintNav">
+    <ul>
+        <li class="active" data-type="0">
+            <a href="javascript:;">我发起的投诉</a>
+        </li>
+        <li data-type="1">
+            <a href="javascript:;">投诉我的</a>
+        </li>
+    </ul>
+</div>
+<div class="complaintList">
+
+</div>
+
+<!-- 是否加载更多 -->
+<div class="to-load">
+    <div class="load-tip">
+        <img id="loading_img" src="/static/img/theme/loader.gif" alt=""/>
+        <span class="end_line" id="tip-text">已加载全部内容</span>
+    </div>
+</div>
+
+
+<script>
+    var page = 1;
+    var before_request = 1;
+    var type = 0;
+    // 请求列表
+    getList();
+
+    // 切换nav
+    $('.compaintNav li').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        type = $(this).data('type');
+        page = 1;
+        before_request = 1;
+        getList();
+    })
+
+    function getList() {
+        $.ajax({
+            type: "GET",
+            url: "/index.php/mobile/complaint/complaintList.html",
+            data: {
+                p: 1,
+                type: type
+            },
+            success: function (data) {
+                if ($.trim(data) == '') {
+                    $(".complaintList").empty();
+                    $('.to-load').show();
+                } else {
+                    $(".complaintList").html(data);
+                }
+            }
+        });
+        $('#loading_img').hide();
+        $("#tip-text").hide();
+    }
+
+    $(window).scroll(
+        function () {
+            var scrollTop = parseInt($(this).scrollTop());
+            var scrollHeight = parseInt($(document).height());
+            var windowHeight = parseInt($(this).height());
+            if (scrollTop + windowHeight >= scrollHeight - 50 && before_request == 1) {
+                ajax_sourch_submit();//调用加载更多
+            }
+        }
+    );
+
+    /**
+     *加载更多
+     */
+    function ajax_sourch_submit() {
+        if (before_request == 0) {
+            return false;
+        }
+        page++;
+        before_request = 0;
+        $('#loading_img').show();
+        $.ajax({
+            type: "GET",
+            url: "/index.php/mobile/complaint/complaintList.html",
+            data: {
+                p: page,
+                type: type
+            },
+            success: function (data) {
+                $('#loading_img').hide();
+                if ($.trim(data) == '' || !data) {
+                    $("#tip-text").show();
+                    return false;
+                } else {
+                    before_request = 1;
+                    $(".complaintList").append(data);
+                }
+            },
+            error: function (data) {
+                $('#loading_img').hide();
+            }
+        });
+    }
+
+    /**
+     * 撤销
+     */
+    function revoke(element, id, uid) {
+        layer.open({
+            content: "是否撤销投诉",
+            btn: ["是", "否"],
+            yes: function (index) {
+                $.ajax({
+                    type: "GET",
+                    url: "/index.php/mobile/complaint/revoke.html",
+                    data: {
+                        id: id,
+                        uid: uid,
+                    },
+                    success: function (res) {
+                        showErrorMsg("撤销成功");
+                        $(element).parents('.complaint_item').find('.status').html("已撤销");
+                        $(element).remove();
+                        layer.close(index);
+                    }
+                });
+            }
+        })
+    }
+
+</script>

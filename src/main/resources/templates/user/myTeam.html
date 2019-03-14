@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <!-- 去除自动识别电话号码 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="g4">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="/user/home">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>行会大厅</span>
+        </div>
+        <div class="ds-in-bl menu tpnavf">
+            <a href="javascript:void(0);"><img src="/static/img/theme/class1.png" alt="菜单"></a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"> </div>
+        <ul>
+
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 1){
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+<link rel="stylesheet" href="/static/css/user.css">
+<style>
+    .classreturn,.team_orderBy,.teamList,.team_header{
+        background: rgba(255, 255, 255, .1);
+    }
+</style>
+<!-- 团队个人信息 -->
+<div class="team_header flex_panel">
+
+    <div class="header_userInfo flex_panel">
+        <img class="icon" src="/static/img/theme/user68.jpg"  alt="">
+
+        <div class="userInfo-detail">
+            <strong class="name" style="color: rgba(255, 255, 255, .8);">18910172928</strong>
+            <span class="tag">第1关声名不显</span>
+        </div>
+    </div>
+
+    <div class="header_money">
+        <div class="des">我的贡献：0人</div>
+        <div class="des">行会信息：0人</div>
+        <div class="des">第1关及以上人数：0人</div>
+    </div>
+
+</div>
+<!-- 团队个人信息  end -->
+
+
+<!-- 搜索 -->
+<div class="team_search flex_panel">
+    <div class="search_content flex_panel">
+        <img class="icon" src="/static/img/theme/search.png" alt="">
+        <input type="text" name="keywords" value="" class="searchInput" placeholder="请输入昵称或手机号">
+    </div>
+    <div class="search_btn" onclick="search()">搜索</div>
+</div>
+<!-- 搜索 end -->
+
+
+<!-- 排序规则 -->
+<ul class="team_orderBy flex_panel">
+    <li data-type="level" class="active" >按等级</li>
+    <li data-type="reg_time"  >按时间</li>
+    <!-- <li data-type="total_amount"  >按消费</li> -->
+</ul>
+
+<!-- 成员列表 -->
+<ul class="teamList">
+    <!-- 页面再ajax_myteam -->
+</ul>
+
+<!-- 是否加载更多 -->
+<div class="to-load">
+    <div class="load-tip">
+        <img id="loading_img" src="/static/img/theme/loader.gif" alt="" />
+        <span class="end_line" id="tip-text">已加载全部内容</span>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="/template/mobile/rainbow/static/js/sourch_submit.js"></script>
+<script type="text/javascript">
+    $('input[name="keywords"]').on('input',function(){
+        $('.search_content .icon').hide();
+    })
+    $(function() {
+        // 第一次进来就加载列表
+        ajax_sourch_submit(1, true);
+
+        $(".team_orderBy li").on('click', function() {
+            if ($(this).hasClass('active')) {
+                return false;
+            } else {
+                $(".active").removeClass('active');
+                $(this).addClass('active');
+                // 重新加载列表
+                more = true
+                page = 1;
+                before_request = 1;
+                ajax_sourch_submit(1);
+            }
+        })
+
+    });
+    // 搜索
+    function search(){
+        before_request = 1;
+        page = 1;
+        ajax_sourch_submit(1);
+    }
+    //加载更多记录
+    var page = 1;
+    var before_request = 1;
+    var more = true;
+
+    // 加载更多记录  如果切换分页才传p
+    function ajax_sourch_submit(p, is_first = false) {
+
+        p ? function() {
+            // 重置分页，重置是否更多，清空列表
+            page = p;
+            more = true;
+            $(".teamList").empty();
+        }() : 0;
+
+        if (before_request == 0 || more==false) return false;
+        before_request = 0;
+
+        loadingToogle(true);
+        $.ajax({
+            type:"get",
+            url:"/Mobile/memberCenter/ajaxMyTeam.html",
+            data: {
+                p: page,
+                is_ajax: 1,
+                sort1: $(".active").data('type'),
+                keywords: $("input[name=keywords]").val(),
+            },
+            success: function(data) {
+                page++;
+                if(is_first){
+                    $('.to-load').hide();
+                }else{
+                    $('.to-load').show();
+                }
+                loadingToogle(false);
+                if ($.trim(data) == '' || !data) {
+                    more = false;
+                    return false;
+                } else {
+                    before_request = 1;
+                    $(".teamList").append(data);
+                }
+            }
+        });
+    }
+
+
+    // 加载更多样式控制
+    function loadingToogle(status) {
+        if (status) {
+            // $('.m_loading').show();
+            $('#loading_img').show();
+            $("#tip-text").text('加载中，请稍候').css({'color':'#867AFB'});
+            $("#tip-text").removeClass('end_line');
+        } else {
+            // $('.to-load').hide();
+            $('#loading_img').hide();
+            $("#tip-text").text('已加载全部内容');
+            $("#tip-text").addClass('end_line');
+        }
+    }
+</script>
+</body>
+
+</html>

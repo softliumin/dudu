@@ -14989,7 +14989,7 @@ div.layui-m-layerbtn span{
     font-size: .512rem;
 }
 .upgrade_btn a{
-    background: url(../images/theme/btn_banner.png) no-repeat;
+    background: url(../img/theme/btn_banner.png) no-repeat;
     background-size: 100% 100%;
     letter-spacing: 2px;
 }
@@ -15557,7 +15557,7 @@ html,body{
     height: 1.88rem;
     line-height: 1.88rem;
     text-align: center;
-    background: url(../images/theme/btn_banner.png) no-repeat;
+    background: url(../img/theme/btn_banner.png) no-repeat;
     background-size: 100% 100%;
     color: #fff;
     font-size: .683rem;

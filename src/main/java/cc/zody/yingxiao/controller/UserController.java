@@ -1,16 +1,25 @@
 package cc.zody.yingxiao.controller;
 
+import cc.zody.yingxiao.dataobject.User;
+import cc.zody.yingxiao.enums.DdResultCodeEnum;
+import cc.zody.yingxiao.model.DdResult;
 import cc.zody.yingxiao.model.RegisterVO;
 import cc.zody.yingxiao.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author liumin
@@ -40,31 +49,203 @@ public class UserController {
         return "user/index";
     }
 
+
+
+    /**
+     * 用户主页
+     */
+    @RequestMapping("/home")
+    public String home(HttpServletRequest request, Model model) {
+        try {
+            List<Cookie> list =  Arrays.asList(request.getCookies());
+            Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
+            if (optionalCookie.isPresent()){
+                User user =  userService.findUserByTelNum(optionalCookie.get().getValue());
+                model.addAttribute("user",user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "user/home";
+    }
+
+
+
+
     /**
      * 进行登录
      *
      * @return
      */
     @ResponseBody
-    @RequestMapping("/login")
-    public String login(String username, String password, HttpServletResponse httpResponse) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public DdResult login(String username, String password, HttpServletResponse httpResponse) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
         try {
             log.error("login");
-            Boolean result = userService.login(username, password);
-            if (result== true){
+            Boolean loginResult = userService.login(username, password);
+            if (null!=loginResult && loginResult == true) {
                 //
-                Cookie cookie = new Cookie("ticket",username);
+                Cookie cookie = new Cookie("dudu", username);
                 cookie.setPath("/");
                 httpResponse.addCookie(cookie);
-            }else{
-
+            } else {
+                if (null==loginResult){
+                    result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "用户不存在");
+                }else{
+                    result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "密码错误");
+                }
             }
             System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
         }
-        return null;
+        return result;
     }
+
+
+    /**
+     * 帮助注册
+     * @param
+     * @return
+     */
+    @RequestMapping("/helpRegister")
+    public String helpRegister() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/helpRegister";
+    }
+
+    /**
+     * 团队（行会）
+     * @param
+     * @return
+     */
+    @RequestMapping("/myTeam")
+    public String myTeam() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/myTeam";
+    }
+
+    /**
+     * 审核闯关
+     * @param
+     * @return
+     */
+    @RequestMapping("/collect")
+    public String collect() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/collect";
+    }
+
+
+    /**
+     * 申请闯关
+     * @param
+     * @return
+     */
+    @RequestMapping("/updateLevel")
+    public String updateLevel() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/updateLevel";
+    }
+
+    /**
+     * 收货地址管理
+     * @param
+     * @return
+     */
+    @RequestMapping("/address_list")
+    public String addressList() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/address_list";
+    }
+
+    /**
+     * 投诉建议
+     * @return
+     */
+    @RequestMapping("/suggest")
+    public String suggest() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/suggest";
+    }
+
+
+
+    /**
+     * 用户信息页面
+     * @param registerVO
+     * @return
+     */
+    @RequestMapping("/userDetail")
+    public String userDetail(RegisterVO registerVO) {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/userDetail";
+    }
+
+    /**
+     * 增加地址
+     * @param
+     * @return
+     */
+    @RequestMapping("/add_address")
+    public String addAddress() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/add_address";
+    }
+
+    /**
+     * 编辑地址
+     * @param
+     * @return
+     */
+    @RequestMapping("/edit_address")
+    public String editAddress() {
+        try {
+
+        }catch (Exception e){
+
+        }
+        return "user/edit_address";
+    }
+
+
+
+
+
 
 
     /**
@@ -74,11 +255,11 @@ public class UserController {
     public String register(RegisterVO registerVO) {
         try {
             Boolean result = userService.register(registerVO);
-            if (result){
+            if (result) {
                 // TODO 登录cookie
 
                 return "user/index";
-            }else{
+            } else {
 
             }
         } catch (Exception e) {
@@ -89,14 +270,8 @@ public class UserController {
 }
 
 
-
-
-
 /**
  * 一些操作记录
- *
- *
- *
  */
 
 

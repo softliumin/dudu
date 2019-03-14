@@ -1,0 +1,231 @@
+/* public */
+
+.flex_panel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    width: 90%;
+    margin: .853333rem auto;
+    height: 1.877333rem;
+    line-height: 1.877333rem;
+    text-align: center;
+    border-radius: .938667rem;
+    -webkit-border-radius: .938667rem;
+    -moz-border-radius: .938667rem;
+    -ms-border-radius: .938667rem;
+    -o-border-radius: .938667rem;
+    display: block;
+    color: #fff;
+    font-size: .682667rem;
+    outline: none;
+    border: none;
+    margin-top: 1.28rem;
+
+}
+
+.des {
+    width: 90%;
+    margin: -.5rem auto 0 auto;
+    color: #999999;
+    font-size: .55rem;
+}
+
+.btn_disabled {
+    background-color: #CCCCCC !important;
+}
+
+
+/* 修改绑定手机号 */
+
+.page_title {
+    width: 100%;
+    padding: 0 .426667rem;
+    height: 1.856rem;
+    line-height: 1.856rem;
+    color: #666666;
+    font-size: .597333rem;
+}
+
+.setting-list {
+    width: 100%;
+}
+
+.setting-list .setting-item {
+    background-color: #ffffff;
+    border-bottom: .021333rem solid #e5e5e5;
+    height: 1.92rem;
+    padding: .426667rem;
+}
+
+.setting-list .setting-item .header {
+    width: 1.706667rem;
+    height: 1.706667rem;
+    border-radius: .853333rem;
+    -webkit-border-radius: .853333rem;
+    -moz-border-radius: .853333rem;
+    -ms-border-radius: .853333rem;
+    -o-border-radius: .853333rem;
+}
+
+.setting-list .setting-item .name{
+    width: 3.84rem;
+}
+
+.setting-list .setting-item .main {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
+.setting-list .setting-item .main.text_right {
+    text-align: right;
+}
+
+.setting-list .setting-item .radio_group {
+    flex: 1;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.setting-list .setting-item .radio_group label {
+    margin-left: .853333rem;
+    height: .64rem;
+    line-height: .64rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.setting-list .setting-item .radio_group input[type='radio'] {
+    -webkit-appearance: none;
+    width: .64rem;
+    height: .64rem;
+    border: .021333rem solid #666666;
+    border-radius: .32rem;
+    -webkit-border-radius: .32rem;
+    -moz-border-radius: .32rem;
+    -ms-border-radius: .32rem;
+    -o-border-radius: .32rem;
+    margin-right: .213333rem;
+    outline: none;
+}
+
+.setting-list .setting-item .radio_group input[type='radio']:checked{
+    border: none;
+    background-image: url('../images/checked.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.setting-list .setting-item .v-code-pic {
+    width: 3.413333rem;
+    height: 1.706667rem;
+}
+
+.send_code {
+    height: 1.493333rem;
+    line-height: 1.493333rem;
+    padding: 0 .426667rem;
+    text-align: center;
+    color: #fff;
+    background-color: #FF8C00;
+    border-radius: 0.7466665rem;
+    -webkit-border-radius: 0.7466665rem;
+    -moz-border-radius: 0.7466665rem;
+    -ms-border-radius: 0.7466665rem;
+    -o-border-radius: 0.7466665rem;
+}
+
+.bind_panel{
+    width: 95%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: .426667rem;
+    border-radius: .213333rem;
+    -webkit-border-radius: .213333rem;
+    -moz-border-radius: .213333rem;
+    -ms-border-radius: .213333rem;
+    -o-border-radius: .213333rem;
+}
+
+.lsu_tips{
+
+}
+/* 个人设置主题 s*/
+/* 晋升密码 */
+#upload{
+    padding: 0 .5rem;
+}
+.setting-list{
+    background-color: transparent;
+}
+.setting-list .setting-item{
+    background-color: transparent;
+    width: 100%;
+    border-color: rgba(255, 255, 255, .1);
+    height: 2.048rem;
+}
+.setting-list .setting-item input{
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 255, 255, .8);
+    font-size: .597rem;
+}
+.setting-list .setting-item input::-webkit-input-placeholder{
+    color: rgba(255, 255, 255, .5);
+}
+.des{
+    margin:.46rem auto 0 auto;
+}
+.setting-list .setting-item .main{
+    background: transparent;
+}
+.setting-list .setting-item .header{
+}
+.setting-list .setting-item span{
+    color: rgba(255, 255, 255, .8);
+}
+.setting-list .setting-item .radio_group label{
+    color: rgba(255, 255, 255, .8);
+}
+.setting-list .setting-item .radio_group input[type='radio']{
+    background: url(../images/theme/setting_choose.png) no-repeat;
+    background-size: 100% 100%;
+    border: none;
+}
+.setting-list .setting-item .radio_group input[type='radio']:checked{
+    background: url(../images/theme/setting_choosed.png) no-repeat;
+    background-size: 100% 100%;
+}
+.bind_panel{
+    background: rgba(255, 255, 255, .1);
+}
+
+.page_title{
+    color: #867AFB;
+    background-color: transparent;
+}
+.setting-list .setting-item .v-code-pic{
+    border-radius: .853rem;
+}
+.send_code{
+    background-color:#867AFB;
+}
+.updataBtn{
+    background-color: transparent;
+    font-size: .555rem;
+    width: 4.267rem;
+    height: 1.87733rem;
+    line-height: 1.9rem;
+    margin: 0;
+    color: #867AFB;
+    font-weight: 600;
+}
+/* 个人设置主题 e*/

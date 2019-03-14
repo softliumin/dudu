@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="/mobile/Index/index.html">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>闯关审核记录</span>
+        </div>
+        <div class="ds-in-bl menu tpnavf">
+            <a href="javascript:void(0);"><img src="/static/img/theme/class1.png" alt="菜单"></a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"> </div>
+        <ul>
+
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 1){
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+
+<link rel="stylesheet" href="/template/mobile/rainbow/static/css/order.css?v=20190308112730">
+<style>
+    .classreturn{
+        /*background-color: rgba(255, 255, 255, .1); */
+    }
+    .orderList-list{
+        /* min-height: calc(100vh - 1.707rem - 1.28rem - .954rem - 1.87733rem); */
+    }
+    .white_bg{
+        background-color: rgba(255, 255, 255, .1);
+        position: fixed;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+</style>
+<!-- 搜索订单 -->
+<div class="white_bg"></div>
+<div class="orderList-search">
+    <div class="order_search flex_panel">
+        <div class="search_content flex_panel">
+            <img class="icon" src="/template/mobile/rainbow/static/images/theme/search.png" alt="">
+            <input type="text" name="mobile" value="" class="searchInput" placeholder="请输入昵称或手机号">
+        </div>
+        <div class="search_btn" onclick="search()">搜索</div>
+    </div>
+</div>
+<!-- 订单状态 -->
+<div class="orderList-status flex_panel">
+    <a href="javascript:;" class="status_item active" data-order_type="0">
+        <strong class="status-name">
+            全&emsp;部
+        </strong>
+    </a>
+    <a href="javascript:;" class="status_item"  data-order_type="1">
+        <strong class="status-name ">
+            待审核
+        </strong>
+    </a>
+    <a href="javascript:;" class="status_item"  data-order_type="2">
+        <strong class="status-name ">
+            审核成功
+        </strong>
+    </a>
+    <a href="javascript:;" class="status_item"  data-order_type="3">
+        <strong class="status-name ">
+            审核失败
+        </strong>
+    </a>
+</div>
+
+<div class="orderList-list"></div>
+<!-- 评价弹窗 s index-->
+<div class="orderList_dialog_mask"></div>
+<div class="orderList_dialog">
+    <div class="dialog_title">
+        评价
+        <div class="evaluate_close"></div>
+    </div>
+    <div class="dialog_content">
+        <ul class="clearfix">
+            <!-- active选中 -->
+            <li class="" data-type="1">
+                <img src="/template/mobile/rainbow/static/images/theme/pj_1.png"  alt="">
+                <span>好评</span> <i class="fr"></i>
+            </li>
+            <li data-type="2">
+                <img src="/template/mobile/rainbow/static/images/theme/pj_2.png"  alt="">
+                <span>中评</span> <i class="fr"></i>
+            </li>
+            <li data-type="3">
+                <img src="/template/mobile/rainbow/static/images/theme/pj_3.png" alt="">
+                <span>差评</span> <i class="fr"></i>
+            </li>
+        </ul>
+    </div>
+    <div class="submit_evaluate">
+        <a href="javascript:;">提交</a>
+    </div>
+</div>
+<!-- 评价弹窗 e-->
+<div class="empty" style="display:none;">
+    <img src="/template/mobile/rainbow/static/images/theme/no_more.png" alt="">
+    <p class="msg" style="margin: 0 0 .4267rem;color: #fff;">暂无相关数据</p>
+    <div class="upgrade_btn" style="width:100%;">
+        <a class="btn" style="font-size: .683rem;" href="/Mobile/Index/index.html">去逛逛</a>
+    </div>
+</div>
+
+<!-- 是否加载更多 -->
+<div class="to-load">
+    <div class="load-tip">
+        <img id="loading_img" style="display: none;" src="/template/mobile/rainbow/static/images/category/loader.gif" alt="" />
+        <span class="end_line" style="display: none;" id="tip-text">已加载全部内容</span>
+    </div>
+</div>
+
+<!-- 弹窗，填写备注信息 -->
+<div class="mask flex_panel" style="display:none;"></div>
+<div class="remark_alert" style="display:none;">
+    <div class="alert_title">备注信息</div>
+    <form class="alert_content flex_panel" id="remarkForm">
+        <input type="text" name="remark" class="main_input" placeholder="请填写备注信息">
+        <input type="hidden" name="type" value="">
+        <input type="hidden" name="order_id" value="">
+        <img class="edit_img" src="/template/mobile/rainbow/static/images/theme/remark.png" alt="">
+    </form>
+    <div class="upgrade_btn order_list_upgrade_btn" style="width:100%;">
+        <a href="javascript:;" class="alert_btn">确认提交</a>
+    </div>
+</div>
+
+
+<a onclick="$('html,body').animate({'scrollTop':0},600)" class="back-to-top" id="topup">
+    <img src="/template/mobile/rainbow/static/images/topup.png">
+</a>
+<script type="text/javascript">
+    var page = 1;
+    var order_type = 0;
+    var more = true;
+    var before_request = 1;
+    var searchVal = "";
+    // 请求订单列表
+    ajax_sourch_submit(0);
+
+    var user_ids = $("#user_ids").val();
+    var user_id = "153509814";
+
+    $("body").on('click', '.refuse', function() {
+        let order_id = $(this).data('order_id');
+        $("#remarkForm input[name='order_id']").val(order_id);
+        $("#remarkForm input[name='type']").val('refuse');
+        $(".mask").show();
+        $(".remark_alert").show();
+        $("body").css('overflow', 'hidden')
+    })
+
+    $("body").on('click', '.confirm', function() {
+        let order_id = $(this).data('order_id');
+        $("#remarkForm input[name='order_id']").val(order_id);
+        $("#remarkForm input[name='type']").val('confirm');
+        $(".mask").show();
+        $(".remark_alert").show();
+        $("body").css('overflow', 'hidden')
+    })
+
+    // 点击灰色区域，隐藏弹窗
+    $(".mask").on('click', function() {
+        $("#remarkForm input[name='order_id']").val('');
+        $("#remarkForm input[name='reamrk']").val('');
+        $('.mask').hide();
+        $(".remark_alert").hide();
+        $("body").css('overflow', 'auto')
+    });
+    //点击切换类型
+    $('.orderList-status .status_item').click(function(){
+        $(this).addClass('active').siblings().removeClass('active');
+        //初始化
+        order_type =   $(this).data('order_type');
+        page = 1;
+        before_request =1;
+        ajax_sourch_submit(0);
+    })
+    // 默认第一次填写 0   重新 1
+    var is_first = 0;
+    //评价弹窗
+    $('body').on("click",".evaluate_button",function(){
+        is_first = $(this).data('evaluate');
+        thatElement =  $(this);
+        thatElementStatus = $(this).parents(".list-item").find('.evaluate_status');
+        $('.orderList_dialog_mask').show();
+        $('.orderList_dialog').toggle();
+    })
+    $('.orderList_dialog_mask').click(function(){
+        $('.orderList_dialog_mask').hide();
+        $('.orderList_dialog').hide();
+    })
+    //关闭评价
+    $('.evaluate_close').click(function(){
+        $('.orderList_dialog_mask').click();
+    })
+    //评价切换
+    $('.dialog_content li').click(function(){
+        $(this).addClass('active').siblings().removeClass('active');
+    })
+    //提交评价
+    $('.submit_evaluate a').click(function(){
+        var selectedStatus =  $(this).parents('.orderList_dialog').find('.active span').text();//是否选择
+        var comment =  $(this).parents('.orderList_dialog').find('.active').data('type');//选中评价
+        var id = thatElementStatus.data('order_id');
+        var log_id = thatElement.data("log_id") || '';
+        if(!is_first){
+            if(!selectedStatus){
+                //第一次可不选
+                $('.orderList_dialog_mask').click();
+                return false;
+            }
+        }
+        submit_evaluate();
+        //评价
+        function submit_evaluate(){
+            $.ajax({
+                url: '/index.php/Mobile/Order/toComment',
+                type: 'POST',
+                dataType: 'json',
+                data:{
+                    id :id,
+                    log_id :log_id,
+                    comment :comment,
+                },
+                success:function(res){
+                    console.log(res);
+                }
+            })
+        }
+        thatElement.text('已提交');
+        thatElementStatus.text(selectedStatus);
+        thatElement.removeClass('evaluate_button');
+        $('.orderList_dialog_mask').click();
+    })
+
+    // 点击提交备注
+    $(".alert_btn").on('click', function() {
+        let reamrk_type = $("input[name='type']").val();
+        let tmp_remark = reamrk_type == 'confirm' ? '已确认' : '未收到';
+        var id = $("#remarkForm input[name='order_id']").val();
+        // 添加默认备注
+        $("input[name='remark']").val() == '' ? $("input[name='remark']").val(tmp_remark) : '';
+        $.ajax({
+            url: '/index.php/Mobile/Order/UpdateOrderStatus',
+            type: 'POST',
+            dataType: 'json',
+            data: $("#remarkForm").serialize(),
+            success: function(res) {
+                if (res.status == 1) {
+                    showErrorMsg(res.msg);
+                    if(reamrk_type == "confirm"){
+                        if(res.data == 1){
+                            window.location.reload();
+                        }else{
+                            window.location = res.url;
+                        }
+                    }else{
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000)
+                    }
+
+                } else {
+                    showErrorMsg(res.msg);
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000)
+                    // window.location.reload();
+                }
+            }
+        })
+
+        // 隐藏弹框
+        $("#remarkForm input[name='order_id']").val('');
+        $("#remarkForm input[name='reamrk']").val('');
+        $('.mask').hide();
+        $(".remark_alert").hide();
+        $("body").css('overflow', 'auto')
+
+    });
+    // 搜索用户记录
+    function search(){
+        //初始化
+        page = 1;
+        before_request =1;
+        ajax_sourch_submit(0);
+    }
+    $(window).scroll(
+        function() {
+            var scrollTop = parseInt($(this).scrollTop());
+            var scrollHeight = parseInt($(document).height());
+            var windowHeight = parseInt($(this).height());
+            if (scrollTop + windowHeight >= scrollHeight-50 && before_request == 1) {
+                ajax_sourch_submit(1);//调用加载更多
+            }
+        }
+    );
+
+    /**
+     *加载更多
+     * option 是否是加载更多
+     */
+    function ajax_sourch_submit(option) {
+        searchVal = $.trim($("input[name='mobile']").val());
+        if (before_request == 0) {
+            return false;
+        }
+        before_request = 0;
+        $("#tip-text").hide();
+        $.ajax({
+            type: "GET",
+            url: "/index.php?m=Mobile&c=Order&a=order_list&type=collect&is_ajax=1&p=" + page + "&user_id=" + user_ids +"&order_type=" + order_type +"&mobile=" + searchVal, //+tab,
+            success: function(data) {
+                page++;
+                loadingToogle(false);
+                if ($.trim(data) == '' || !data) {
+                    if ($(".orderList-list").children().length == 0) {
+                        $(".to-load").hide();
+                    }
+                    if(option == 1){
+                        $("#tip-text").show();
+                    }else{
+                        $(".orderList-list").empty().html();
+                        $(".empty").show();
+                    }
+                    return false;
+                } else {
+                    before_request = 1;
+                    $("#tip-text").hide();
+                    $(".empty").hide();
+                    if(option == 1){
+                        $(".orderList-list").append(data);
+                    }else{
+                        $(".orderList-list").empty().html(data);
+                    }
+
+                }
+
+            }
+
+        });
+    }
+
+
+    // 加载更多样式控制
+    function loadingToogle(status) {
+        if (status) {
+            // $('.m_loading').show();
+            $('#loading_img').show();
+            $("#tip-text").text('加载中，请稍候');
+            $("#tip-text").removeClass('end_line');
+        } else {
+            // $('.to-load').hide();
+            $('#loading_img').hide();
+            $("#tip-text").text('已加载全部内容');
+            $("#tip-text").addClass('end_line');
+        }
+    }
+</script>
+</body>
+
+</html>

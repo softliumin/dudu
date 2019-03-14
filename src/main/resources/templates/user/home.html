@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+    <title>嘟嘟闯关游戏-用户首页</title>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body class="g4">
+<style>
+    .body_bg {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+<!-- 首页 -->
+<div class="classreturn loginsignup " style="border: none;">
+    <div class="content">
+        <div class="ds-in-bl search center">
+            <span>嘟嘟闯关游戏</span>
+        </div>
+        <div style="position: absolute;right:.42667rem;top:0;">
+            <a href="/user/suggest" style="color: rgba(255, 255, 255, .8);">投诉简历</a>
+        </div>
+    </div>
+</div>
+
+<!--顶部滚动广告栏-s-->
+<div class="index_banner">
+    <div class="swiper-container meirong_banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <a href="javascript:;">22222
+                    <img src="/public/upload/ad/2019/02-27/49b9438699ee2c4caed490c943d1bba6.png" alt="">
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="javascript:;">11111
+                    <img src="/public/upload/ad/2019/02-27/04a39553795e8c574c68b8503a670bf7.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+
+<!-- 用户等级信息展示 -->
+<div class="index_info">
+    <ul>
+        <li style="color: rgba(255, 255, 255, .8);"><em>I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D:</em><span
+                th:text="${user.id} "></span>
+        </li>
+        <li style="color: rgba(255, 255, 255, .8);"><em>等&nbsp;&nbsp;&nbsp; 级:</em><span>第1关声名不显</span><i
+                class="that_button">等级介绍</i></li>
+        <li style="color: rgba(255, 255, 255, .8);"><em>姓&nbsp;&nbsp;&nbsp; 名:</em><span th:text="${user.username} "/>
+        </li>
+        <li style="color: rgba(255, 255, 255, .8);"><em>推荐人:</em><span>天乐</span></li>
+    </ul>
+    <a class="index_info_creditPoints" href="/index.php/Mobile/Credit/index.html">信用分：100分</a>
+    <a class="index_info_setting" href="/user/userDetail">账号安全设置</a>
+</div>
+
+<!-- 中部导航 s-->
+<div class="index_middle_nav">
+    <ul>
+        <li>
+            <a href="/user/helpRegister">
+                <img src="/static/img/theme/home_001.png" alt="帮助注册">
+                <p>帮助注册</p>
+            </a>
+        </li>
+        <li>
+            <a href="/user/updateLevel">
+                <img src="/static/img/theme/home_002.png" alt="申请闯关">
+                <p>申请闯关</p>
+            </a>
+        </li>
+        <li>
+            <a href="/user/collect">
+                <img src="/static/img/theme/home_003.png" alt="审核闯关">
+                <p>审核闯关</p>
+            </a>
+        </li>
+        <li>
+            <a href="/user/myTeam">
+                <img src="/static/img/theme/home_004.png" alt="行会大厅">
+                <p>行会大厅</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- 中部导航 e-->
+
+<!-- 底部客服 s-->
+<div class="index_bottom_service_box">
+    <div class="index_bottom_service" style="color: #6356E2;">
+        在线客服： QQ 111111111            </div>
+</div>
+<!-- 底部客服 e-->
+
+</body>
+<style>
+
+</style>
+
+
+</html>

@@ -40,6 +40,19 @@ public class UserService {
         }
     }
 
+    /**
+     * 根据手机号码查找
+     * @param telNum
+     * @return
+     */
+    public User findUserByTelNum(String telNum) {
+        return  userMapper.selectForLogin(telNum);
+    }
+
+
+
+
+
 
     /**
      * 注册用户
@@ -60,6 +73,11 @@ public class UserService {
             e.printStackTrace();
             return false;
         }
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(EncryptUtil.md5("123456"));
     }
 
 }

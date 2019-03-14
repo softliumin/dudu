@@ -36,6 +36,17 @@ public class IndexImgController {
         return result;
     }
 
+    @RequestMapping(value = "/add")
+    public DdResult addIndexImg() {
+        DdResult<String> result = DdResult.getSuccessResult();
+        try {
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
 

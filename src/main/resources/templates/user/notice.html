@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image:url("/public/upload/logo/2019/01-17/565b4b934bbfb92620dcc95fb707b34c.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="/index.php/mobile/Index/index.html">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+                <!-- <img src="/template/mobile/rainbow/static/images/return.png" alt="返回"> -->
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>公告</span>
+        </div>
+        <div class="ds-in-bl menu hide">
+            <a href="javascript:void(0);"><img src="/template/mobile/rainbow/static/images/class1.png" alt="菜单"></a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"> </div>
+        <ul>
+            <li>
+                <a class="yello" href="/index.php/mobile/Index/index.html">
+                    <div class="icon">
+                        <i class="icon-shouye iconfont"></i>
+                        <p>首页</p>
+                    </div>
+                </a>
+            </li>
+            <!--  <li>
+                 <a href="/index.php/mobile/Goods/categoryList.html">
+                     <div class="icon">
+                         <i class="icon-fenlei iconfont"></i>
+                         <p>分类</p>
+                     </div>
+                 </a>
+             </li> -->
+            <li>
+                <a href="/index.php/mobile/Cart/index.html">
+                    <div class="icon">
+                        <i class="icon-gouwuche iconfont"></i>
+                        <p>购物车</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/index.php/mobile/User/index.html">
+                    <div class="icon">
+                        <i class="icon-wode iconfont"></i>
+                        <p>我的</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 1){
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+<style type="text/css">
+    .announcement_img{
+        width: 14.208rem;
+        height: 5.674667rem;
+        margin-top: .426667rem;
+    }
+</style>
+
+<div class="announcement_box" id="articleBox">
+    <div class="announcement_list clearfix">
+        <a href="/index.php/mobile/Announcement/detail/id/40.html">
+            <div class="fl announcement_list_l">
+                <img src="/template/mobile/rainbow/static/images/theme/index_notice.png" alt="公告">
+            </div>
+            <div class="fl announcement_list_r">
+                <h5>关于拓客新零售系统商家注意事项的公告</h5>
+                <img class="announcement_img" src="/public/upload/article/2019/03-05/84a76976b27bd1850581034a53031be8.png" alt="">
+                <p>商家注意事项：
+                    使用拓客系统必须以实物商品交易为基础。
+                    严禁货币类，高风险虚拟产品交易。
+                    严禁退还利润不发货的行为。
+                    实名认证一人一号严禁多号。
+                    发现虚拟交易玩资金不卖货者封号，举报属实，该号归举报者所有，大家一起监督避免害群之马影响大家使用。</p>
+                <div class="time">
+                    2019.03.05 20:00:38        </div>
+            </div>
+        </a>
+    </div>
+    <div class="announcement_list clearfix">
+        <a href="/index.php/mobile/Announcement/detail/id/39.html">
+            <div class="fl announcement_list_l">
+                <img src="/template/mobile/rainbow/static/images/theme/index_notice.png" alt="公告">
+            </div>
+            <div class="fl announcement_list_r">
+                <h5>关于2月14日晚系统升级维护的公告</h5>
+                <img class="announcement_img" src="" alt="">
+                <p>尊敬的用户：
+                    您好！由于系统业务扩大需要，平台决定于今天（2019.02.14）晚上12点钟对系统进行升级维护，系统将2019年2月15号早上9点钟升级维护完毕，升级完成之后即可继续使用。在此期间为您带来的不便之处敬请谅解！感谢您的支持！</p>
+                <div class="time">
+                    2019.02.14 18:43:59        </div>
+            </div>
+        </a>
+    </div>
+    <div class="announcement_list clearfix">
+        <a href="/index.php/mobile/Announcement/detail/id/38.html">
+            <div class="fl announcement_list_l">
+                <img src="/template/mobile/rainbow/static/images/theme/index_notice.png" alt="公告">
+            </div>
+            <div class="fl announcement_list_r">
+                <h5>关于销售任务游戏上线的公告</h5>
+                <img class="announcement_img" src="/public/upload/article/2018/12-28/5a7e6a2f79ea754b5211a174b4b1d50b.png" alt="">
+                <p>我们只是款销售任务游戏，所有销售环节由玩家自由把握风险，本平台只提供销售工具，不涉及销售法务问题。一经查实销售假货将冻结游戏帐号。</p>
+                <div class="time">
+                    2018.12.28 20:22:56        </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="loadbefore">
+    <img class="ajaxloading" src="/template/mobile/rainbow/static/images/loading.gif" alt="正在加载。。。">
+    <span>正在加载...</span>
+</div>
+<a onclick="$('html,body').animate({'scrollTop':0},600)" class="back-to-top" id="topup">
+    <img src="/template/mobile/rainbow/static/images/topup.png">
+</a>
+
+<!-- <div class="loading-completed end_line" style="display: none;">———— 这是我的底线了 ————</div> -->
+<!--底部导航-start-->
+<!--底部导航-end-->
+</body>
+<script type="text/javascript">
+    $(function(){
+        //滚动加载
+        $(window).scroll(function () {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight == scrollHeight) {
+                ajaxLoad();; //调用加载更多
+            }
+        });
+    })
+    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+    var pages = 1;
+    var url,data;
+    function ajaxLoad() {
+
+        if (before_request == 0) return false;
+        $(".loadbefore").show();
+        before_request = 0;
+        pages++;
+        // console.log(pages)
+        url = '/index.php/mobile/announcement/index.html';
+        data = {
+            currPage:pages,
+            is_ajax:true
+        }
+        $.ajax({
+            type: "get",
+            url: url,
+            data:data,
+            // dataType: 'json',
+            success:function(respone){
+                $(".loadbefore").hide();
+                if (respone!= "") {
+                    console.log(respone);
+                    $('#articleBox').append(respone);
+                    before_request = 1;
+                }else{
+                    before_request == 0
+                    $(".loading-completed").show();
+                }
+            }
+        })
+    }
+</script>
+</html>

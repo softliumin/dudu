@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="g4">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<link rel="stylesheet" href="/static/css/userInfo.css">
+<style>
+    .setting .myorder{
+        height: 2.048rem;
+    }
+    .setting .content .list7 >div{
+        padding: 0;
+    }
+</style>
+<!-- 首页 -->
+<div class="classreturn loginsignup " >
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a  href="/user/home">
+                <i class="iconfont icon-jiantouzuo"></i>
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>设置</span>
+        </div>
+        <div style="position: absolute;right:0rem;top:0;">
+            <a href="javascript:;" class="btn updataBtn">确认修改</a>
+        </div>
+    </div>
+</div>
+<form action="/index.php/mobile/user/userDetail.html" id="upload" method="POST" enctype="multipart/form-data">
+    <ul class="setting-list">
+        <li class="setting-item flex_panel" style="height:2.986667rem;">
+            <span class="name">头像</span>
+            <label for="upload_file" id="head_pic">
+                <img class="header" src="/static/img/theme/user68.jpg"  alt="">
+                <input  type="file" accept="image/*" name="head_pic" id="upload_file"  style="display:none" onchange="changeHead(this)">
+            </label>
+        </li>
+
+        <li class="setting-item flex_panel">
+            <span>昵称</span>
+            <input type="text" name="nickname" class="main text_right" placeholder="请输入昵称" value="柳敏">
+        </li>
+
+    </ul>
+    <div class="floor my p setting" style="margin-bottom: 0rem;">
+        <div class="content">
+            <div class="floor list7" style="overflow: visible;">
+
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/index.php/Mobile/User/setMobile/type/1.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>手机号</span>
+                                </div>
+                                <div class="fr">
+                                    <span>18910172928</span>
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/index.php/Mobile/User/realName.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>实名验证</span>
+                                </div>
+                                <div class="fr">
+                                    <span>未验证</span>
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/index.php/Mobile/User/setMobile/type/2.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>备用手机号</span>
+                                </div>
+                                <div class="fr">
+                                    <span></span>
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/index.php/Mobile/User/password.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>登录密码</span>
+                                </div>
+                                <div class="fr">
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/index.php/mobile/user/bindAccount/type/1.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>绑定支付宝</span>
+                                </div>
+                                <div class="fr">
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/index.php/mobile/user/bindAccount/type/2.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>绑定微信</span>
+                                </div>
+                                <div class="fr">
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="/user/address_list.html">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>地址管理</span>
+                                </div>
+                                <div class="fr">
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<div class="upgrade_btn" style="padding:1.2rem .85rem 1.2rem;">
+    <a href="/index.php/mobile/User/logout.html" class="btn" id="logout">退出</a>
+</div>
+<script>
+
+    $(function() {
+
+
+
+        $(".updataBtn").on('click', function() {
+            let formData = $("#upload").serializeArray().reverse();
+            let is_error = false;
+            let error_msg = '';
+            formData.forEach((v, k) => {
+                switch (v.name) {
+            case 'nickname':
+                if (v.value == '') {
+                    is_error = true;
+                    error_msg = '请输入您的昵称';
+                }
+                break;
+            case 'name':
+                if (v.value == '') {
+                    is_error = true;
+                    error_msg = '请输入您的名称';
+                }
+                break;
+            }
+        })
+
+            if (is_error) {
+                layer.open({
+                    content: error_msg,
+                    time: 2000
+                })
+            } else {
+                // form表单提交。因为如果有头像，必须要form表单
+                $("#upload").submit();
+            }
+        })
+
+    })
+
+
+    //显示上传照片
+    window.URL = window.URL || window.webkitURL;
+
+    function changeHead(obj) {
+        var files = obj.files;
+        img = new Image();
+        if (window.URL) {
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.width = 60;
+            img.height = 60;
+            img.onload = function(e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+
+        } else if (window.FileReader) {
+            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function(e) {
+                img.src = this.result;
+                img.width = 60;
+                img.height = 60;
+            }
+        } else {
+            //ie
+            obj.select();
+            obj.blur();
+            var nfile = document.selection.createRange().text;
+            document.selection.empty();
+            img.src = nfile;
+            img.width = 60;
+            img.height = 60;
+            img.onload = function() {}
+        }
+
+        $(img).addClass('header');
+        $("#head_pic").find('img').remove();
+        $("#head_pic").append(img);
+    }
+</script>
+</body>
+
+</html>

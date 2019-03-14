@@ -6,6 +6,7 @@ import cc.zody.yingxiao.model.RegisterVO;
 import cc.zody.yingxiao.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * @author liumin
@@ -66,12 +67,14 @@ public class UserService {
             user.setLevel(0);
             user.setReferrerId(registerVO.getReferrerId());
             user.setAliPay(registerVO.getAliPay());
-            user.setWeChat(registerVO.weChat);
-            user.setUsername(registerVO.username);
-            user.setPassword(EncryptUtil.md5(registerVO.password));
+            user.setWeChat(registerVO.getWeChat());
+            if (StringUtils.isEmpty(registerVO.getUsername())){
+                user.setUsername(registerVO.getTelNum());
+            }else{
+                user.setUsername(registerVO.getUsername());
+            }
+            user.setPassword(EncryptUtil.md5(registerVO.getPassword()));
             user.setTelNum(registerVO.getTelNum());
-
-
             int dbResult = userMapper.insertUser(user);
             if (dbResult==1){
                 return  true;

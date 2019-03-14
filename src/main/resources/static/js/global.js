@@ -152,8 +152,8 @@ function checkEmail(str){
  * @returns {boolean}
  */
 function checkMobile(tel) {
-    // var reg = /(^1[3-9][0-9]{9}$)/;
-    var reg = /1[3456789]\d{9}$/;
+     var reg = /(^1(3|4|5|7|8)\d{9}$)/;
+    //var reg = /1[3456789]\d{9}$/;
     if (reg.test(tel)) {
         return true;
     }else{

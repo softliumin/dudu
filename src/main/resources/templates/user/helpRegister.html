@@ -16,10 +16,11 @@
 
     <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
     <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/public/js/global.js"></script>
+    <script src="/static/js/global.js"></script>
     <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
     <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/theme/web_logo.png" media="screen"/>
 </head>
 <body class="g4">
 <style>
@@ -125,33 +126,32 @@
 
     function checkSubmit() {
         var formData = $("#regFrom").serializeArray().reverse();
-    //     let error_msg = '';
-    //
-    //     formData.forEach((v, k) => {
-    //         if (v.value == '') {
-    //         if(v.name == 'paytypeWx' || v.name == 'paytypeZfb'){
-    //             //  选填
-    //         }else{
-    //             error_msg = $("input[name='" + v.name + "']").attr('placeholder');
-    //         }
-    //     }
-    //
-    //     switch (v.name) {
-    //         case 'username':
-    //             // if (!(/^1[345789]\d{9}$/.test(v.value))) {
-    //             if (!checkMobile(v.value)) {
-    //                 error_msg = '请输入正确手机号'
-    //             }
-    //             break;
-    //         case 'password2':
-    //             if (v.value.length < 6) {
-    //                 error_msg = '密码不能小于6位';
-    //             } else if (v.value != $("input[name='password']").val()) {
-    //                 error_msg = '两次输入密码不一致，请检查后重试'
-    //             }
-    //             break;
-    //     }
-    // })
+        let error_msg = '';
+
+        formData.forEach((v, k) => {
+        //     if (v.value == '') {
+        //     if(v.name == 'paytypeWx' || v.name == 'paytypeZfb'){
+        //         //  选填
+        //     }else{
+        //         error_msg = $("input[name='" + v.name + "']").attr('placeholder');
+        //     }
+        // }
+
+        switch (v.name) {
+            case 'telNum':
+                if (!checkMobile(v.value)) {
+                    alert('请输入正确手机号');
+                }
+                break;
+            case 'password2':
+                if (v.value.length < 6) {
+                    alert("密码不能小于6位");
+                } else if (v.value != $("input[name='password']").val()) {
+                    alert("两次输入密码不一致，请检查后重试");
+                }
+                break;
+        }
+    })
 
         $.ajax({
             url: '/user/ajax/helpRegister',

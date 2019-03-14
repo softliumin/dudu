@@ -415,6 +415,17 @@ public class UserController {
         }
         return result;
     }
+
+
+    @RequestMapping("self_reg")
+    public String self_reg(){
+        try {
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "user/self_reg";
+    }
 }
 
 

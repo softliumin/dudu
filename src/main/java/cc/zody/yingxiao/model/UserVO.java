@@ -4,7 +4,6 @@ import cc.zody.yingxiao.dataobject.UserLevel;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户模型

@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
     <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 <body class="g4">
@@ -25,6 +27,9 @@
     }
 </style>
 <div class="body_bg"></div>
+
+<link rel="stylesheet" href="/template/mobile/rainbow/static/css/swiper.4.0.7.css?v=20190308112730">
+<body>
 <!-- 首页 -->
 <div class="classreturn loginsignup " style="border: none;">
     <div class="content">
@@ -32,7 +37,7 @@
             <span>嘟嘟闯关游戏</span>
         </div>
         <div style="position: absolute;right:.42667rem;top:0;">
-            <a href="/user/suggest" style="color: rgba(255, 255, 255, .8);">投诉简历</a>
+            <a href="/user/suggest" style="color: rgba(255, 255, 255, .8);">投诉建议</a>
         </div>
     </div>
 </div>
@@ -42,13 +47,13 @@
     <div class="swiper-container meirong_banner">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <a href="javascript:;">22222
-                    <img src="/public/upload/ad/2019/02-27/49b9438699ee2c4caed490c943d1bba6.png" alt="">
+                <a href="javascript:;">
+                    <img src="/static/upload/indexImg_001.png" alt="">
                 </a>
             </div>
             <div class="swiper-slide">
-                <a href="javascript:;">11111
-                    <img src="/public/upload/ad/2019/02-27/04a39553795e8c574c68b8503a670bf7.png" alt="">
+                <a href="javascript:;">
+                    <img src="/static/upload/indexImg_002.png" alt="">
                 </a>
             </div>
         </div>
@@ -63,11 +68,11 @@
         <li style="color: rgba(255, 255, 255, .8);"><em>I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D:</em><span
                 th:text="${user.id} "></span>
         </li>
-        <li style="color: rgba(255, 255, 255, .8);"><em>等&nbsp;&nbsp;&nbsp; 级:</em><span>第1关声名不显</span><i
+        <li style="color: rgba(255, 255, 255, .8);"><em>等&nbsp;&nbsp;&nbsp; 级:</em>第<span th:text="${user.level} "/> 关 <span th:text="${user.levelName} "/><i
                 class="that_button">等级介绍</i></li>
         <li style="color: rgba(255, 255, 255, .8);"><em>姓&nbsp;&nbsp;&nbsp; 名:</em><span th:text="${user.username} "/>
         </li>
-        <li style="color: rgba(255, 255, 255, .8);"><em>推荐人:</em><span>天乐</span></li>
+        <li style="color: rgba(255, 255, 255, .8);"><em>推荐人:</em><span th:text="${user.referrerName} "/></li>
     </ul>
     <a class="index_info_creditPoints" href="/user/credit">信用分：100分</a>
     <a class="index_info_setting" href="/user/userDetail">账号安全设置</a>

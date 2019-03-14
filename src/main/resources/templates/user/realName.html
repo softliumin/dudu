@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- 去除自动识别电话号码 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="/index.php/Mobile/User/userDetail.html">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+                <!-- <img src="/template/mobile/rainbow/static/images/return.png" alt="返回"> -->
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>实名认证</span>
+        </div>
+        <div class="ds-in-bl menu hide">
+            <a href="javascript:void(0);"><img src="/template/mobile/rainbow/static/images/class1.png" alt="菜单"></a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"> </div>
+        <ul>
+            <li>
+                <a class="yello" href="/index.php/mobile/Index/index.html">
+                    <div class="icon">
+                        <i class="icon-shouye iconfont"></i>
+                        <p>首页</p>
+                    </div>
+                </a>
+            </li>
+            <!--  <li>
+                 <a href="/index.php/mobile/Goods/categoryList.html">
+                     <div class="icon">
+                         <i class="icon-fenlei iconfont"></i>
+                         <p>分类</p>
+                     </div>
+                 </a>
+             </li> -->
+            <li>
+                <a href="/index.php/mobile/Cart/index.html">
+                    <div class="icon">
+                        <i class="icon-gouwuche iconfont"></i>
+                        <p>购物车</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/index.php/mobile/User/index.html">
+                    <div class="icon">
+                        <i class="icon-wode iconfont"></i>
+                        <p>我的</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 1){
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+<link rel="stylesheet" href="/template/mobile/rainbow/static/css/realName.css">
+<div class="realNameModule">
+    <!--上传身份证图片认证-->
+    <form method="post" action="/index.php/mobile/User/upIdentityCard.html" style="display: none;" id="card_form" enctype="multipart/form-data">
+        <div class="identity-input">
+            <input type="text" name="true_name" value="" placeholder="请输入您的真实姓名" style="width:100%;" />
+        </div>
+        <div class="identity-input">
+            <input type="text" name="card_number" value="" style="width:100%;" placeholder="请输入您的身份证号码" />
+        </div>
+
+        <div class="addIdentity">
+            <div class="identityTitle">请上传清晰的身份证正面和背面图片</div>
+            <div class="id_card_content clearfix">
+                <div class="id_card_dl fl">
+                    <label class="file"  for="file_img_list1" style="cursor:pointer;">
+                        <div class="shcph" id="fileList1">
+                            <img src="" onerror="this.src='/template/mobile/rainbow/static/images/zhengm.png'" alt="" style="object-fit: initial;">
+                            <input type="file" accept="image/*" id="file_img_list1" name="file_img_list1" style="display:none;" onchange="uploadVoucher(this,1)">
+                            <!-- <input type="hidden" name="img_list1" id="img_list1" /> -->
+                        </div>
+                    </label>
+                </div>
+                <div class="id_card_dl fl">
+                    <label class="file"  for="file_img_list2" style="cursor:pointer;">
+                        <div class="shcph" id="fileList2">
+                            <img src="" onerror="this.src='/template/mobile/rainbow/static/images/beim.png'" alt="" style="object-fit: initial;">
+                            <input type="file" accept="image/*" id="file_img_list2" name="file_img_list2" style="display:none;" onchange="uploadVoucher(this,2)">
+                            <!-- <input type="hidden" name="img_list2" id="img_list2" /> -->
+                        </div>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <!--认证成功显示模块-->
+    <div class="authenticatedModule" style="display: none;">
+        <div class="authenticated_name">
+            <i>姓名</i>
+            <span></span>
+            <i class="authenticated_icon"></i>
+        </div>
+        <div class="authenticated_identity">
+            <i>身份证</i>
+            <span></span>
+        </div>
+    </div>
+    <!--弹窗 -->
+    <!-- 验证提交审核中 -->
+    <!-- 遮罩 -->
+    <div id="realName_submitEnd1" style="display: none;">
+        <div class="mask"></div>
+        <div class="realName_submitEndCotent">
+            <div class="title1">温馨提示</div>
+            <div class="info1">
+                <p>您的实名认证已经提交，我们将在24小时内反馈审核，结果请耐心等待。  </p>
+            </div>
+            <a href="/index.php/Mobile/User/userDetail.html" class="know_btn">我知道了</a>
+        </div>
+    </div>
+</div>
+
+<div class="upgrade_btn" style="margin:.3rem .85rem;display: none;">
+    <a href="javascript:;" class="btn" id="submit">提交申请</a>
+</div>
+
+<!-- <script src="/template/mobile/rainbow/static/js/uploader_mobile.js"></script> -->
+<script type="text/javascript">
+
+</script>
+<script>
+    //显示上传照片
+    window.URL = window.URL || window.webkitURL;
+
+    // 上传图片
+    var img_list = 0;
+    function uploadVoucher(obj,index) {
+        var files = obj.files;
+        img = new Image();
+        if (window.URL) {
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.width = 60;
+            img.height = 60;
+            img.onload = function(e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+
+        } else if (window.FileReader) {
+            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function(e) {
+                img.src = this.result;
+                img.width = 60;
+                img.height = 60;
+            }
+        } else {
+            //ie
+            obj.select();
+            obj.blur();
+            var nfile = document.selection.createRange().text;
+            document.selection.empty();
+            img.src = nfile;
+            img.width = 60;
+            img.height = 60;
+            img.onload = function() {}
+        }
+        img_list=1;
+        $("#fileList"+index).find('img').remove();
+        $("#fileList"+index).append(img);
+    }
+    // function handleFiles2(id) {
+    //     mobUploader("#file_img_list" + id, "#fileList" + id, function (r) {
+    //         $("#img_list" + id).val(r.url);
+    //         console.log(r.url);
+    //     });
+    // };
+
+    //显示上传照片
+    var img_list = 0;
+    function handleFiles(obj,index) {
+        fileList = document.getElementById("fileList"+index);
+        var files = obj.files;
+        img = new Image();
+        if(window.URL){
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.onload = function(e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+            if(fileList.firstElementChild){
+                fileList.removeChild(fileList.firstElementChild);
+            }
+            $('#fileList'+index).find('img').remove();
+            fileList.appendChild(img);
+            img_list=1;
+        }else if(window.FileReader){
+            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function(e){
+                img.src = this.result;
+                $('#fileList'+index).find('img').remove();
+                fileList.appendChild(img);
+            }
+        }else
+        {
+            //ie
+            obj.select();
+            obj.blur();
+            var nfile = document.selection.createRange().text;
+            document.selection.empty();
+            img.src = nfile;
+            img.onload=function(){
+
+            }
+            $('#fileList'+index).find('img').remove();
+            fileList.appendChild(img);
+        }
+    }
+
+
+    //   审核中提示
+    //   function submitOk(){
+    //     layer.open({
+    //     content: $('#realName_submitEnd1').html(),
+    //     shade: 'background-color: rgba(0,0,0,.5)',
+    //     shadeClose: false,
+    //   });
+    // }
+    // 审核失败提示
+    function submitFail(){
+
+        layer.open({
+            className: 'coupon_endStyle',
+            content: "您提交的身份证图片不清晰或者信息不一致，请修改后重新提交!",
+            skin: 'msg',
+            type:'3',
+            time: 5 //5秒后自动关闭
+        });
+    }
+    $.ajax({
+        type: "get",
+        url: "",
+        data: {'is_ajax':1},
+        dataType: 'json',
+        success: function (data) {
+            if (data.code == 1) {
+                if(data.res.process=='invalid'){   //认证失败
+                    $('form').show();
+                    $('.upgrade_btn').show();
+                    submitFail();
+                }else if(data.res.process=='success'){     //认证成功
+                    $('form').hide();
+                    $('.authenticated_name span').text(data.res.true_name);
+                    $('.authenticated_identity span').text(data.res.card_number);
+                    $('.upgrade_btn').hide();
+                    $('.authenticatedModule').show();
+                }else if(data.res.process=='pending'){     //审核中
+                    $('form').show();
+                    $('.upgrade_btn').show();
+                    $('#realName_submitEnd1').show();
+                }
+            }else{
+                $('form').show();
+                $('.upgrade_btn').show();
+                // 未验证
+            }
+        }
+    })
+    //提交認證
+    $('#submit').on('click', function () {
+        // if ("" == "valid") {
+        //     return showErrorMsg('您已通过实名认证，无需再再次认证');
+        // }
+        var name = $('input[name="true_name"]').val();
+        var card_id = $('input[name=card_number]').val();
+        var regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (name == '') {
+            return showErrorMsg('姓名不能为空！');
+        }
+        if (regIdNo == '') {
+            return showErrorMsg('身份证号码不能为空！');
+        }
+        if (!regIdNo.test(card_id)) {
+            return showErrorMsg('请输入正确的身份证号码');
+        }
+        if (img_list==0) {
+            showErrorMsg('请上传您本人的身份证相关截图');
+            return false;
+        }
+
+        $('#card_form').submit();
+        // return;
+        // $.ajax({
+        //     type: "post",
+        //     url: "/index.php/mobile/User/upIdentityCard.html",
+        //     data: {
+        //         true_name: name,
+        //         card_number: card_id,
+        //     },
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         if (data.code == 1) {
+        //             layer.open({
+        //                 content: data.msg,
+        //                 skin: 'msg',
+        //                 time: 2 //2秒后自动关闭
+        //                     ,
+        //                 end: function () {
+        //                     window.location.href = '/index.php/mobile/User/userinfo.html';
+        //                 }
+        //             });
+        //         } else {
+        //             showErrorMsg(data.msg);
+        //         }
+        //     }
+        // });
+    });
+</script>
+<script>
+    $(function() {
+        var flashMessage = null;
+        //console.log(flashMessage);
+        if (flashMessage) {
+            layer.open({
+                content: flashMessage.msg,
+                time: 3,
+            });
+        }
+    });
+</script>

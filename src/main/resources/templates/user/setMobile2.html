@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+    <meta charset="UTF-8" />
+    <!-- 去除自动识别电话号码 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="g4">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("/static/img/theme/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="/index.php/Mobile/User/userDetail.html">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+                <!-- <img src="/template/mobile/rainbow/static/images/return.png" alt="返回"> -->
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>设置备用手机号</span>
+        </div>
+        <div class="ds-in-bl menu tpnavf">
+            <a href="javascript:void(0);"><img src="/template/mobile/rainbow/static/images/class1.png" alt="菜单"></a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"> </div>
+        <ul>
+            <li>
+                <a class="yello" href="/index.php/mobile/Index/index.html">
+                    <div class="icon">
+                        <i class="icon-shouye iconfont"></i>
+                        <p>首页</p>
+                    </div>
+                </a>
+            </li>
+            <!--  <li>
+                 <a href="/index.php/mobile/Goods/categoryList.html">
+                     <div class="icon">
+                         <i class="icon-fenlei iconfont"></i>
+                         <p>分类</p>
+                     </div>
+                 </a>
+             </li> -->
+            <li>
+                <a href="/index.php/mobile/Cart/index.html">
+                    <div class="icon">
+                        <i class="icon-gouwuche iconfont"></i>
+                        <p>购物车</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/index.php/mobile/User/index.html">
+                    <div class="icon">
+                        <i class="icon-wode iconfont"></i>
+                        <p>我的</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 1){
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+<link rel="stylesheet" href="/template/mobile/rainbow/static/css/userInfo.css?v=20190308112730">
+<style>
+    .setting-list .setting-item{
+        height: 2.005rem;
+    }
+    .setting-list .setting-item .v-code-pic{
+        border-radius: .853rem;
+    }
+</style>
+<div class="page_title" style="color: #867AFB;">
+    当前备用手机号：
+    暂未绑定</div>
+
+<form action="" id="upload" action="/index.php/Mobile/User/setMobile.html" method="post">
+    <ul class="setting-list">
+        <li class="setting-item flex_panel">
+            <input type="mobile" name="mobile" class="main" placeholder="请输入手机号码">
+        </li>
+
+        <li class="setting-item flex_panel">
+            <input type="text" name="verify_code" class="main" placeholder="请输入图文验证码">
+            <img class="v-code-pic" src="/index.php?m=Mobile&c=User&a=verify&type=forget" id="verify_code_img" onclick="verify()">
+        </li>
+
+        <li class="setting-item flex_panel">
+            <input type="password" name="password" class="main" placeholder="请输入登录密码">
+        </li>
+    </ul>
+</form>
+<div class="upgrade_btn" style="margin:1.28rem .85rem;">
+    <a href="javascript:;" class="btn">确认修改</a>
+</div>
+
+
+<script>
+    //加载验证码
+    function verify() {
+        $('#verify_code_img').attr('src', '/index.php?m=Mobile&c=User&a=verify&type=forget&r=' + Math.random());
+    }
+
+    $(".btn").on('click', function() {
+        let is_error = false;
+        let error_msg = false;
+        let formData = $("#upload").serializeArray().reverse();
+
+        formData.forEach((v, k) => {
+            if (v.value == '') {
+            is_error = true;
+            error_msg = v.name;
+        } else if (v.name == 'mobile' && !(/^1[345789]\d{9}$/.test(v.value))) {
+            is_error = true;
+            error_msg = v.name;
+        }
+    })
+
+        if (is_error) {
+            layer.open({
+                content: $("input[name='" + error_msg + "']").attr('placeholder'),
+                time: 2000
+            })
+            return false;
+        } else {
+            $("#upload").submit();
+        }
+    })
+</script>
+</body>
+
+</html>

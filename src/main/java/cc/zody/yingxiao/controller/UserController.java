@@ -8,6 +8,7 @@ import cc.zody.yingxiao.model.RegisterVO;
 import cc.zody.yingxiao.model.UserVO;
 import cc.zody.yingxiao.service.UserLevelService;
 import cc.zody.yingxiao.service.UserService;
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class UserController {
     Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private UserLevelService userLevelService;
+    UserLevelService userLevelService;
 
     @Autowired
     UserService userService;
@@ -58,17 +59,16 @@ public class UserController {
     }
 
 
-
     /**
      * 用户主页
      */
     @RequestMapping("/home")
     public String home(HttpServletRequest request, Model model) {
         try {
-            List<Cookie> list =  Arrays.asList(request.getCookies());
+            List<Cookie> list = Arrays.asList(request.getCookies());
             Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
-            if (optionalCookie.isPresent()){
-                User user =  userService.findUserByTelNum(optionalCookie.get().getValue());
+            if (optionalCookie.isPresent()) {
+                User user = userService.findUserByTelNum(optionalCookie.get().getValue());
                 Map<String, String> levelMap = new HashMap<>();
                 List<UserLevel> userLevelList = userLevelService.queryAllLevel();
                 if (!CollectionUtils.isEmpty(userLevelList)) {
@@ -83,17 +83,15 @@ public class UserController {
                 vo.setUsername(user.getUsername());
                 vo.setReferrerId(user.getReferrerId());
                 vo.setReferrerName("huhuhu");
-                vo.setLevelName(levelMap.get(""+user.getLevel()+""));
+                vo.setLevelName(levelMap.get("" + user.getLevel() + ""));
 
-                model.addAttribute("user",vo);
+                model.addAttribute("user", vo);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "user/home";
     }
-
-
 
 
     /**
@@ -108,15 +106,15 @@ public class UserController {
         try {
             log.error("login");
             Boolean loginResult = userService.login(username, password);
-            if (null!=loginResult && loginResult == true) {
+            if (null != loginResult && loginResult == true) {
                 //
                 Cookie cookie = new Cookie("dudu", username);
                 cookie.setPath("/");
                 httpResponse.addCookie(cookie);
             } else {
-                if (null==loginResult){
+                if (null == loginResult) {
                     result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "用户不存在");
-                }else{
+                } else {
                     result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "密码错误");
                 }
             }
@@ -131,6 +129,7 @@ public class UserController {
 
     /**
      * 帮助注册
+     *
      * @param
      * @return
      */
@@ -138,7 +137,7 @@ public class UserController {
     public String helpRegister() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/helpRegister";
@@ -146,6 +145,7 @@ public class UserController {
 
     /**
      * 团队（行会）
+     *
      * @param
      * @return
      */
@@ -153,7 +153,7 @@ public class UserController {
     public String myTeam() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/myTeam";
@@ -161,6 +161,7 @@ public class UserController {
 
     /**
      * 审核闯关
+     *
      * @param
      * @return
      */
@@ -168,7 +169,7 @@ public class UserController {
     public String collect() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/collect";
@@ -177,6 +178,7 @@ public class UserController {
 
     /**
      * 申请闯关
+     *
      * @param
      * @return
      */
@@ -184,7 +186,7 @@ public class UserController {
     public String updateLevel() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/updateLevel";
@@ -192,22 +194,23 @@ public class UserController {
 
     /**
      * 综合信用评分
+     *
      * @return
      */
     @RequestMapping("/credit")
     public String credit() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/credit";
     }
 
 
-
     /**
      * 收货地址管理
+     *
      * @param
      * @return
      */
@@ -215,7 +218,7 @@ public class UserController {
     public String addressList() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/address_list";
@@ -223,35 +226,36 @@ public class UserController {
 
     /**
      * 投诉建议
+     *
      * @return
      */
     @RequestMapping("/suggest")
     public String suggest() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/suggest";
     }
 
 
-
     /**
      * 用户信息页面
+     *
      * @param registerVO
      * @return
      */
     @RequestMapping("/userDetail")
-    public String userDetail(HttpServletRequest request,Model model) {
+    public String userDetail(HttpServletRequest request, Model model) {
         try {
-            List<Cookie> list =  Arrays.asList(request.getCookies());
+            List<Cookie> list = Arrays.asList(request.getCookies());
             Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
             if (optionalCookie.isPresent()) {
                 User user = userService.findUserByTelNum(optionalCookie.get().getValue());
-                model.addAttribute("user",user);
+                model.addAttribute("user", user);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "user/userDetail";
@@ -259,6 +263,7 @@ public class UserController {
 
     /**
      * 增加地址
+     *
      * @param
      * @return
      */
@@ -266,7 +271,7 @@ public class UserController {
     public String addAddress() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/add_address";
@@ -274,6 +279,7 @@ public class UserController {
 
     /**
      * 编辑地址
+     *
      * @param
      * @return
      */
@@ -281,16 +287,11 @@ public class UserController {
     public String editAddress() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/edit_address";
     }
-
-
-
-
-
 
 
     /**
@@ -315,6 +316,7 @@ public class UserController {
 
     /**
      * 主手机号
+     *
      * @param
      * @return
      */
@@ -322,7 +324,7 @@ public class UserController {
     public String setMainMobile() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/setMainMobile";
@@ -330,6 +332,7 @@ public class UserController {
 
     /**
      * 备用手机号
+     *
      * @param
      * @return
      */
@@ -337,7 +340,7 @@ public class UserController {
     public String setMobile2() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/setMobile2";
@@ -348,7 +351,7 @@ public class UserController {
     public String bindAliPay() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/bindAliPay";
@@ -358,7 +361,7 @@ public class UserController {
     public String bindWeChat() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/bindWeChat";
@@ -368,22 +371,49 @@ public class UserController {
     public String realName() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/realName";
     }
 
 
-
     @RequestMapping("/setPassword")
     public String setPassword() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "user/setPassword";
+    }
+
+    /**
+     * 帮助注册
+     *
+     * @param
+     * @return
+     */
+    @RequestMapping("/ajax/helpRegister")
+    @ResponseBody
+    public DdResult ajaxHelpRegister(HttpServletRequest request,RegisterVO user) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            List<Cookie> list = Arrays.asList(request.getCookies());
+            Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
+            if (optionalCookie.isPresent()) {
+                user.setReferrerId( Integer.parseInt(optionalCookie.get().getValue()));
+            }
+
+            Boolean dbResult = userService.register(user);
+            if (!dbResult){
+                result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "注册失败!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
+        }
+        return result;
     }
 }
 

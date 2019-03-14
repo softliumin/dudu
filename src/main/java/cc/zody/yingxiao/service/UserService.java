@@ -63,6 +63,15 @@ public class UserService {
     public Boolean register(RegisterVO registerVO) {
         try {
             User user = new User();
+            user.setLevel(0);
+            user.setReferrerId(registerVO.getReferrerId());
+            user.setAliPay(registerVO.getAliPay());
+            user.setWeChat(registerVO.weChat);
+            user.setUsername(registerVO.username);
+            user.setPassword(EncryptUtil.md5(registerVO.password));
+            user.setTelNum(registerVO.getTelNum());
+
+
             int dbResult = userMapper.insertUser(user);
             if (dbResult==1){
                 return  true;

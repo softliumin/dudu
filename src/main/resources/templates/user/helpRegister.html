@@ -72,7 +72,7 @@
     })
 </script>
 
-<link rel="stylesheet" href="/static/css/userInfo.css?v=0.2">
+<link rel="stylesheet" href="/static/css/userInfo.css">
 <style>
     .setting-list{
         margin:0  .5rem;
@@ -82,7 +82,7 @@
 <form action="" method="post" id="regFrom">
     <ul class="setting-list">
         <li class="setting-item flex_panel">
-            <input type="text" name="username" id="username" value="" placeholder="请输入要注册的手机号码" class="c-form-txt-normal main" maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+            <input type="text" name="telNum" id="username" value="" placeholder="请输入要注册的手机号码" class="c-form-txt-normal main" maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
             <span id="mobile_phone_notice"></span>
         </li>
 
@@ -100,14 +100,14 @@
             <span id="confirm_password_notice"></span>
         </li>
         <li class="setting-item flex_panel">
-            <input type="text" name="nickname" id="nickname" value="" placeholder="请输入昵称" class="c-form-txt-normal main" onkeyup="this.value=this.value.replace(/\s+/g,'')">
-            <span id="mobile_phone_notice"></span>
+            <input type="text" name="username" id="nickname" value="" placeholder="请输入昵称" class="c-form-txt-normal main" onkeyup="this.value=this.value.replace(/\s+/g,'')">
+            <span id="nickname_notice"></span>
         </li>
         <li class="setting-item flex_panel">
-            <input type="text"  name="paytypeWx" value="" maxlength="16" placeholder="请填写微信号"  onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
+            <input type="text"  name="weChat" value="" maxlength="16" placeholder="请填写微信号"  onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
         </li>
         <li class="setting-item flex_panel">
-            <input type="text"  name="paytypeZfb" value="" maxlength="16" placeholder="请填写支付宝号" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
+            <input type="text"  name="aliPay" value="" maxlength="16" placeholder="请填写支付宝号" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
         </li>
 
     </ul>
@@ -125,59 +125,59 @@
 
     function checkSubmit() {
         var formData = $("#regFrom").serializeArray().reverse();
-        let error_msg = '';
+    //     let error_msg = '';
+    //
+    //     formData.forEach((v, k) => {
+    //         if (v.value == '') {
+    //         if(v.name == 'paytypeWx' || v.name == 'paytypeZfb'){
+    //             //  选填
+    //         }else{
+    //             error_msg = $("input[name='" + v.name + "']").attr('placeholder');
+    //         }
+    //     }
+    //
+    //     switch (v.name) {
+    //         case 'username':
+    //             // if (!(/^1[345789]\d{9}$/.test(v.value))) {
+    //             if (!checkMobile(v.value)) {
+    //                 error_msg = '请输入正确手机号'
+    //             }
+    //             break;
+    //         case 'password2':
+    //             if (v.value.length < 6) {
+    //                 error_msg = '密码不能小于6位';
+    //             } else if (v.value != $("input[name='password']").val()) {
+    //                 error_msg = '两次输入密码不一致，请检查后重试'
+    //             }
+    //             break;
+    //     }
+    // })
 
-        formData.forEach((v, k) => {
-            if (v.value == '') {
-            if(v.name == 'paytypeWx' || v.name == 'paytypeZfb'){
-                //  选填
-            }else{
-                error_msg = $("input[name='" + v.name + "']").attr('placeholder');
+        $.ajax({
+            url: '/user/ajax/helpRegister',
+            data: $('#regFrom').serialize(),
+            dataType: 'json',
+            type: 'POST',
+            success: function(res) {
+                if (res.code==1){
+                    alert("注册成功!");
+                    window.location.href = '/user/home';
+                } else{
+                    alert(res.message);
+                }
+                console.log(res);
+                // if (res.status == 1) {
+                //     setTimeout(function() {
+                //         window.location.href = '/index.php/Mobile/Index/index';
+                //     }, 2000)
+                // }
+                //
+                // layer.open({
+                //     content: res.msg,
+                //     time: 2000
+                // })
             }
-        }
-
-        switch (v.name) {
-            case 'username':
-                // if (!(/^1[345789]\d{9}$/.test(v.value))) {
-                if (!checkMobile(v.value)) {
-                    error_msg = '请输入正确手机号'
-                }
-                break;
-            case 'password2':
-                if (v.value.length < 6) {
-                    error_msg = '密码不能小于6位';
-                } else if (v.value != $("input[name='password']").val()) {
-                    error_msg = '两次输入密码不一致，请检查后重试'
-                }
-                break;
-        }
-    })
-
-        if (error_msg.length != '') {
-            layer.open({
-                content: error_msg,
-                time: 2000
-            })
-        } else {
-            $.ajax({
-                url: '',
-                data: $('#regFrom').serialize(),
-                dataType: 'json',
-                type: 'POST',
-                success: function(res) {
-                    if (res.status == 1) {
-                        setTimeout(function() {
-                            window.location.href = '/index.php/Mobile/Index/index';
-                        }, 2000)
-                    }
-
-                    layer.open({
-                        content: res.msg,
-                        time: 2000
-                    })
-                }
-            })
-        }
+        })
     }
 </script>
 </body>

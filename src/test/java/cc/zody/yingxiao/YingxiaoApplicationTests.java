@@ -67,16 +67,16 @@ public class YingxiaoApplicationTests {
     }
 
     @Test
-    @Ignore
+//    @Ignore
     public void  testUserLevelAdd(){
         UserLevel userLevel = new UserLevel();
-        userLevel.setLevelName("haha1");
+        userLevel.setLevelName("傻逼");
         userLevel.setLevelNum("1");
         Integer result = userLevelMapper.insertUserLevel(userLevel);
         System.out.println("===================="+result);
     }
 
-    @Ignore
+
     @Test
     public void testUserLevelSelect(){
         List<UserLevel> list = userLevelMapper.selectAllUserLevel();

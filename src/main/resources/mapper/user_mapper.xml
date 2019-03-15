@@ -69,6 +69,12 @@
         select * from user where tel_num = #{telNum} limit 1;
     </select>
 
+    <select id="selectById" resultMap="userDo">
+        select * from user where id = #{id} limit 1;
+    </select>
+
+
+
     <select id="selectAllUser" resultMap="userDo">
          select * from user where 1=1
     </select>

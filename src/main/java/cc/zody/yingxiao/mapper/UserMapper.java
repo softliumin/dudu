@@ -22,6 +22,8 @@ public interface UserMapper {
 
     User selectForLogin( @Param("telNum")String telNum);
 
+    User selectById( @Param("id")Integer id);
+
     Integer updateUserLevel(User user);
 
 }

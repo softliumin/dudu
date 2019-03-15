@@ -49,6 +49,14 @@ public class UserService {
     public User findUserByTelNum(String telNum) {
         return  userMapper.selectForLogin(telNum);
     }
+    /**
+     * 根据uid查找
+     * @param telNum
+     * @return
+     */
+    public User findUserById(Integer id) {
+        return  userMapper.selectById(id);
+    }
 
 
 

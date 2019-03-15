@@ -76,13 +76,13 @@ public class UserController {
                         levelMap.put(level.getLevelNum(), level.getLevelName());
                     }
                 }
-
                 UserVO vo = new UserVO();
                 vo.setId(user.getId());
                 vo.setLevel(user.getLevel());
                 vo.setUsername(user.getUsername());
                 vo.setReferrerId(user.getReferrerId());
-                vo.setReferrerName("huhuhu");
+
+                vo.setReferrerName(userService.findUserById(user.getReferrerId()).username);
                 vo.setLevelName(levelMap.get("" + user.getLevel() + ""));
 
                 model.addAttribute("user", vo);
@@ -437,8 +437,17 @@ public class UserController {
 //mysql -h 47.75.197.99 -P 3306 -u root -p
 
 //scp -P 22 /Users/hengzhen/Desktop/yingxiao-0.0.1-SNAPSHOT.jar root@47.75.197.99:/code/
+//scp -P 22 /Users/hengzhen/IdeaProjects/yingxiao/target/yingxiao-0.0.1-SNAPSHOT.jar root@47.75.197.99:/code/
 //
 //java -jar yingxiao-0.0.1-SNAPSHOT.jar
 
 //http://localhost/static/img/theme/login_pwd.png
 //http://localhost/static/img/theme/btn_banner.png
+/**
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
+ *
+ */
+
+
+

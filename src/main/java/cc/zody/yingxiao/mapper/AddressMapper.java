@@ -18,6 +18,8 @@ public interface AddressMapper {
 
     List<Address> selectUserAllAddress(User user);
 
+    Address selectById(Integer id);
+
 
 
 }

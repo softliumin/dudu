@@ -1,11 +1,13 @@
 package cc.zody.yingxiao.controller;
 
+import cc.zody.yingxiao.dataobject.Address;
 import cc.zody.yingxiao.dataobject.User;
 import cc.zody.yingxiao.dataobject.UserLevel;
 import cc.zody.yingxiao.enums.DdResultCodeEnum;
 import cc.zody.yingxiao.model.DdResult;
 import cc.zody.yingxiao.model.RegisterVO;
 import cc.zody.yingxiao.model.UserVO;
+import cc.zody.yingxiao.service.AddressService;
 import cc.zody.yingxiao.service.UserLevelService;
 import cc.zody.yingxiao.service.UserService;
 import com.alibaba.fastjson.JSON;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,6 +47,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AddressService addressService;
 
     /**
      * 用户登录首页
@@ -216,11 +222,14 @@ public class UserController {
      * @return
      */
     @RequestMapping("/address_list")
-    public String addressList() {
+    public String addressList(HttpServletRequest request, Model model) {
         try {
-
+            List<Address> list = addressService.queryAddressByUid(getUserFromCookie(request).getId());
+            if (!CollectionUtils.isEmpty(list)) {
+                model.addAttribute("addressList", list);
+            }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return "user/address_list";
     }
@@ -270,11 +279,6 @@ public class UserController {
      */
     @RequestMapping("/add_address")
     public String addAddress() {
-        try {
-
-        } catch (Exception e) {
-
-        }
         return "user/add_address";
     }
 
@@ -284,12 +288,15 @@ public class UserController {
      * @param
      * @return
      */
-    @RequestMapping("/edit_address")
-    public String editAddress() {
+    @RequestMapping("/edit_address/{id}")
+    public String editAddress(@PathVariable Integer id,Model model) {
         try {
-
+            Address address =  addressService.selectById(id);
+            if (null!= address){
+                model.addAttribute("address",address);
+            }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return "user/edit_address";
     }
@@ -351,9 +358,9 @@ public class UserController {
     @RequestMapping("/bindAliPay")
     public String bindAliPay(HttpServletRequest request, Model model) {
         try {
-            User user = getUidFromCookie(request);
-            if (null!=user){
-                model.addAttribute("aliPay",user.getAliPay());
+            User user = getUserFromCookie(request);
+            if (null != user) {
+                model.addAttribute("aliPay", user.getAliPay());
             }
         } catch (Exception e) {
 
@@ -361,18 +368,52 @@ public class UserController {
         return "user/bindAliPay";
     }
 
+    @ResponseBody
+    @RequestMapping("/ajax/bindAliPay")
+    public DdResult ajaxBindAliPay(HttpServletRequest request, String al_account) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            userService.updateAliPay(getUserFromCookie(request).getId(), al_account);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
+        }
+        return result;
+    }
+
     @RequestMapping("/bindWeChat")
     public String bindWeChat(HttpServletRequest request, Model model) {
         try {
-            User user = getUidFromCookie(request);
-            if (null!=user){
-                model.addAttribute("weChat",user.getWeChat());
+            User user = getUserFromCookie(request);
+            if (null != user) {
+                model.addAttribute("weChat", user.getWeChat());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "user/bindWeChat";
     }
+
+    /**
+     * 修改绑定微信号码
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/ajax/bindWeChat")
+    public DdResult ajaxBindWeChat(HttpServletRequest request, String newWeChat) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            userService.updateWeChat(getUserFromCookie(request).getId(), newWeChat);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
+        }
+        return result;
+    }
+
 
     @RequestMapping("/realName")
     public String realName() {
@@ -403,17 +444,17 @@ public class UserController {
      */
     @RequestMapping("/ajax/helpRegister")
     @ResponseBody
-    public DdResult ajaxHelpRegister(HttpServletRequest request,RegisterVO user) {
+    public DdResult ajaxHelpRegister(HttpServletRequest request, RegisterVO user) {
         DdResult<Boolean> result = DdResult.getSuccessResult();
         try {
             List<Cookie> list = Arrays.asList(request.getCookies());
             Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
             if (optionalCookie.isPresent()) {
-                user.setReferrerId( Integer.parseInt(optionalCookie.get().getValue()));
+                user.setReferrerId(Integer.parseInt(optionalCookie.get().getValue()));
             }
 
             Boolean dbResult = userService.register(user);
-            if (!dbResult){
+            if (!dbResult) {
                 result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "注册失败!");
             }
         } catch (Exception e) {
@@ -425,23 +466,23 @@ public class UserController {
 
 
     @RequestMapping("self_reg")
-    public String self_reg(){
+    public String self_reg() {
         try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "user/self_reg";
     }
 
 
-    public User getUidFromCookie(HttpServletRequest request ){
+    public User getUserFromCookie(HttpServletRequest request) {
         List<Cookie> list = Arrays.asList(request.getCookies());
         Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
         if (optionalCookie.isPresent()) {
             User user = userService.findUserByTelNum(optionalCookie.get().getValue());
             return user;
-        }else{
+        } else {
             return null;
         }
 
@@ -451,6 +492,12 @@ public class UserController {
 
 /**
  * 一些操作记录
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
  */
 
 

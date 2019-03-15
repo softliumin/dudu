@@ -51,7 +51,7 @@ public class UserService {
     }
     /**
      * 根据uid查找
-     * @param telNum
+     * @param
      * @return
      */
     public User findUserById(Integer id) {
@@ -60,7 +60,15 @@ public class UserService {
 
 
 
+    public Integer updateWeChat(Integer id,String weChat){
 
+        return userMapper.updateWeChat(id, weChat);
+    }
+
+    public Integer updateAliPay(Integer id,String aliPay){
+
+        return userMapper.updateAliPay(id, aliPay);
+    }
 
 
     /**

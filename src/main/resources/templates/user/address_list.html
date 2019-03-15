@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
-    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
     <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
     <script src="/public/js/global.js"></script>
@@ -155,13 +156,16 @@
 </style>
 <div class="address_list">
     <div class="jd_listaddless p">
-        <div class="maleri30 clearfix">
+
+        <!-- 循环开始 -->
+        <div class="maleri30 clearfix"  th:each="address,addressStat : ${addressList}" >
             <div class="name">
-                <h1 class="fl">柳敏</h1>
-                <div class="number fr"><i class="number-dh">电话：</i> 18910172928</div>
+                <h1 class="fl" th:text="${address.name}"></h1>
+                <div class="number fr" ><i class="number-dh">电话：</i>    <span th:text="${address.telNum}" th:remove="tag"></span>
+                </div>
             </div>
             <div class="numberaddress fl">
-                <span class="similars fl">浙江省,杭州市,余杭区,文一西路969号</span>
+                <span class="similars fl" th:text="${address.mainAddress}+${address.detailAddress}"></span>
             </div>
 
             <div class="acquiescent fl" onclick="ajaxDefaultAddress(this)" data-address_id="31141" >
@@ -169,8 +173,8 @@
                 <span>默认地址</span>
             </div>
             <div class="authenticatedButton fr">
-                <a class="redactBtn fl" href="/index.php/Mobile/User/edit_address/id/31141.html">
-                    编辑
+                <a class="redactBtn fl" th:href="@{/user/edit_address/{id}(id=${address.id})}">
+                编辑
                 </a>
                 <div class="fl">
                 </div>
@@ -187,7 +191,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- 循环结束 -->
     </div>
     <div class="mask-filter-div"></div>
     <!--地址-e-->

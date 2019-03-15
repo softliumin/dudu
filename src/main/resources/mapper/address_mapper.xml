@@ -45,6 +45,10 @@
         where  id = #{id}
     </update>
 
+    <select id="selectById" resultMap="addressDo">
+      select * from  address where id=#{id} limit 1
+    </select>
+
     <delete id="delAddress">
         delete  from address where id=#{id}
     </delete>

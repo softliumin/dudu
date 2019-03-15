@@ -26,4 +26,9 @@ public interface UserMapper {
 
     Integer updateUserLevel(User user);
 
+
+    Integer updateWeChat(Integer id,String weChat);
+
+    Integer updateAliPay(Integer id,String aliPay);
+
 }

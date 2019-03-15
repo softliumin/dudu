@@ -12,6 +12,7 @@
         <result column="detail_address" jdbcType="VARCHAR" property="detailAddress"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="def_address" jdbcType="INTEGER" property="defAddress"/>
     </resultMap>
 
     <select id="selectUserAllAddress" resultMap="addressDo">
@@ -20,9 +21,9 @@
 
     <insert id="insertAddress" >
           insert into address
-          (user_id,name,tel_num,main_address,detail_address,gmt_create,gmt_modified)
+          (user_id,name,tel_num,main_address,detail_address,gmt_create,gmt_modified,def_address)
            values
-           (#{userId},#{name},#{telNum},#{mainAddress},#{detailAddress},now(),now())
+           (#{userId},#{name},#{telNum},#{mainAddress},#{detailAddress},now(),now(),#{defAddress})
     </insert>
 
     <update id="updateAddress">

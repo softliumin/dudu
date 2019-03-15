@@ -62,5 +62,10 @@ public class Address implements Serializable {
      */
     public Date gmtModified;
 
+    /**
+     * 默认地址 0表示默认
+     */
+    public Integer defAddress;
+
 
 }

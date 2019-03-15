@@ -169,7 +169,10 @@
             </div>
 
             <div class="acquiescent fl" onclick="ajaxDefaultAddress(this)" data-address_id="31141" >
-                <i class="receiving active"></i>
+
+                <i th:if="${address.defAddress} ==0"    class="receiving active" > </i>
+                <i th:unless="${address.defAddress}==1" class="receiving" ></i>
+
                 <span>默认地址</span>
             </div>
             <div class="authenticatedButton fr">

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.WebParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -348,9 +349,12 @@ public class UserController {
 
 
     @RequestMapping("/bindAliPay")
-    public String bindAliPay() {
+    public String bindAliPay(HttpServletRequest request, Model model) {
         try {
-
+            User user = getUidFromCookie(request);
+            if (null!=user){
+                model.addAttribute("aliPay",user.getAliPay());
+            }
         } catch (Exception e) {
 
         }
@@ -358,11 +362,14 @@ public class UserController {
     }
 
     @RequestMapping("/bindWeChat")
-    public String bindWeChat() {
+    public String bindWeChat(HttpServletRequest request, Model model) {
         try {
-
+            User user = getUidFromCookie(request);
+            if (null!=user){
+                model.addAttribute("weChat",user.getWeChat());
+            }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return "user/bindWeChat";
     }
@@ -425,6 +432,19 @@ public class UserController {
             e.printStackTrace();
         }
         return "user/self_reg";
+    }
+
+
+    public User getUidFromCookie(HttpServletRequest request ){
+        List<Cookie> list = Arrays.asList(request.getCookies());
+        Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
+        if (optionalCookie.isPresent()) {
+            User user = userService.findUserByTelNum(optionalCookie.get().getValue());
+            return user;
+        }else{
+            return null;
+        }
+
     }
 }
 

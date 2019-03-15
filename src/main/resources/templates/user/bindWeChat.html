@@ -87,24 +87,10 @@
 </div>
 <form class="bind_panel" id="upload">
     <ul class="setting-list">
-
-
         <li class="setting-item flex_panel">
             <span class="name">微信账号</span>
-            <input type="text" name="al_account" class="main" placeholder="请输入微信账号" value="18910172928">
+            <input type="text" name="al_account" class="main" placeholder="请输入微信账号" th:value="${weChat}">
         </li>
-
-
-        <!-- <li class="setting-item flex_panel">
-          <span class="name">手机号</span>
-          <input type="text" name="mobile" class="main" placeholder="请输入手机号" value="18910172928" readonly>
-        </li>
-
-
-        <li class="setting-item flex_panel">
-          <span class="name">姓名</span>
-          <input type="text" name="name" class="main" placeholder="请输入姓名" value="">
-        </li> -->
     </ul>
     <input type="hidden" name="type" value="2" placeholder="">
 </form>

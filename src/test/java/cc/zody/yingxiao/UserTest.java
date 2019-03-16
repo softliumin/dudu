@@ -23,15 +23,19 @@ public class UserTest {
 
     @Test
     public void testInsertUser() {
-        User user = new User();
-        user.setTelNum("11111");
-        user.setPassword("pwd");
-        user.setUsername("username");
-        user.setWeChat("weChat");
-        user.setAliPay("aliPay");
-        user.setReferrerId(2);
-        Integer result = userMapper.insertUser(user);
-        System.out.println(result);
+        for (int x=10;x<14;x++){
+            User user = new User();
+            user.setTelNum("150217770"+x);
+            user.setPassword("e10adc3949ba59abbe56e057f20f883e");
+            user.setUsername("柳敏"+x);
+            user.setWeChat("150217770"+x);
+            user.setAliPay("150217770"+x);
+            user.setReferrerId(9);
+            user.setLevel(x);
+            Integer result = userMapper.insertUser(user);
+            System.out.println(result);
+        }
+
     }
 
     @Test

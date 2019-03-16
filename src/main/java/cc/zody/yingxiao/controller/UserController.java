@@ -72,28 +72,27 @@ public class UserController {
     @RequestMapping("/home")
     public String home(HttpServletRequest request, Model model) {
         try {
-            List<Cookie> list = Arrays.asList(request.getCookies());
-            Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
-            if (optionalCookie.isPresent()) {
-                User user = userService.findUserByTelNum(optionalCookie.get().getValue());
-                Map<String, String> levelMap = new HashMap<>();
-                List<UserLevel> userLevelList = userLevelService.queryAllLevel();
-                if (!CollectionUtils.isEmpty(userLevelList)) {
-                    for (UserLevel level : userLevelList) {
-                        levelMap.put(level.getLevelNum(), level.getLevelName());
-                    }
-                }
-                UserVO vo = new UserVO();
-                vo.setId(user.getId());
-                vo.setLevel(user.getLevel());
-                vo.setUsername(user.getUsername());
-                vo.setReferrerId(user.getReferrerId());
-
-                vo.setReferrerName(userService.findUserById(user.getReferrerId()).username);
-                vo.setLevelName(levelMap.get("" + user.getLevel() + ""));
-
-                model.addAttribute("user", vo);
+            User user = getUserFromCookie(request);
+            if (null==user){
+                return "user/index";
             }
+            Map<Integer, String> levelMap = new HashMap<>();
+            List<UserLevel> userLevelList = userLevelService.queryAllLevel();
+            if (!CollectionUtils.isEmpty(userLevelList)) {
+                for (UserLevel level : userLevelList) {
+                    levelMap.put(level.getLevelNum(), level.getLevelName());
+                }
+            }
+            UserVO vo = new UserVO();
+            vo.setId(user.getId());
+            vo.setLevel(user.getLevel());
+            vo.setUsername(user.getUsername());
+            vo.setReferrerId(user.getReferrerId());
+
+            vo.setReferrerName(userService.findUserById(user.getReferrerId()).username);
+            vo.setLevelName(levelMap.get("" + user.getLevel() + ""));
+
+            model.addAttribute("user", vo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,10 +110,8 @@ public class UserController {
     public DdResult login(String username, String password, HttpServletResponse httpResponse) {
         DdResult<Boolean> result = DdResult.getSuccessResult();
         try {
-            log.error("login");
             Boolean loginResult = userService.login(username, password);
             if (null != loginResult && loginResult == true) {
-                //
                 Cookie cookie = new Cookie("dudu", username);
                 cookie.setPath("/");
                 httpResponse.addCookie(cookie);
@@ -259,11 +256,10 @@ public class UserController {
     @RequestMapping("/userDetail")
     public String userDetail(HttpServletRequest request, Model model) {
         try {
-            List<Cookie> list = Arrays.asList(request.getCookies());
-            Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
-            if (optionalCookie.isPresent()) {
-                User user = userService.findUserByTelNum(optionalCookie.get().getValue());
+            User user = getUserFromCookie(request);
+            if (null!= user){
                 model.addAttribute("user", user);
+                return  "user/index";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -475,18 +471,30 @@ public class UserController {
         return "user/self_reg";
     }
 
-
+    /**
+     * 解析异常
+     * @param request
+     * @return
+     */
     public User getUserFromCookie(HttpServletRequest request) {
-        List<Cookie> list = Arrays.asList(request.getCookies());
-        Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
-        if (optionalCookie.isPresent()) {
-            User user = userService.findUserByTelNum(optionalCookie.get().getValue());
-            return user;
-        } else {
+        try {
+            if (null == request || null == request.getCookies()){
+                return null;
+            }
+            List<Cookie> list = Arrays.asList(request.getCookies());
+            Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
+            if (optionalCookie.isPresent()) {
+                User user = userService.findUserByTelNum(optionalCookie.get().getValue());
+                return user;
+            } else {
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
-
     }
+
 }
 
 

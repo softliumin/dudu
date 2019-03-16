@@ -6,7 +6,7 @@
 
     <resultMap id="levelDo" type="cc.zody.yingxiao.dataobject.UserLevel">
         <result column="id" jdbcType="INTEGER" property="id"/>
-        <result column="level_num" jdbcType="VARCHAR" property="levelNum"/>
+        <result column="level_num" jdbcType="INTEGER" property="levelNum"/>
         <result column="level_name" jdbcType="VARCHAR" property="levelName"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>

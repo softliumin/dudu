@@ -71,7 +71,7 @@ public class YingxiaoApplicationTests {
     public void  testUserLevelAdd(){
         UserLevel userLevel = new UserLevel();
         userLevel.setLevelName("傻逼");
-        userLevel.setLevelNum("1");
+        userLevel.setLevelNum(1);
         Integer result = userLevelMapper.insertUserLevel(userLevel);
         System.out.println("===================="+result);
     }
@@ -90,7 +90,7 @@ public class YingxiaoApplicationTests {
         UserLevel userLevel = new UserLevel();
         userLevel.setId(1);
         userLevel.setLevelName("first");
-        userLevel.setLevelNum("11111");
+        userLevel.setLevelNum(111);
         Integer result = userLevelMapper.updateUserLevel(userLevel);
         System.out.println("===================="+result);
     }

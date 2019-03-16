@@ -30,7 +30,7 @@
         <if test='aliPay != null and aliPay != "" '>
             #{aliPay},
         </if>
-        #{username},#{password},#{referrerId},0,now(),now())
+        #{username},#{password},#{referrerId},#{level},now(),now())
     </insert>
 
     <select id="selectUserForPage" resultMap="userDo">

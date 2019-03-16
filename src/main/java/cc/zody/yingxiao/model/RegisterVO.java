@@ -39,6 +39,11 @@ public class RegisterVO implements Serializable {
     public Integer referrerId;
 
     /**
+     * 推荐人(uid)
+     */
+    public String referrerTelNum;
+
+    /**
      * 用户级别
      *
      * @see UserLevel

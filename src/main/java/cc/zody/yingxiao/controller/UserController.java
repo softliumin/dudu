@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -591,6 +592,39 @@ public class UserController {
                 user.setReferrerId(Integer.parseInt(optionalCookie.get().getValue()));
             }
 
+            Boolean dbResult = userService.register(user);
+            if (!dbResult) {
+                result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "注册失败!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
+        }
+        return result;
+    }
+
+    /**
+     * 帮助注册
+     *
+     * @param
+     * @return
+     */
+    @RequestMapping("/ajax/selfRegister")
+    @ResponseBody
+    public DdResult ajaxSelfRegister(HttpServletRequest request, RegisterVO user) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            if (StringUtils.isEmpty(user.getReferrerTelNum())){
+                // TODO
+                user.setReferrerId(9);
+            }else {
+                User uu =userService.findUserByTelNum(user.getReferrerTelNum());
+                if (null== uu){
+                    user.setReferrerId(9);
+                }else{
+                    user.setReferrerId(uu.getId());
+                }
+            }
             Boolean dbResult = userService.register(user);
             if (!dbResult) {
                 result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "注册失败!");

@@ -82,7 +82,7 @@
     <input type="hidden" name="is_bind" value="">
     <ul class="setting-list">
         <li class="setting-item flex_panel">
-            <input type="text" name="username" id="username" value="" placeholder="请输入手机号码" class="c-form-txt-normal main" maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+            <input type="text" name="telNum" id="username" value="" placeholder="请输入手机号码" class="c-form-txt-normal main" maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
             <span id="mobile_phone_notice"></span>
         </li>
 
@@ -92,28 +92,28 @@
         <!--</li>-->
 
         <li class="setting-item flex_panel">
-            <input type="password" id="password" value="" maxlength="16" placeholder="请设置登录密码" class="c-form-txt-normal main" onBlur="check_password();"  onkeyup="this.value=this.value.replace(/\s+/g,'')">
-            <input type="hidden" name="password" value="" />
+            <input type="password" name="password" id="password" value="" maxlength="16" placeholder="请设置登录密码" class="c-form-txt-normal main" onBlur="check_password();"  onkeyup="this.value=this.value.replace(/\s+/g,'')">
+            <input type="hidden" name="password-tt" value="" />
             <span id="password_notice"></span>
         </li>
+        <!--<li class="setting-item flex_panel">-->
+            <!--<input type="password" id="password2" value="" maxlength="16" placeholder="请再次确认登录密码" onBlur="check_confirm_password();" class="c-form-txt-normal main"  onkeyup="this.value=this.value.replace(/\s+/g,'')">-->
+            <!--<input type="hidden" name="password2" value="" />-->
+            <!--<span id="confirm_password_notice"></span>-->
+        <!--</li>-->
         <li class="setting-item flex_panel">
-            <input type="password" id="password2" value="" maxlength="16" placeholder="请再次确认登录密码" onBlur="check_confirm_password();" class="c-form-txt-normal main"  onkeyup="this.value=this.value.replace(/\s+/g,'')">
-            <input type="hidden" name="password2" value="" />
-            <span id="confirm_password_notice"></span>
+            <input type="text" name="username" id="nickname" value="" placeholder="请输入您的昵称" class="c-form-txt-normal main" onkeyup="this.value=this.value.replace(/\s+/g,'')">
+            <span id="mobile_username_notice"></span>
         </li>
         <li class="setting-item flex_panel">
-            <input type="text" name="nickname" id="nickname" value="" placeholder="请输入您的昵称" class="c-form-txt-normal main" onkeyup="this.value=this.value.replace(/\s+/g,'')">
-            <span id="mobile_phone_notice"></span>
+            <input type="text" name="referrerTelNum" id="invite"  maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"   value=""  placeholder="填写邀请人手机号码" class="c-form-txt-normal main" >
+            <span id="invite_referrerTelNum_notice"></span>
         </li>
         <li class="setting-item flex_panel">
-            <input type="text" name="invite" id="invite"  maxlength="11"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"   value=""  placeholder="填写邀请人手机号码" class="c-form-txt-normal main" >
-            <span id="invite_phone_notice"></span>
+            <input type="text"  name="weChat" value="" maxlength="16" placeholder="请填写微信号"  onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
         </li>
         <li class="setting-item flex_panel">
-            <input type="text"  name="paytypeWx" value="" maxlength="16" placeholder="请填写微信号"  onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
-        </li>
-        <li class="setting-item flex_panel">
-            <input type="text"  name="paytypeZfb" value="" maxlength="16" placeholder="请填写支付宝号" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
+            <input type="text"  name="aliPay" value="" maxlength="16" placeholder="请填写支付宝号" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
         </li>
 
         <li class="setting-item flex_panel" style="display:none;">
@@ -260,31 +260,31 @@
     }
     //提交表单
     function checkSubmit() {
-        check_confirm_password()
-        if (flag == false) {
-            return;
-        }
-        // if (!$('input[name=agree_pact]').is(':checked')) {
-        //   showErrorMsg('请同意拓客新零售平台服务协议');
-        //   return false;
+        // check_confirm_password()
+        // if (flag == false) {
+        //     return;
         // }
-        if( !$.trim($("input[name=nickname]").val())){
-            showErrorMsg('请填写您的昵称');
-            return false;
-        }
+        // // if (!$('input[name=agree_pact]').is(':checked')) {
+        // //   showErrorMsg('请同意拓客新零售平台服务协议');
+        // //   return false;
+        // // }
+        // if( !$.trim($("input[name=nickname]").val())){
+        //     showErrorMsg('请填写您的昵称');
+        //     return false;
+        // }
         $.ajax({
             type: 'POST',
-            url: "/index.php?m=Mobile&c=User&a=reg",
+            url: "/user/ajax/selfRegister",
             dataType: 'JSON',
             data: $('#regFrom').serialize(),
             success: function(data) {
-                if (data.status == 1) {
-                    showErrorMsg(data.msg);
+                if (data.code == 1) {
+                    alert("注册成功，请登录！")
                     setTimeout(function() {
-                        location.href = '/index.php/Mobile/Index/index';
+                        location.href = '/user/index';
                     }, 1000)
                 } else {
-                    showErrorMsg(data.msg);
+                    alert("注册失败，请联系管理员！")
                 }
             }
         })

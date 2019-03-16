@@ -92,12 +92,12 @@
 <!-- <div class="page_title" style="color:#6356E2;">
   温馨提示：您已满足升级下一等级的条件，请联系一下用户并向他购买产品，对方审核通过后即可升级成功！
 </div> -->
-<form action="/mobile/index/gift_giving.html" method="post" id="giftForm" enctype="multipart/form-data">
+<form action="/user/ajax/gift_giving" method="post" id="giftForm" enctype="multipart/form-data">
     <ul class="detail-list">
         <li class="detail-item title">
             商家信息
         </li>
-
+        <input type="hidden" th:value="${levelOne.id}"  name="passUser1">
         <li class="detail-item">
             <span class="name">用户姓名</span>
             <span class="content" th:text="${levelOne.username}">
@@ -124,33 +124,34 @@
         </li>
 
         <!-- 收货地址 -->
-        <li class="detail-item">
-            <span class="name">收货方式：</span>
-            <span class="content">
-          <i class="receiving " data-type="2">快递</i>
-          <i class="receiving active" data-type="1">自提</i>
-        </span>
-        </li>
-        <li class="detail-item gift_my_address">
-            <div class="gift_address_choose">
-                <a href="/Mobile/User/address_list/preurl/aHR0cDovL3NhbGUuMTBtZi5vcmcvbW9iaWxlL2luZGV4L2dpZnRfZ2l2aW5nLmh0bWw%3D/type/croos.html">
-                    <input type="hidden" value="84412" name="address_id">
-                    <div class="gift_addres_top clearfix">
-                        <div class="fl my_name"><span>姓名：</span>  敏敏</div>
-                        <div class="fl my_tel">15021700700</div>
-                    </div>
-                    <div class="gift_addres_bottom clearfix">
-                        <div class="fl"><span>收货地址:</span></div>
-                        <div class="fr gift_addres_detail">
-                            <p>天津市路路11号</p>
-                        </div>
-                    </div>
-                    <div class="gift_addres_setting">
-                        <i class="Mright"></i>
-                    </div>
-                </a>
-            </div>
-        </li>
+        <!--<li class="detail-item">-->
+            <!--<span class="name">收货方式：</span>-->
+            <!--<span class="content">-->
+                <!--<i class="receiving " data-type="2">快递</i>-->
+                <!--<i class="receiving active" data-type="1">自提</i>-->
+            <!--</span>-->
+        <!--</li>-->
+        <!--<li class="detail-item gift_my_address">-->
+            <!--<div class="gift_address_choose">-->
+                <!--<a href="/Mobile/User/address_list/preurl/aHR0cDovL3NhbGUuMTBtZi5vcmcvbW9iaWxlL2luZGV4L2dpZnRfZ2l2aW5nLmh0bWw%3D/type/croos.html">-->
+                    <!--<input type="hidden" value="84412" name="address_id">-->
+                    <!--<div class="gift_addres_top clearfix">-->
+                        <!--<div class="fl my_name"><span>姓名：</span>  敏敏</div>-->
+                        <!--<div class="fl my_tel">15021700700</div>-->
+                    <!--</div>-->
+                    <!--<div class="gift_addres_bottom clearfix">-->
+                        <!--<div class="fl"><span>收货地址:</span></div>-->
+                        <!--<div class="fr gift_addres_detail">-->
+                            <!--<p>天津市路路11号</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="gift_addres_setting">-->
+                        <!--<i class="Mright"></i>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</li>-->
+
         <!-- 收货类型 1为自提 2快递-->
         <input type="hidden" class="type" name="collect_type" value="1" />
     </ul>
@@ -158,6 +159,8 @@
         <li class="detail-item title">
             商家信息
         </li>
+        <input type="hidden" th:value="${levelTwo.id}"   name="passUser2">
+
         <li class="detail-item">
             <span class="name">用户姓名</span>
             <span class="content" th:text="${levelTwo.username}">
@@ -183,39 +186,37 @@
         </li>
 
         <!-- 收货地址 -->
-        <li class="detail-item">
-            <span class="name">收货方式：</span>
-            <span class="content">
-            <i class="receiving" data-type="2">快递</i>
-            <i class="receiving active" data-type="1">自提</i>
-          </span>
-        </li>
-        <li class="detail-item gift_my_address">
-            <div class="gift_address_choose">
-                <a href="/Mobile/User/address_list/preurl/aHR0cDovL3NhbGUuMTBtZi5vcmcvbW9iaWxlL2luZGV4L2dpZnRfZ2l2aW5nLmh0bWw%3D/type/croos.html">
-                    <input type="hidden" value="84412" name="cross_address_id">
-                    <div class="gift_addres_top clearfix">
-                        <div class="fl my_name"><span>姓名：</span>  敏敏</div>
-                        <div class="fl my_tel">15021700700</div>
-                    </div>
-                    <div class="gift_addres_bottom clearfix">
-                        <div class="fl"><span>收货地址:</span></div>
-                        <div class="fr gift_addres_detail">
-                            <p>天津市路路11号</p>
-                        </div>
-                    </div>
-                    <div class="gift_addres_setting">
-                        <i class="Mright"></i>
-                    </div>
-                </a>
-            </div>
-        </li>
+        <!--<li class="detail-item">-->
+            <!--<span class="name">收货方式：</span>-->
+            <!--<span class="content">-->
+                <!--<i class="receiving" data-type="2">快递</i>-->
+                <!--<i class="receiving active" data-type="1">自提</i>-->
+            <!--</span>-->
+        <!--</li>-->
+        <!--<li class="detail-item gift_my_address">-->
+            <!--<div class="gift_address_choose">-->
+                <!--<a href="/Mobile/User/address_list/preurl/aHR0cDovL3NhbGUuMTBtZi5vcmcvbW9iaWxlL2luZGV4L2dpZnRfZ2l2aW5nLmh0bWw%3D/type/croos.html">-->
+                    <!--<input type="hidden" value="84412" name="cross_address_id">-->
+                    <!--<div class="gift_addres_top clearfix">-->
+                        <!--<div class="fl my_name"><span>姓名：</span>  敏敏</div>-->
+                        <!--<div class="fl my_tel">15021700700</div>-->
+                    <!--</div>-->
+                    <!--<div class="gift_addres_bottom clearfix">-->
+                        <!--<div class="fl"><span>收货地址:</span></div>-->
+                        <!--<div class="fr gift_addres_detail">-->
+                            <!--<p>天津市路路11号</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="gift_addres_setting">-->
+                        <!--<i class="Mright"></i>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</li>-->
         <!-- 收货类型 1为自提 2快递-->
-        <input type="hidden" class="type" name="croos_collect_type" value="1" />
     </ul>
 
-    <input type="hidden" value="153471049"   name="croos_user_id">
-    <input type="hidden" value="153509814"   name="collect_user_id">
+
 </form>
 
 <!-- 如果没有送礼也没有待审核数据 -->
@@ -229,107 +230,107 @@
 <!--<script src="/template/mobile/rainbow/static/js/mobilePassword/mobilePassword.js"></script>-->
 <link rel="stylesheet" href="/static/css/mobilePassword.css">
 <script>
-    $('.gift_my_address').hide();//初始化 自提
-    //显示上传照片
-    window.URL = window.URL || window.webkitURL;
-
-    var password = new mobilePassword({
-        size: 6,
-        title: '请输入支付密码',
-        callback: (res) => {
-        $("input[name='password']").val(res);
-    // console.log($("#giftForm").serialize())
-    $("#giftForm").submit();
-    },
-    forgetAction: function() {
-        console.log('忘记密码了')
-    }
-    })
+    // $('.gift_my_address').hide();//初始化 自提
+    // //显示上传照片
+    // window.URL = window.URL || window.webkitURL;
+    //
+    // var password = new mobilePassword({
+    //     size: 6,
+    //     title: '请输入支付密码',
+    //     callback: (res) => {
+    //     $("input[name='password']").val(res);
+    // // console.log($("#giftForm").serialize())
+    // $("#giftForm").submit();
+    // },
+    // forgetAction: function() {
+    //     console.log('忘记密码了')
+    // }
+    // })
 
     $(function() {
         // 選擇收貨方式
-        $('#giftForm').on('click','.receiving',function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            var type = $(this).data('type');
-            if(type == '1'){
-                $(this).parents('li').siblings('.gift_my_address').hide();
-            }else{
-                $(this).parents('li').siblings('.gift_my_address').show();
-            }
-            // 写入收货方式
-            $(this).parents('ul').find('input.type').val(type);
-        })
+        // $('#giftForm').on('click','.receiving',function(){
+        //     $(this).addClass('active').siblings().removeClass('active');
+        //     var type = $(this).data('type');
+        //     if(type == '1'){
+        //         $(this).parents('li').siblings('.gift_my_address').hide();
+        //     }else{
+        //         $(this).parents('li').siblings('.gift_my_address').show();
+        //     }
+        //     // 写入收货方式
+        //     $(this).parents('ul').find('input.type').val(type);
+        // })
 
 
 
         $(".bottom_btn").on('click', function() {
-            var croos_user_id = $("input[name='croos_user_id']").val();
-            var collect_user_id = $("input[name='collect_user_id']").val();
-            console.log(croos_user_id);
-            console.log(collect_user_id);
+            // var croos_user_id = $("input[name='croos_user_id']").val();
+            // var collect_user_id = $("input[name='collect_user_id']").val();
+            // console.log(croos_user_id);
+            // console.log(collect_user_id);
             $("#giftForm").submit();
 
         })
     })
 
     // 修改付款类型
-    function changePayWay(obj) {
-        let pay_way = $(obj).val();
-        let way_str = {
-            1: '支付宝',
-            2: '微信',
-        }
-
-        $.ajax({
-            url: '/mobile/index/getAccount/type/' + pay_way,
-            type: 'POST',
-            dataType: 'json',
-            data: $("#upload").serialize(),
-            success: function(res) {
-                if (res.status == 1) {
-                    $("#account").val(res.account);
-                }
-            }
-        })
-    }
+    // function changePayWay(obj) {
+    //     let pay_way = $(obj).val();
+    //     let way_str = {
+    //         1: '支付宝',
+    //         2: '微信',
+    //     }
+    //
+    //     $.ajax({
+    //         url: '/mobile/index/getAccount/type/' + pay_way,
+    //         type: 'POST',
+    //         dataType: 'json',
+    //         data: $("#upload").serialize(),
+    //         success: function(res) {
+    //             if (res.status == 1) {
+    //                 $("#account").val(res.account);
+    //             }
+    //         }
+    //     })
+    // }
 
 
     // 上传图片
-    function uploadVoucher(obj) {
-        var files = obj.files;
-        img = new Image();
-        if (window.URL) {
-            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
-            img.width = 60;
-            img.height = 60;
-            img.onload = function(e) {
-                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
-            }
-
-        } else if (window.FileReader) {
-            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
-            var reader = new FileReader();
-            reader.readAsDataURL(files[0]);
-            reader.onload = function(e) {
-                img.src = this.result;
-                img.width = 60;
-                img.height = 60;
-            }
-        } else {
-            //ie
-            obj.select();
-            obj.blur();
-            var nfile = document.selection.createRange().text;
-            document.selection.empty();
-            img.src = nfile;
-            img.width = 60;
-            img.height = 60;
-            img.onload = function() {}
-        }
-
-        $("#voucher").find('img').remove();
-        $("#voucher").append(img);
-    }
+    // function uploadVoucher(obj) {
+    //     var files = obj.files;
+    //     img = new Image();
+    //     if (window.URL) {
+    //         img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+    //         img.width = 60;
+    //         img.height = 60;
+    //         img.onload = function(e) {
+    //             window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+    //         }
+    //
+    //     } else if (window.FileReader) {
+    //         //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+    //         var reader = new FileReader();
+    //         reader.readAsDataURL(files[0]);
+    //         reader.onload = function(e) {
+    //             img.src = this.result;
+    //             img.width = 60;
+    //             img.height = 60;
+    //         }
+    //     } else {
+    //         //ie
+    //         obj.select();
+    //         obj.blur();
+    //         var nfile = document.selection.createRange().text;
+    //         document.selection.empty();
+    //         img.src = nfile;
+    //         img.width = 60;
+    //         img.height = 60;
+    //         img.onload = function() {}
+    //     }
+    //
+    //     $("#voucher").find('img').remove();
+    //     $("#voucher").append(img);
+    // }
 </script>
 
 </body>

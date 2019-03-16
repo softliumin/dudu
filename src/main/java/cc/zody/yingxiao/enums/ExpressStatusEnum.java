@@ -1,15 +1,16 @@
 package cc.zody.yingxiao.enums;
 
 /**
- * 用户升级审核状态
+ * 发货状态
+ *
  * @author liumin
  * @since 2018-02-28
  */
-public enum PassStatusEnum {
-
-    READY(0, "等待审核"),
-    OK(1, "审核通过"),
-    NOT_OK(2, "审核不通过");
+public enum ExpressStatusEnum {
+    NO_NEED(0, "不需要发货"),
+    READY(1, "等待发货"),
+    ING(2, "已经发货"),
+    OK(3, "确认收获");
 
     private Integer code;
     private String desc;
@@ -22,8 +23,9 @@ public enum PassStatusEnum {
         return desc;
     }
 
-    PassStatusEnum(Integer code, String desc) {
+    ExpressStatusEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }
+
 }

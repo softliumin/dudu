@@ -17,7 +17,10 @@
     </resultMap>
 
     <insert id="insertPass">
-        insert into pass (level_num,level_name,gmt_create,gmt_modified) values (#{levelNum},#{levelName},now(),now())
+        insert into pass
+        (user_id,pass_user_id,level_num,pass_status,express_type,express_status,gmt_create,gmt_modified)
+        values
+        (#{userId},#{passUserId},#{levelNum},#{passStatus},#{expressType},#{expressStatus},now(),now())
     </insert>
 
     <select id="listByUser" resultMap="passDo">

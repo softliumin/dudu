@@ -1,13 +1,19 @@
 package cc.zody.yingxiao.controller;
 
 import cc.zody.yingxiao.dataobject.Address;
+import cc.zody.yingxiao.dataobject.Pass;
 import cc.zody.yingxiao.dataobject.User;
 import cc.zody.yingxiao.dataobject.UserLevel;
 import cc.zody.yingxiao.enums.DdResultCodeEnum;
+import cc.zody.yingxiao.enums.ExpressStatusEnum;
+import cc.zody.yingxiao.enums.ExpressTypeEnum;
+import cc.zody.yingxiao.enums.PassStatusEnum;
 import cc.zody.yingxiao.model.DdResult;
+import cc.zody.yingxiao.model.PassVO;
 import cc.zody.yingxiao.model.RegisterVO;
 import cc.zody.yingxiao.model.UserVO;
 import cc.zody.yingxiao.service.AddressService;
+import cc.zody.yingxiao.service.PassService;
 import cc.zody.yingxiao.service.UserLevelService;
 import cc.zody.yingxiao.service.UserService;
 import com.alibaba.fastjson.JSON;
@@ -17,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +57,9 @@ public class UserController {
 
     @Autowired
     AddressService addressService;
+
+    @Autowired
+    PassService passService;
 
     /**
      * 用户登录首页
@@ -222,6 +232,45 @@ public class UserController {
     }
 
     /**
+     * ajax申请闯关
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/ajax/gift_giving")
+    public String ajaxGiftGiving(@ModelAttribute PassVO passVO, HttpServletRequest request) {
+        try {
+            User user = getUserFromCookie(request);
+            if (null != passVO.getPassUser1()) {
+                Pass pass = new Pass();
+                pass.setLevelNum(user.getLevel() + 1);
+                pass.setPassStatus(PassStatusEnum.READY.code());
+                pass.setUserId(user.getId());
+                pass.setPassUserId(passVO.getPassUser1());
+                pass.setExpressStatus(ExpressStatusEnum.NO_NEED.code());
+                pass.setExpressType(ExpressTypeEnum.NO_Express.code());
+                Integer re2 = passService.insert(pass);
+            }
+
+            if (null != passVO.getPassUser2()) {
+                Pass pass = new Pass();
+                pass.setLevelNum(user.getLevel() + 1);
+                pass.setPassStatus(PassStatusEnum.READY.code());
+                pass.setUserId(user.getId());
+                pass.setPassUserId(passVO.getPassUser2());
+                pass.setExpressStatus(ExpressStatusEnum.NO_NEED.code());
+                pass.setExpressType(ExpressTypeEnum.NO_Express.code());
+                Integer re2 = passService.insert(pass);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "user/gift_giving";
+        }
+        return "redirect:/user/updateLevel";
+    }
+
+    /**
      * 申请闯关页面
      *
      * @return
@@ -243,8 +292,8 @@ public class UserController {
                         User userTemp = userService.findUserById(referrerId);
                         if (userTemp.getLevel() == 1) {
                             u1 = userTemp;
-                        }else{
-                            referrerId= userTemp.getReferrerId();
+                        } else {
+                            referrerId = userTemp.getReferrerId();
                         }
                     } while (null == u1);
 
@@ -252,8 +301,8 @@ public class UserController {
                         User userTemp = userService.findUserById(referrerId);
                         if (userTemp.getLevel() == 5) {
                             u5 = userTemp;
-                        }else{
-                            referrerId= userTemp.getReferrerId();
+                        } else {
+                            referrerId = userTemp.getReferrerId();
                         }
                     } while (null == u5);
                     // 上一级
@@ -286,17 +335,16 @@ public class UserController {
                     do {
                         User userTemp = userService.findUserById(referrerId);
                         // 仅仅是查询上级
-                        if (user.getLevel() == (user.getLevel()+1)) {
+                        if (user.getLevel() == (user.getLevel() + 1)) {
                             uu = userTemp;
-                        }else{
-                            referrerId= userTemp.getReferrerId();
+                        } else {
+                            referrerId = userTemp.getReferrerId();
                         }
 
                     } while (null != uu);
                     break;
 
             }
-
 
 
         } catch (Exception e) {
@@ -595,6 +643,12 @@ public class UserController {
 
 /**
  * 一些操作记录
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
  * <p>
  * sudo systemctl start mariadb
  * systemctl stop mariadb

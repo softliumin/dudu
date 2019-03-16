@@ -22,72 +22,37 @@ public class Pass implements Serializable {
     /**
      * 闯关人id
      */
-    public String passOwner;
+    public Integer userId;
+
+    /**
+     * 闯关人id
+     */
+    public Integer passUserId;
+
+    /**
+     * 创第几关
+     */
+    public Integer levelNum;
 
 
     /**
      * 审核状态
      */
-    public Integer status;
+    public Integer passStatus;
 
 
-    //==================商家信息begin==================================
-    /**
-     * 审核人名称
-     */
-    public String passName;
-
-    /**
-     * 审核人手机号
-     */
-    public String passTel;
-
-    /**
-     * 备用手机号
-     */
-    public String passTel2;
-
-    /**
-     * 审核人微信号
-     */
-    public String passWeChat;
-    //===================商家信息end=================================
-
-
-
-
-
-    //==================发货信息begin=============================
     /**
      * 发货方式
      */
-    public String  expressType;
+    public Integer  expressType;
 
     /**
      * 发货状态
      */
-    public String  expressStatus;
-
-    /**
-     * 收货地址
-     */
-    public String  receiverAddress;
-    /**
-     *收件人
-     */
-    public String  receiverName;
-    /**
-     *收件人手机号
-     */
-    public String  receiverTel;
-    /**
-     * 发货凭证
-     */
-    public String  expressPic;
+    public Integer  expressStatus;
 
 
 
-    //==================发货信息end=============================
 
     /**
      * 创建时间

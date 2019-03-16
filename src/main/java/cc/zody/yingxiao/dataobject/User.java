@@ -20,6 +20,11 @@ public class User implements Serializable {
 
     public String telNum;
 
+    /**
+     * 备用手机号
+     */
+    public String telNum2;
+
     public String weChat;
 
     public String aliPay;
@@ -32,6 +37,11 @@ public class User implements Serializable {
 
 
     public String password;
+
+    /**
+     * 原密码
+     */
+    public String pwd;
 
     /**
      * 推荐人(uid)

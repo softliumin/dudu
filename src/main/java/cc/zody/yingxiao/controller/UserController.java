@@ -73,7 +73,7 @@ public class UserController {
     public String home(HttpServletRequest request, Model model) {
         try {
             User user = getUserFromCookie(request);
-            if (null==user){
+            if (null == user) {
                 return "user/index";
             }
             Map<Integer, String> levelMap = new HashMap<>();
@@ -187,11 +187,21 @@ public class UserController {
      * @return
      */
     @RequestMapping("/updateLevel")
-    public String updateLevel() {
+    public String updateLevel(HttpServletRequest request, Model model) {
         try {
+            User user = getUserFromCookie(request);
 
+            // 当前级别 下一级别
+
+            List<UserLevel> list = userLevelService.queryAllLevel();
+            Map<Integer, String> map = new HashMap<>();
+            list.stream().forEach(le -> map.put(le.getLevelNum(), le.getLevelName()));
+            String nowName = "关" + map.get(user.getLevel());
+            String nextName = "关" + map.get(user.getLevel() + 1);
+            model.addAttribute("levelNow", "第" + user.getLevel() + nowName);
+            model.addAttribute("levelNext", "第" + (user.getLevel() + 1) + nextName);
         } catch (Exception e) {
-
+            return "user/index";
         }
         return "user/updateLevel";
     }
@@ -209,6 +219,90 @@ public class UserController {
 
         }
         return "user/credit";
+    }
+
+    /**
+     * 申请闯关页面
+     *
+     * @return
+     */
+    @RequestMapping("/gift_giving")
+    public String giftGiving(HttpServletRequest request, Model model) {
+        try {
+
+            User user = getUserFromCookie(request);
+            Integer level = user.getLevel();
+            Integer referrerId = user.getReferrerId();
+            switch (user.getLevel()) {
+                case 0:
+                    // 1和5
+                    User u1 = null;
+                    User u5 = null;
+
+                    do {
+                        User userTemp = userService.findUserById(referrerId);
+                        if (userTemp.getLevel() == 1) {
+                            u1 = userTemp;
+                        }else{
+                            referrerId= userTemp.getReferrerId();
+                        }
+                    } while (null == u1);
+
+                    do {
+                        User userTemp = userService.findUserById(referrerId);
+                        if (userTemp.getLevel() == 5) {
+                            u5 = userTemp;
+                        }else{
+                            referrerId= userTemp.getReferrerId();
+                        }
+                    } while (null == u5);
+                    // 上一级
+                    model.addAttribute("levelOne", u1);
+
+                    // 更大的一级
+                    model.addAttribute("levelTwo", u5);
+                    break;
+                case 4:
+                    // 5和9
+//                    for (; ; ) {
+//
+//                    }
+
+                    break;
+
+                case 8:
+                    // 9和13
+//                    for (; ; ) {
+//
+//                    }
+
+                    break;
+
+                default:
+//                    for (; ; ) {
+//
+//                    }
+                    User uu = null;
+                    do {
+                        User userTemp = userService.findUserById(referrerId);
+                        // 仅仅是查询上级
+                        if (user.getLevel() == (user.getLevel()+1)) {
+                            uu = userTemp;
+                        }else{
+                            referrerId= userTemp.getReferrerId();
+                        }
+
+                    } while (null != uu);
+                    break;
+
+            }
+
+
+
+        } catch (Exception e) {
+
+        }
+        return "user/gift_giving";
     }
 
 
@@ -257,9 +351,9 @@ public class UserController {
     public String userDetail(HttpServletRequest request, Model model) {
         try {
             User user = getUserFromCookie(request);
-            if (null!= user){
+            if (null != user) {
                 model.addAttribute("user", user);
-                return  "user/index";
+                return "user/index";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,11 +379,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("/edit_address/{id}")
-    public String editAddress(@PathVariable Integer id,Model model) {
+    public String editAddress(@PathVariable Integer id, Model model) {
         try {
-            Address address =  addressService.selectById(id);
-            if (null!= address){
-                model.addAttribute("address",address);
+            Address address = addressService.selectById(id);
+            if (null != address) {
+                model.addAttribute("address", address);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -473,12 +567,13 @@ public class UserController {
 
     /**
      * 解析异常
+     *
      * @param request
      * @return
      */
     public User getUserFromCookie(HttpServletRequest request) {
         try {
-            if (null == request || null == request.getCookies()){
+            if (null == request || null == request.getCookies()) {
                 return null;
             }
             List<Cookie> list = Arrays.asList(request.getCookies());
@@ -489,7 +584,7 @@ public class UserController {
             } else {
                 return null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -500,6 +595,18 @@ public class UserController {
 
 /**
  * 一些操作记录
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
+ * <p>
+ * sudo systemctl start mariadb
+ * systemctl stop mariadb
  * <p>
  * sudo systemctl start mariadb
  * systemctl stop mariadb

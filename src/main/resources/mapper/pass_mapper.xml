@@ -4,5 +4,34 @@
 
 <mapper namespace="cc.zody.yingxiao.mapper.PassMapper">
 
+    <resultMap id="passDo" type="cc.zody.yingxiao.dataobject.Pass">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="pass_user_id" jdbcType="INTEGER" property="passUserId"/>
+        <result column="level_num" jdbcType="INTEGER" property="levelNum"/>
+        <result column="express_type" jdbcType="INTEGER" property="expressType"/>
+        <result column="express_status" jdbcType="INTEGER" property="expressStatus"/>
+        <result column="pass_status" jdbcType="INTEGER" property="passStatus"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="insertPass">
+        insert into pass (level_num,level_name,gmt_create,gmt_modified) values (#{levelNum},#{levelName},now(),now())
+    </insert>
+
+    <select id="listByUser" resultMap="passDo">
+        select * from pass where user_id = #{userId}
+    </select>
+
+    <select id="listByLevel" resultMap="passDo">
+        select * from pass where user_id = #{userId} and level_num = #{levelNum}
+    </select>
+
+    <update id="updatePassStatus">
+        update pass set pass_status=#{passStatus}
+        ,gmt_modified = now()
+        where id = #{id}
+    </update>
 
 </mapper>

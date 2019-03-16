@@ -7,11 +7,13 @@
     <resultMap id="userDo" type="cc.zody.yingxiao.dataobject.User">
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="tel_num" jdbcType="VARCHAR" property="telNum"/>
+        <result column="tel_num2" jdbcType="VARCHAR" property="telNum2"/>
         <result column="we_chat" jdbcType="VARCHAR" property="weChat"/>
         <result column="ali_pay" jdbcType="VARCHAR" property="aliPay"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
         <result column="referrer_id" jdbcType="INTEGER" property="referrerId"/>
         <result column="level" jdbcType="INTEGER" property="level"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>

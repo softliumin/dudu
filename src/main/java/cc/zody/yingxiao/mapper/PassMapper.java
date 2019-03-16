@@ -1,6 +1,9 @@
 package cc.zody.yingxiao.mapper;
 
+import cc.zody.yingxiao.dataobject.Pass;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 闯关的相关操作
@@ -10,6 +13,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PassMapper {
 
+    Integer insertPass(Pass pss);
 
+    List<Pass> listByUser(Pass pss);
+
+    List<Pass> listByLevel(Pass pss);
+
+
+    Integer updatePassStatus(Pass pss);
 
 }

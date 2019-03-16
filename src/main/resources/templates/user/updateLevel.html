@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -78,43 +78,44 @@
     <!-- <h5>我要闯关</h5> -->
     <div class="upgrade_star clearfix">
         <div class="fl upgrade_star_l upgrade_star_o">
-            <span>第1关声名不显</span>
+            <span th:text="${levelNow}"></span>
             <p>当前等级</p>
         </div>
         <div class="fl upgrade_star_c">&emsp;</div>
         <div class="fr upgrade_star_r upgrade_star_o">
-            <span>第2关小有名气</span>
+            <span th:text="${levelNext}"></span>
             <p>下一关</p>
         </div>
     </div>
 
-    <div class="upgrade_tips">
-        直接邀请3个第1关声名不显        </div>
-    <div class="plan">
-        <span style="width:0%"><em>0</em></span>
-    </div>
-    <div class="clearfix upgrade_num">
-        <span class="">0</span>
-        <span class="fr">3</span>
-    </div>
+    <!--<div class="upgrade_tips">-->
+        <!--直接邀请3个第1关声名不显        </div>-->
+    <!--<div class="plan">-->
+        <!--<span style="width:0%"><em>0</em></span>-->
+    <!--</div>-->
+    <!--<div class="clearfix upgrade_num">-->
+        <!--<span class="">0</span>-->
+        <!--<span class="fr">3</span>-->
+    <!--</div>-->
 
 
 
 
     <div class="upgrade_btn">
-        <a href="javascript:void(0)" data-href="/mobile/member_center/updataLevel.html" class="upLevel">我要闯关</a>
+        <a href="/user/gift_giving" class="upLevel">我要闯关</a>
 
 
     </div>
 
     <div class="up_applay_history">
-        <a href="/mobile/Order/order_list.html">闯关记录 ></a>
+        <a href="/order/order_list.html">闯关记录 ></a>
     </div>
 </div>
 <!-- 我要闯关 e -->
 <script type="text/javascript">
-    $('.upgrade_btn a.upLevel').click(function(){
-        // var href = $(this).data('href');
-        showErrorMsg('亲,您的闯关条件还不满足...')
-    })
+    // $('.upgrade_btn a.upLevel').click(function(){
+    //      var href = $(this).data('href');
+    //      window.location.href
+    //     //showErrorMsg('亲,您的闯关条件还不满足...')
+    // })
 </script>

@@ -2,6 +2,7 @@ package cc.zody.yingxiao.controller;
 
 import cc.zody.yingxiao.dataobject.Pass;
 import cc.zody.yingxiao.dataobject.User;
+import cc.zody.yingxiao.model.OrderVO;
 import cc.zody.yingxiao.model.PassVO;
 import cc.zody.yingxiao.service.PassService;
 import cc.zody.yingxiao.service.UserService;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,16 +43,20 @@ public class OrderController {
             Pass pass = new Pass();
             pass.setUserId(user.getId());
             List<Pass> list = passService.listByUser(pass);
-            List<PassVO> passVOList = new ArrayList<>();
+            List<OrderVO> passVOList = new ArrayList<>();
             for (Pass ss : list) {
-                PassVO vo = new PassVO();
-//                vo.setPassUser1();
-//                vo.setPassUser2();
-                vo.setGmtCreate(ss.getGmtCreate());
+                OrderVO vo = new OrderVO();
+                User passer = userService.findUserById(ss.getPassUserId());
+                vo.setPassUserId(pass.getPassUserId());
+                vo.setPassTelNum(passer.getTelNum());
+                vo.setWeChat("微信号："+passer.getWeChat());
+                vo.setAliPay("支付宝号："+passer.getAliPay());
+                vo.setPassLevel("闯关等级：第"+ss.getLevelNum()+"关");
+                vo.setGmtCreate(dateToStr(ss.gmtCreate));
                 passVOList.add(vo);
             }
 
-            model.addAttribute("passList", passVOList);
+            model.addAttribute("orderList", passVOList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,6 +87,12 @@ public class OrderController {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public String dateToStr(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(date);
     }
 
 

@@ -3,7 +3,6 @@ package cc.zody.yingxiao.model;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户闯关模型
@@ -14,6 +13,8 @@ import java.util.Date;
 @Data
 public class PassVO implements Serializable {
 
+
+    private static final long serialVersionUID = 8055001393451358346L;
     /**
      * 申请人
      */
@@ -72,15 +73,6 @@ public class PassVO implements Serializable {
     public String weChat2;
     public String telNum2;
 
-    /**
-     * 创建时间
-     */
-    public Date gmtCreate;
-
-    /**
-     * 修改时间
-     */
-    public Date gmtModified;
 
 
 

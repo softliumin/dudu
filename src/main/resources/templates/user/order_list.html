@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8" />
-    <!-- 去除自动识别电话号码 -->
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="x-rim-auto-match" content="none">
 
@@ -123,7 +121,60 @@
     </a>
 </div>
 
-<div class="orderList-list"></div>
+<!-- 审核列表 -->
+<div class="orderList-list">
+    <div class="maleri30 clearfix"  th:each="pass,passStat:${passList}" >
+
+        <div class="list-item">
+            <a href="/index.php/Mobile/Order/order_detail/id/153674.html">
+                <!-- 商品信息 循环开始 -->
+                <div class="order-info flex_panel">
+                    闯关时间：<span th:text="${pass.gmtCreate}"></span>
+                    <span class="order_status_text">待确认</span>
+                </div>
+                <div class="goods-info flex_panel">
+                    <img class="goods-img" src="/template/mobile/rainbow/static/images/user68.jpg"  alt="">
+                    <div class="goods-detail">
+                        <div class="info flex_panel">
+                            <span class="user_name">余小生</span>
+                            <span>上门自提</span>
+                        </div>
+
+                        <div class="info flex_panel">
+                            <span class="mobile">18961182106</span>
+                            <span class="evaluate_status" data-order_id="153674" style="color: rgba(255, 255, 255, .3)">
+                                未评论
+                            </span>
+                        </div>
+                        <div class="info flex_panel">
+                            <span class="checkpoint_level_name">闯关等级：第1关声名不显</span>
+                        </div>
+
+                        <div class="info flex_panel">
+                            <span class="paytypeWx">微信号：13775033821</span>
+                        </div>
+                        <div class="info flex_panel">
+                            <span class="paytypeZfb">支付宝号：13775033821</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商品信息 循环结束 -->
+            </a>
+            <!-- 是否被投诉 -->
+            <div class="order-handle flex_panel">
+                <!-- 我的闯关 -->
+                <a class="handle-btn go_other" href="/index.php/Mobile/Complaint/index/give_gift_id/153674.html">投诉</a>
+                <a class="handle-btn go_other evaluate_button" href="javascript:;" data-log_id="" data-evaluate="0">评价</a>
+                <a class="handle-btn" href="/index.php/Mobile/Order/order_detail/id/153674.html">查看详情</a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
 <!-- 评价弹窗 s index-->
 <div class="orderList_dialog_mask"></div>
 <div class="orderList_dialog">

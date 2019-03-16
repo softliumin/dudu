@@ -60,7 +60,7 @@ public class OrderController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/user/order_list";
+        return "user/order_list";
     }
 
 

@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -121,7 +120,60 @@
     </a>
 </div>
 
-<div class="orderList-list"></div>
+
+    <div class="orderList-list">
+
+        <div class="list-item" th:each="order,ordersStat : ${orderList}">
+
+        <a href="/order/order_detail/">
+            <!-- 商品信息 循环开始 -->
+            <div class="order-info flex_panel">
+                闯关时间：<span th:text="${order.getGmtCreate()}"></span>
+                <span class="order_status_text">待确认</span>
+            </div>
+            <div class="goods-info flex_panel">
+                <img class="goods-img" src="/static/img/theme/user68.jpg"  alt="">
+                <div class="goods-detail">
+                    <div class="info flex_panel">
+                        <span class="user_name" th:text="${order.passUsername}"></span>
+                        <span>上门自提</span>
+                    </div>
+
+                    <div class="info flex_panel">
+                        <span class="mobile" th:text="${order.passTelNum}"></span>
+                        <span class="evaluate_status" data-order_id="153675" style="color: rgba(255, 255, 255, .3)">
+                                未评论
+                            </span>
+                    </div>
+                    <div class="info flex_panel">
+                        <span class="checkpoint_level_name" th:text="${order.passLevel}"></span>
+                    </div>
+
+                    <div class="info flex_panel">
+                        <span class="paytypeWx" th:text="${order.weChat}"></span>
+                    </div>
+                    <!--<div class="info flex_panel">-->
+                        <!--<span class="paytypeZfb">支付宝号：123456</span>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!-- 商品信息 循环结束 -->
+        </a>
+        <!-- 是否被投诉 -->
+
+
+        <div class="order-handle flex_panel">
+            <!-- 闯关审核 -->
+            <a class="handle-btn refuse" data-order_id="153675" href="javascript:void(0);">审核失败</a>
+            <a class="handle-btn confirm" data-order_id="153675" href="javascript:void(0);">审核通过</a>
+            <a class="handle-btn" href="/index.php/Mobile/Order/order_detail/id/153675/type/2.html">查看详情</a>
+        </div>
+
+    </div>
+
+
+
+</div>
 <!-- 评价弹窗 s index-->
 <div class="orderList_dialog_mask"></div>
 <div class="orderList_dialog">

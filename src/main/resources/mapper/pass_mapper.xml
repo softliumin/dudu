@@ -27,6 +27,12 @@
         select * from pass where user_id = #{userId}
     </select>
 
+    <select id="listByPassUserId" resultMap="passDo">
+        select * from pass where pass_user_id = #{id}
+    </select>
+
+
+
     <select id="listByLevel" resultMap="passDo">
         select * from pass where user_id = #{userId} and level_num = #{levelNum}
     </select>

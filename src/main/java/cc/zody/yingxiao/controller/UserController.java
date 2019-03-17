@@ -9,6 +9,7 @@ import cc.zody.yingxiao.enums.ExpressStatusEnum;
 import cc.zody.yingxiao.enums.ExpressTypeEnum;
 import cc.zody.yingxiao.enums.PassStatusEnum;
 import cc.zody.yingxiao.model.DdResult;
+import cc.zody.yingxiao.model.OrderVO;
 import cc.zody.yingxiao.model.PassVO;
 import cc.zody.yingxiao.model.RegisterVO;
 import cc.zody.yingxiao.model.UserVO;
@@ -34,7 +35,10 @@ import javax.jws.WebParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -181,11 +185,25 @@ public class UserController {
      * @return
      */
     @RequestMapping("/collect")
-    public String collect() {
+    public String collect(HttpServletRequest request,Model model) {
         try {
-
+            User user = getUserFromCookie(request);
+            List<Pass> list = passService.listByPassUserId(user.getId());
+            List<OrderVO> passVOList = new ArrayList<>();
+            for (Pass ss : list) {
+                OrderVO vo = new OrderVO();
+                User passer = userService.findUserById(ss.getPassUserId());
+                vo.setPassUserId(user.getId());
+                vo.setPassTelNum(passer.getTelNum());
+                vo.setWeChat("微信号："+passer.getWeChat());
+                vo.setPassLevel("闯关等级：第"+ss.getLevelNum()+"关");
+                vo.setGmtCreate(dateToStr(ss.gmtCreate));
+                vo.setOrderId(ss.getId());
+                passVOList.add(vo);
+            }
+            model.addAttribute("orderList",passVOList);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return "user/collect";
     }
@@ -670,6 +688,12 @@ public class UserController {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public String dateToStr(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(date);
     }
 
 }

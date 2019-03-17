@@ -16,6 +16,7 @@ public interface PassMapper {
     Integer insertPass(Pass pss);
 
     List<Pass> listByUser(Pass pss);
+    List<Pass> listByPassUserId(Integer  id);
 
     List<Pass> listByLevel(Pass pss);
 

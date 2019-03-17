@@ -33,6 +33,15 @@ public class PassService {
         return passMapper.listByUser(pass);
     }
 
+    /**
+     * 查询待审核的记录
+     * @param userId
+     * @return
+     */
+    public List<Pass> listByPassUserId(Integer  userId) {
+        return passMapper.listByPassUserId(userId);
+    }
+
 
     public Integer updatePassStatus(Pass pass) {
         return passMapper.updatePassStatus(pass);

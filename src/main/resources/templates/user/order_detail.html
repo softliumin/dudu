@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+
+    <title>嘟嘟闯关游戏</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
+    <script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
+</head>
+<body class="g4">
+<style>
+    .body_bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image:url("//dudu001-1258827509.cos.ap-chengdu.myqcloud.com/login_back.png");
+        background-size: 100% auto;
+    }
+</style>
+<div class="body_bg"></div>
+
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return [back]">
+            <a id="[back]" href="javascript:history.back(-1)">
+                <i class="iconfont icon-jiantouzuo" style="[headerNewStyle]"></i>
+            </a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>闯关记录详情</span>
+        </div>
+        <div class="ds-in-bl menu tpnavf">
+            <a href="javascript:void(0);"><img src="/static/img/theme/class1.png" alt="菜单"></a>
+        </div>
+    </div>
+</div>
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <div class="up-tpnavf-i"> </div>
+        <ul>
+
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 1){
+                $('.tpnavf').hide()
+            }
+        })
+    })
+</script>
+
+<link rel="stylesheet" href="/static/css/order.css">
+<style>
+    .classreturn{
+        background-color: rgba(255, 255, 255, .1);
+    }
+    .detail-list .detail-item .content{
+        word-break: break-all;
+        overflow: hidden;
+        line-height: .7rem;
+        color:rgba(255, 255, 255, .8);
+    }
+</style>
+
+<div class="order__detail--head">
+    <div class="order__status" style="color:rgba(255, 255, 255, .8);">
+        待确认  </div>
+</div>
+
+<ul class="detail-list">
+    <li class="detail-item title" style="color:rgba(255, 255, 255, .8);">
+        商家信息
+    </li>
+    <li class="detail-item">
+        <span class="name">姓名：</span>
+        <span class="content">18961182106</span>
+    </li>
+    <li class="detail-item">
+        <span class="name">手机号：</span>
+        <span class="content">18961182106</span>
+    </li>
+    <li class="detail-item">
+        <span class="name">备用手机号：</span>
+        <span class="content">13775033821</span>
+    </li>
+    <li class="detail-item">
+        <span class="name">微信号：</span>
+        <span class="content">13775033821</span>
+    </li>
+</ul>
+<ul class="detail-list">
+    <li class="detail-item">
+        <span class="name">闯关等级：</span>
+        <span class="content">第1关声名不显</span>
+    </li>
+</ul>
+
+<ul class="detail-list">
+    <li class="detail-item title">
+        发货信息
+    </li>
+    <li class="detail-item">
+        <span class="name">发货方式：</span>
+        <span class="content">自提</span>
+    </li>
+    <li class="detail-item">
+        <span class="name">发货状态：</span>
+        <span class="content">上门自提</span>
+    </li>
+    <li class="detail-item">
+        <span class="name">收货地址：</span>
+        <span class="content"></span>
+    </li>
+    <li class="detail-item">
+        <span class="name">收件人：</span>
+        <span class="content"></span>
+    </li>
+    <li class="detail-item">
+        <span class="name">手机号</span>
+        <span class="content"></span>
+    </li>
+    <li class="detail-item">
+        <span class="name">快递公司：</span>
+        <span class="content"></span>
+    </li>
+    <li class="detail-item">
+        <span class="name">快递单号：</span>
+        <span class="content"></span>
+    </li>
+
+</ul>
+
+<!-- <ul class="detail-list">
+  <li class="detail-item">
+    <span class="name">消费金额</span>
+    <span class="content">￥100.00</span>
+  </li>
+</ul> -->
+
+<ul class="detail-list">
+    <!-- <li class="detail-item title">
+      消费人信息
+    </li>
+    <li class="detail-item">
+      <span class="name">用户账号</span>
+      <span class="content"></span>
+    </li>
+
+    <li class="detail-item">
+      <span class="name">用户姓名</span>
+      <span class="content"></span>
+    </li>
+
+    <li class="detail-item">
+      <span class="name">微信账号</span>
+      <span class="content"></span>
+    </li>
+
+    <li class="detail-item">
+      <span class="name">手机号</span>
+      <span class="content"></span>
+    </li>
+
+     -->
+
+
+
+</ul>
+
+
+<!-- 弹窗，填写备注信息 -->
+<div class="mask flex_panel" style="display:none;"></div>
+
+<div class="remark_alert" style="display:none;">
+    <div class="alert_title">备注信息</div>
+    <form class="alert_content flex_panel" id="remarkForm">
+        <input type="text" name="remark" class="main_input"  placeholder="请填写备注信息">
+        <input type="hidden" name="order_id" value="153674">
+        <input type="hidden" name="type" value="">
+        <img class="edit_img" src="/template/mobile/rainbow/static/images/remark.png"  alt="">
+    </form>
+    <div class="upgrade_btn order_list_upgrade_btn" style="width:100%;">
+        <a href="javascript:;" class="alert_btn">确认提交</a>
+    </div>
+</div>
+
+
+<script>
+    $("body").on('click', '.refuse', function() {
+//    let order_id = $(this).data('order_id');
+//    $("#remarkForm input[name='order_id']").val(order_id);
+        $("#remarkForm input[name='type']").val('refuse');
+        $(".mask").show();
+        $(".remark_alert").show();
+        $("body").css('overflow', 'hidden')
+    })
+
+    $("body").on('click', '.confirm', function() {
+//    let order_id = $(this).data('order_id');
+//    $("#remarkForm input[name='order_id']").val(order_id);
+        $("#remarkForm input[name='type']").val('confirm');
+        $(".mask").show();
+        $(".remark_alert").show();
+        $("body").css('overflow', 'hidden')
+    })
+
+    // 点击灰色区域，隐藏弹窗
+    $(".mask").on('click', function() {
+//    $("#remarkForm input[name='order_id']").val('');
+        $("#remarkForm input[name='reamrk']").val('');
+        $('.mask').hide();
+        $(".remark_alert").hide();
+        $("body").css('overflow', 'auto')
+    });
+
+    // 点击提交备注
+    $(".alert_btn").on('click', function() {
+        let reamrk_type = $("input[name='type']").val();
+        let tmp_remark = reamrk_type == 'confirm' ? '已确认' : '未收到';
+        // 添加默认备注
+        $("input[name='reamrk']").val() == '' ? $("input[name='reamrk']").val(tmp_remark) : '';
+
+        $.ajax({
+            url: '/index.php/Mobile/Order/UpdateOrderStatus',
+            type: 'POST',
+            dataType: 'json',
+            data: $("#remarkForm").serialize(),
+            success: function(res) {
+                if(res.status == 1){
+                    showErrorMsg(res.msg);
+                    if(reamrk_type == "confirm"){
+                        window.location = res.url;
+                    }else{
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000)
+                    }
+                }else{
+                    showErrorMsg(res.msg);
+                }
+            }
+        })
+
+        // 隐藏弹框
+        $("#remarkForm input[name='reamrk']").val('');
+//    $("#remarkForm input[name='order_id']").val('');
+        $('.mask').hide();
+        $(".remark_alert").hide();
+        $("body").css('overflow', 'auto')
+
+    });
+
+
+    // 查看大图
+    function showImg(url) {
+        //alert(url);
+        var showImg = '<div class="showImg">' +
+            '<img class="main_img" src="' + url + '" alt="">' +
+            '<img class="close" onclick="closeLayer()" src="/static/img/theme/close_white.png" alt="">' +
+            '</div>'
+        layer.open({
+            type: 1,
+            closeBtn: 1,
+            className: 'noBg',
+            title: false,
+            shadeClose: true,
+            content: showImg
+        });
+    }
+
+    // 关闭layer
+    function closeLayer() {
+        layer.closeAll();
+    }
+</script>
+
+</body>
+
+</html>

@@ -9,6 +9,7 @@ import cc.zody.yingxiao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -53,6 +54,7 @@ public class OrderController {
                 vo.setAliPay("支付宝号："+passer.getAliPay());
                 vo.setPassLevel("闯关等级：第"+ss.getLevelNum()+"关");
                 vo.setGmtCreate(dateToStr(ss.gmtCreate));
+                vo.setOrderId(ss.getId());
                 passVOList.add(vo);
             }
 
@@ -63,6 +65,15 @@ public class OrderController {
         return "user/order_list";
     }
 
+    /**
+     * 订单详情页面
+     * @return
+     */
+    @RequestMapping("/order_detail/{passId}")
+    public String order_detail(@PathVariable Integer passId){
+
+        return "user/order_detail";
+    }
 
     /**
      * 解析异常

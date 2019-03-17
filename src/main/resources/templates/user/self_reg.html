@@ -112,9 +112,9 @@
         <li class="setting-item flex_panel">
             <input type="text"  name="weChat" value="" maxlength="16" placeholder="请填写微信号"  onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
         </li>
-        <li class="setting-item flex_panel">
-            <input type="text"  name="aliPay" value="" maxlength="16" placeholder="请填写支付宝号" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">
-        </li>
+        <!--<li class="setting-item flex_panel">-->
+            <!--<input type="text"  name="aliPay" value="" maxlength="16" placeholder="请填写支付宝号" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="main">-->
+        <!--</li>-->
 
         <li class="setting-item flex_panel" style="display:none;">
             <label>
@@ -260,6 +260,8 @@
     }
     //提交表单
     function checkSubmit() {
+
+
         // check_confirm_password()
         // if (flag == false) {
         //     return;
@@ -284,6 +286,8 @@
                         location.href = '/user/index';
                     }, 1000)
                 } else {
+
+
                     alert("注册失败，请联系管理员！")
                 }
             }

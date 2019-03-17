@@ -15,7 +15,7 @@ public class OrderVO implements Serializable {
 
     public Integer passUserId;
 
-
+    public Integer orderId;
 
     /**
      * 头像

@@ -90,7 +90,7 @@
 <div class="orderList-search">
     <div class="order_search flex_panel">
         <div class="search_content flex_panel">
-            <img class="icon" src="/template/mobile/rainbow/static/images/theme/search.png" alt="">
+            <img class="icon" src="/static/img/theme/search.png" alt="">
             <input type="text" name="mobile" value="" class="searchInput" placeholder="请输入昵称或手机号">
         </div>
         <div class="search_btn" onclick="search()">搜索</div>
@@ -125,14 +125,14 @@
     <div class="maleri30 clearfix"  th:each="order,orderStat:${orderList}" >
 
         <div class="list-item">
-            <a href="/index.php/Mobile/Order/order_detail/id/153674.html">
+            <a th:href="@{/order/order_detail/{id} (id=${order.orderId})}">
                 <!-- 商品信息 循环开始 -->
                 <div class="order-info flex_panel">
                     闯关时间：<span th:text="${order.gmtCreate}"></span>
                     <span class="order_status_text">待确认</span>
                 </div>
                 <div class="goods-info flex_panel">
-                    <img class="goods-img" src="/template/mobile/rainbow/static/images/user68.jpg"  alt="">
+                    <img class="goods-img" src="/static/img/theme/user68.jpg"  alt="">
                     <div class="goods-detail">
                         <div class="info flex_panel">
                             <span class="user_name" th:text="${order.passUsername}"></span>
@@ -152,9 +152,9 @@
                         <div class="info flex_panel">
                             <span class="paytypeWx" th:text="${order.weChat}"></span>
                         </div>
-                        <div class="info flex_panel">
-                            <span class="paytypeZfb" th:text="${order.aliPay}"></span>
-                        </div>
+                        <!--<div class="info flex_panel">-->
+                            <!--<span class="paytypeZfb" th:text="${order.aliPay}"></span>-->
+                        <!--</div>-->
                     </div>
                 </div>
                 <!-- 商品信息 循环结束 -->
@@ -162,9 +162,9 @@
             <!-- 是否被投诉 -->
             <div class="order-handle flex_panel">
                 <!-- 我的闯关 -->
-                <a class="handle-btn go_other" href="/index.php/Mobile/Complaint/index/give_gift_id/153674.html">投诉</a>
-                <a class="handle-btn go_other evaluate_button" href="javascript:;" data-log_id="" data-evaluate="0">评价</a>
-                <a class="handle-btn" href="/index.php/Mobile/Order/order_detail/id/153674.html">查看详情</a>
+                <!--<a class="handle-btn go_other" href="/index.php/Mobile/Complaint/index/give_gift_id/153674.html">投诉</a>-->
+                <!--<a class="handle-btn go_other evaluate_button" href="javascript:;" data-log_id="" data-evaluate="0">评价</a>-->
+                <a class="handle-btn" th:href="@{/order/order_detail/{id} (id=${order.orderId})}">查看详情</a>
             </div>
         </div>
 

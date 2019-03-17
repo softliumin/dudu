@@ -15338,7 +15338,7 @@ div.layui-m-layerbtn span{
     width: 12.8rem;
     max-height: 19.2rem;
     height: 19.2rem;
-    background: url(../images/theme/index_dialog_banner.png) no-repeat;
+    background: url(../img/theme/index_dialog_banner.png) no-repeat;
     background-size: 100% 100%;
     z-index: 100;
     top: 50%;
@@ -15359,7 +15359,7 @@ div.layui-m-layerbtn span{
 .index_dialog .dialog_line{
     height:1.967rem ;
     width: 100%;
-    background: url(../images/theme/dialog_title_line.png) no-repeat center center;
+    background: url(../img/theme/dialog_title_line.png) no-repeat center center;
     background-size: 70% 1px;
 }
 .index_dialog .dialog_content{

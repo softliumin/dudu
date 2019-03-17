@@ -12,11 +12,11 @@
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_505790_jfhfcf1fevq.css"/>
     <script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
-    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/public/js/global.js"></script>
-    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
-    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/global.js"></script>
+    <script src="/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
 </head>
 <body class="g4">
@@ -67,7 +67,7 @@
         })
     })
 </script>
-<link rel="stylesheet" href="/template/mobile/rainbow/static/css/style.css?v=0.2">
+<link rel="stylesheet" href="/static/css/style.css">
 <style>
     .classreturn{
         background-color: rgba(255, 255, 255, .1);
@@ -102,7 +102,10 @@
 
 
     <div class="upgrade_btn">
-        <a href="/user/gift_giving" class="upLevel">我要闯关</a>
+
+        <a th:if="${isHas!= true}"   class="upLevel" href="/user/gift_giving" > 我要闯关</a >
+        <a th:if="${isHas==true}" class="receiving" href="/order/order_list.html">审核中,请耐人等待... </a >
+
 
 
     </div>

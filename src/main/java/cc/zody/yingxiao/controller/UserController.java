@@ -105,7 +105,7 @@ public class UserController {
             vo.setReferrerId(user.getReferrerId());
 
             vo.setReferrerName(userService.findUserById(user.getReferrerId()).username);
-            vo.setLevelName(levelMap.get("" + user.getLevel() + ""));
+            vo.setLevelName(levelMap.get(user.getLevel()));
 
             model.addAttribute("user", vo);
         } catch (Exception e) {
@@ -229,6 +229,18 @@ public class UserController {
             String nextName = "关" + map.get(user.getLevel() + 1);
             model.addAttribute("levelNow", "第" + user.getLevel() + nowName);
             model.addAttribute("levelNext", "第" + (user.getLevel() + 1) + nextName);
+
+            // 判断是否已经闯关
+            Pass pass = new Pass();
+            pass.setUserId(user.getId());
+            pass.setLevelNum(user.getLevel() + 1);
+            List<Pass> listDb = passService.listByLevel(pass);
+            if (CollectionUtils.isEmpty(listDb)){
+                model.addAttribute("isHas",false); // 没闯关
+            }else{
+                model.addAttribute("isHas",true); // 已经闯关
+            }
+
         } catch (Exception e) {
             return "user/index";
         }
@@ -362,12 +374,9 @@ public class UserController {
 
                     } while (null != uu);
                     break;
-
             }
-
-
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return "user/gift_giving";
     }

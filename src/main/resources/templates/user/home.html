@@ -28,7 +28,7 @@
 </style>
 <div class="body_bg"></div>
 
-<link rel="stylesheet" href="/template/mobile/rainbow/static/css/swiper.4.0.7.css?v=20190308112730">
+<link rel="stylesheet" href="/static/css/swiper.4.0.7.css">
 <body>
 <!-- 首页 -->
 <div class="classreturn loginsignup " style="border: none;">
@@ -68,8 +68,9 @@
         <li style="color: rgba(255, 255, 255, .8);"><em>I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D:</em><span
                 th:text="${user.id} "></span>
         </li>
-        <li style="color: rgba(255, 255, 255, .8);"><em>等&nbsp;&nbsp;&nbsp; 级:</em>第<span th:text="${user.level} "/> 关&nbsp;&nbsp; <span th:text="${user.levelName} "/><i
-                class="that_button">等级介绍</i></li>
+        <li style="color: rgba(255, 255, 255, .8);"><em>等&nbsp;&nbsp;&nbsp; 级:</em>第<span th:text="${user.level} "/>关<span th:text="${user.levelName} "/>
+            <i class="that_button">等级介绍</i>
+        </li>
         <li style="color: rgba(255, 255, 255, .8);"><em>姓&nbsp;&nbsp;&nbsp; 名:</em><span th:text="${user.username} "/>
         </li>
         <li style="color: rgba(255, 255, 255, .8);"><em>推荐人:</em><span th:text="${user.referrerName} "/></li>
@@ -115,10 +116,50 @@
         在线客服： QQ 111111111            </div>
 </div>
 <!-- 底部客服 e-->
+<div class="index_dialog_mask"></div>
+<div class="index_dialog" >
+    <div class="dialog_title">
+        <img src="/static/img/theme/index_dialog_title.png" alt="title">
+    </div>
+    <div class="dialog_line"></div>
+    <div class="dialog_content">
+        <ul>
+            <li><img src="/static/img/theme/ad9feadc3ef10af6c02a73053f471d56.png" alt="第13关独孤求败"></li>
+            <li><img src="/static/img/theme/4a7f62f91a679e945847392df9e3716b.png" alt="第12关傲视天下"></li>
+            <li><img src="/static/img/theme/7dbd32a6547a544b0ecb671a3bea1aec.png" alt="第11关笑看风云"></li>
+            <li><img src="/static/img/theme/ab8894ff77ee6702d1797cbd751179cd.png" alt="第10关震古烁今"></li>
+            <li><img src="/static/img/theme/7e29939d7e3c0d56ee692fe67eda301c.png" alt="第9关名震四海"></li>
+            <li><img src="/static/img/theme/e18c1811136caf3ff1183b98f2f481e4.png" alt="第8关威名远播"></li>
+            <li><img src="/static/img/theme/e538a761b56ddc43cb1d6a17c33451cc.png" alt="第7关大名鼎鼎"></li>
+            <li><img src="/static/img/theme/19aefb0dc765be396c1c21e033f6e395.png" alt="第6关闻名遐迩"></li>
+            <li><img src="/static/img/theme/3cdb18ee44c378b648c03f4c43830f85.png" alt="第5关赫赫有名"></li>
+            <li><img src="/static/img/theme/ce7e84fc0effdd8124748ec09c78b45c.png" alt="第4关名噪一时"></li>
+            <li><img src="/static/img/theme/b87d552f154c801a91e898400b07c251.png" alt="第3关声明鹊起"></li>
+            <li><img src="/static/img/theme/fb0468b286ebb0a0a85f0760d399ccf6.png" alt="第2关小有名气"></li>
+            <li><img src="/static/img/theme/12f78c87e5cda24d5fc586ca7b6ce33b.png" alt="第1关声名不显"></li>
+            <li><img src="/static/img/theme/23544644eb2d2f0fef4b7fb194e5e290.png" alt="默默无闻"></li>
+        </ul>
+    </div>
+</div>
+<!-- 等级弹窗 e-->
+<a onclick="$('html,body').animate({'scrollTop':0},600)" class="back-to-top" id="topup">
+    <img src="/static/img/theme/topup.png">
+</a>
+
 
 </body>
 </body>
 
+<script>
+    $('.that_button').click(function(){
+        $('.index_dialog_mask').show();
+        $('.index_dialog').toggle();
+    })
+    $('.index_dialog_mask').click(function(){
+        $('.index_dialog_mask').hide();
+        $('.index_dialog').hide();
+    })
 
+</script>
 
 </html>

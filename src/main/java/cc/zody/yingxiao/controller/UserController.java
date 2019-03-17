@@ -193,8 +193,34 @@ public class UserController {
      * @return
      */
     @RequestMapping("/myTeam")
-    public String myTeam() {
+    public String myTeam(HttpServletRequest request,Model model) {
         try {
+            User user = getUserFromCookie(request);
+            if (null == user) {
+                return "user/index";
+            }
+            Map<Integer, String> levelMap = new HashMap<>();
+            List<UserLevel> userLevelList = userLevelService.queryAllLevel();
+            if (!CollectionUtils.isEmpty(userLevelList)) {
+                for (UserLevel level : userLevelList) {
+                    levelMap.put(level.getLevelNum(), level.getLevelName());
+                }
+            }
+            UserVO vo = new UserVO();
+            vo.setId(user.getId());
+            vo.setLevel(user.getLevel());
+            vo.setUsername(user.getUsername());
+            vo.setReferrerId(user.getReferrerId());
+            vo.setLevelName("第"+user.getLevel()+"关"+levelMap.get(user.getLevel()));
+            model.addAttribute("user", vo);
+
+            // 我的贡献
+            List<User> listContribute = userService.findUserByReferrerId(user.getReferrerId());
+            model.addAttribute("contribute",null ==listContribute?0:listContribute.size());
+            //  TODO 行会信息
+            model.addAttribute("myTeam","暂无");
+            // TODO 第1关及以上人数
+            model.addAttribute("myTeamUpLevel1","暂无");
 
         } catch (Exception e) {
 
@@ -662,12 +688,12 @@ public class UserController {
         DdResult<Boolean> result = DdResult.getSuccessResult();
         try {
             if (StringUtils.isEmpty(user.getReferrerTelNum())){
-                // TODO
-                user.setReferrerId(9);
+                // TODO 默认推荐人
+                user.setReferrerId(1);
             }else {
                 User uu =userService.findUserByTelNum(user.getReferrerTelNum());
                 if (null== uu){
-                    user.setReferrerId(9);
+                    user.setReferrerId(1);
                 }else{
                     user.setReferrerId(uu.getId());
                 }

@@ -101,6 +101,12 @@
         select * from user where id = #{id} limit 1;
     </select>
 
+    <select id="findUserByReferrerId" resultMap="userDo">
+        select * from user where referrer_id = #{id} limit 1;
+    </select>
+
+
+
 
 
     <select id="selectAllUser" resultMap="userDo">

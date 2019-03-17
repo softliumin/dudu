@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8" />
-    <!-- 去除自动识别电话号码 -->
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="x-rim-auto-match" content="none">
 
@@ -81,8 +79,8 @@
         <img class="icon" src="/static/img/theme/user68.jpg"  alt="">
 
         <div class="userInfo-detail">
-            <strong class="name" style="color: rgba(255, 255, 255, .8);">18910172928</strong>
-            <span class="tag">第1关声名不显</span>
+            <strong class="name" style="color: rgba(255, 255, 255, .8);" th:text="${user.username}"></strong>
+            <span class="tag" th:text="${user.levelName}"></span>
         </div>
     </div>
 

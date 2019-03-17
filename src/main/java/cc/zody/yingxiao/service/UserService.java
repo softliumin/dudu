@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * @author liumin
  * @since 2019-03-08
@@ -56,6 +58,15 @@ public class UserService {
      */
     public User findUserById(Integer id) {
         return  userMapper.selectById(id);
+    }
+
+    /**
+     * 根据推荐人查找
+     * @param
+     * @return
+     */
+    public List<User> findUserByReferrerId(Integer id) {
+        return  userMapper.findUserByReferrerId(id);
     }
 
 

@@ -18,9 +18,21 @@ public class EncryptUtil {
 
     /**
      * md5字符串(35小写)
+     * 实际上就是base64转码，不在使用md5
      */
     public static String md5(String data) {
-        return md5(data, null, false);
+        byte[] b = null;
+        String s = null;
+        try {
+            b = data.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+        }
+        if (b != null) {
+            s = new BASE64Encoder().encode(b);
+        }
+        return s;
+
+        //return md5(data, null, false);
     }
 
     private static String md5(String data, String salt, boolean upper) {
@@ -98,6 +110,8 @@ public class EncryptUtil {
     /**
      * des 加密
      */
+
+
 
 
 

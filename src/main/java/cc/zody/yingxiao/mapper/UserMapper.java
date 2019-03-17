@@ -24,6 +24,8 @@ public interface UserMapper {
 
     User selectById( @Param("id")Integer id);
 
+    List<User> findUserByReferrerId( @Param("id")Integer id);
+
     Integer updateUserLevel(User user);
 
 

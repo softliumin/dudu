@@ -17,6 +17,7 @@ import cc.zody.yingxiao.service.AddressService;
 import cc.zody.yingxiao.service.PassService;
 import cc.zody.yingxiao.service.UserLevelService;
 import cc.zody.yingxiao.service.UserService;
+import cc.zody.yingxiao.util.EncryptUtil;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,10 +71,13 @@ public class UserController {
      * 用户登录首页
      */
     @RequestMapping("/index")
-    public String index() {
+    public String index(HttpServletRequest request) {
         try {
-
-
+            //假如登录ok就跑到home页面
+            User uu = getUserFromCookie(request);
+            if (null!= uu){
+                return "user/home";
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,7 +131,7 @@ public class UserController {
         try {
             Boolean loginResult = userService.login(username, password);
             if (null != loginResult && loginResult == true) {
-                Cookie cookie = new Cookie("dudu", username);
+                Cookie cookie = new Cookie("dudu", EncryptUtil.getBase64(username));
                 cookie.setPath("/");
                 httpResponse.addCookie(cookie);
             } else {
@@ -429,12 +433,12 @@ public class UserController {
             User user = getUserFromCookie(request);
             if (null != user) {
                 model.addAttribute("user", user);
-                return "user/index";
+                return "user/userDetail";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "user/userDetail";
+        return "user/index";
     }
 
     /**
@@ -613,12 +617,8 @@ public class UserController {
     public DdResult ajaxHelpRegister(HttpServletRequest request, RegisterVO user) {
         DdResult<Boolean> result = DdResult.getSuccessResult();
         try {
-            List<Cookie> list = Arrays.asList(request.getCookies());
-            Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
-            if (optionalCookie.isPresent()) {
-                user.setReferrerId(Integer.parseInt(optionalCookie.get().getValue()));
-            }
-
+            User uu = getUserFromCookie(request);
+            user.setReferrerId(uu.getId());
             Boolean dbResult = userService.register(user);
             if (!dbResult) {
                 result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), "注册失败!");
@@ -688,7 +688,7 @@ public class UserController {
             List<Cookie> list = Arrays.asList(request.getCookies());
             Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
             if (optionalCookie.isPresent()) {
-                User user = userService.findUserByTelNum(optionalCookie.get().getValue());
+                User user = userService.findUserByTelNum(EncryptUtil.getFromBase64(optionalCookie.get().getValue()));
                 return user;
             } else {
                 return null;

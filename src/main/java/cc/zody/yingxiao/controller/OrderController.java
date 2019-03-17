@@ -6,6 +6,7 @@ import cc.zody.yingxiao.model.OrderVO;
 import cc.zody.yingxiao.model.PassVO;
 import cc.zody.yingxiao.service.PassService;
 import cc.zody.yingxiao.service.UserService;
+import cc.zody.yingxiao.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +90,7 @@ public class OrderController {
             List<Cookie> list = Arrays.asList(request.getCookies());
             Optional<Cookie> optionalCookie = list.stream().filter(co -> co.getName().equals("dudu")).findFirst();
             if (optionalCookie.isPresent()) {
-                User user = userService.findUserByTelNum(optionalCookie.get().getValue());
+                User user = userService.findUserByTelNum(EncryptUtil.getFromBase64(optionalCookie.get().getValue()));
                 return user;
             } else {
                 return null;

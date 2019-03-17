@@ -1053,7 +1053,7 @@ div.mobilePassword-mask{
     color: rgba(255, 255, 255, .8);
 }
 .remark_alert{
-    background: url(../images/theme/alert_banner.png) no-repeat;
+    background: url(/static/img/theme/alert_banner.png) no-repeat;
     background-size: 100% 100%;
     padding: 0 .5rem;
 }

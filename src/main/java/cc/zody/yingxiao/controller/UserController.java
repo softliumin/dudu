@@ -76,12 +76,31 @@ public class UserController {
             //假如登录ok就跑到home页面
             User uu = getUserFromCookie(request);
             if (null!= uu){
-                return "user/home";
+                return "redirect:/user/home";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "user/index";
+    }
+
+    /**
+     * 退出登录
+     * @param request
+     * @param httpResponse
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse httpResponse) {
+        try {
+            Cookie cookie = new Cookie("dudu", "out");
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            httpResponse.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/user/index";
     }
 
 
@@ -132,6 +151,7 @@ public class UserController {
             Boolean loginResult = userService.login(username, password);
             if (null != loginResult && loginResult == true) {
                 Cookie cookie = new Cookie("dudu", EncryptUtil.getBase64(username));
+                cookie.setMaxAge(3600);
                 cookie.setPath("/");
                 httpResponse.addCookie(cookie);
             } else {
@@ -749,6 +769,7 @@ public class UserController {
 /**
  * sudo systemctl start mariadb
  * systemctl stop mariadb
+ * nohup java -jar yingxiao-0.0.1-SNAPSHOT.jar &
  *
  */
 

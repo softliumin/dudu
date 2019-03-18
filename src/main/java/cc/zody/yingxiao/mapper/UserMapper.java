@@ -30,6 +30,7 @@ public interface UserMapper {
 
 
     Integer updateWeChat(Integer id,String weChat);
+    Integer upLevel(Integer uid);
 
     Integer updateAliPay(Integer id,String aliPay);
 

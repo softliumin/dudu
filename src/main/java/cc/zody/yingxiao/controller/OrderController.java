@@ -14,6 +14,7 @@ import cc.zody.yingxiao.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -149,6 +150,20 @@ public class OrderController {
                     // TODO
                     break;
             }
+            /**
+             * 尝试升级(所有的闯关都审核ok，则级别直接+1)
+             */
+            Pass pa = passService.queryById(order_id);
+            Integer levelNum = pa.getLevelNum();
+            List<Pass> passList = passService.listByUser(pa);
+            if (!CollectionUtils.isEmpty(passList)){
+                Optional<Pass> op = passList.stream().filter(aa -> aa.getPassStatus()!=1 ).findFirst();
+                if (!op.isPresent()){
+                    // 升级
+                    userService.upLevel(pa.getUserId());
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());

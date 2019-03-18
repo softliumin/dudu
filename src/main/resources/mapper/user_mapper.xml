@@ -113,4 +113,12 @@
          select * from user where 1=1
     </select>
 
+
+    <update id="upLevel">
+        update user set
+        level=level+1
+        ,gmt_modified = now()
+        where id = #{id}
+    </update>
+
 </mapper>

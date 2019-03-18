@@ -285,6 +285,7 @@ public class UserController {
             Pass pass = new Pass();
             pass.setUserId(user.getId());
             pass.setLevelNum(user.getLevel() + 1);
+            pass.setPassStatus(PassStatusEnum.OK.code());
             List<Pass> listDb = passService.listByLevel(pass);
             if (CollectionUtils.isEmpty(listDb)){
                 model.addAttribute("isHas",false); // 没闯关

@@ -38,7 +38,9 @@
 
 
     <select id="listByLevel" resultMap="passDo">
-        select * from pass where user_id = #{userId} and level_num = #{levelNum}
+        select * from pass where user_id = #{userId}
+        and level_num = #{levelNum}
+        and pass_status != #{passStatus}
     </select>
 
     <update id="updatePassStatus">

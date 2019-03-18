@@ -76,6 +76,12 @@ public class UserService {
         return userMapper.updateWeChat(id, weChat);
     }
 
+    // 升1级
+    public Integer upLevel(Integer uid){
+
+        return userMapper.upLevel(uid);
+    }
+
     public Integer updateAliPay(Integer id,String aliPay){
 
         return userMapper.updateAliPay(id, aliPay);

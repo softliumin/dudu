@@ -2,6 +2,9 @@ package cc.zody.yingxiao.controller;
 
 import cc.zody.yingxiao.dataobject.Pass;
 import cc.zody.yingxiao.dataobject.User;
+import cc.zody.yingxiao.enums.DdResultCodeEnum;
+import cc.zody.yingxiao.enums.PassStatusEnum;
+import cc.zody.yingxiao.model.DdResult;
 import cc.zody.yingxiao.model.OrderVO;
 import cc.zody.yingxiao.model.PassVO;
 import cc.zody.yingxiao.service.PassService;
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +57,9 @@ public class OrderController {
                 User passer = userService.findUserById(ss.getPassUserId());
                 vo.setPassUserId(pass.getPassUserId());
                 vo.setPassTelNum(passer.getTelNum());
-                vo.setWeChat("微信号："+passer.getWeChat());
-                vo.setAliPay("支付宝号："+passer.getAliPay());
-                vo.setPassLevel("闯关等级：第"+ss.getLevelNum()+"关");
+                vo.setWeChat("微信号：" + passer.getWeChat());
+                vo.setAliPay("支付宝号：" + passer.getAliPay());
+                vo.setPassLevel("闯关等级：第" + ss.getLevelNum() + "关");
                 vo.setGmtCreate(dateToStr(ss.gmtCreate));
                 vo.setOrderId(ss.getId());
                 passVOList.add(vo);
@@ -69,20 +74,21 @@ public class OrderController {
 
     /**
      * 订单详情页面
+     *
      * @return
      */
     @RequestMapping("/order_detail/{passId}")
-    public String order_detail(@PathVariable Integer passId,HttpServletRequest request,Model model){
+    public String order_detail(@PathVariable Integer passId, HttpServletRequest request, Model model) {
         try {
-            Pass pass =  passService.queryById(passId);
+            Pass pass = passService.queryById(passId);
             OrderVO orderVO = new OrderVO();
             User user = userService.findUserById(pass.getPassUserId());
             orderVO.setWeChat(user.getWeChat());
             orderVO.setPassTelNum(user.getTelNum());
             orderVO.setPassUsername(user.getUsername());
-            orderVO.setPassLevel("第"+pass.getLevelNum()+"关"+ UserLevelService.all_level_info.get(pass.getLevelNum()));
-            model.addAttribute("orderVO",orderVO);
-        }catch (Exception e){
+            orderVO.setPassLevel("第" + pass.getLevelNum() + "关" + UserLevelService.all_level_info.get(pass.getLevelNum()));
+            model.addAttribute("orderVO", orderVO);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "user/order_detail";
@@ -114,7 +120,43 @@ public class OrderController {
     }
 
 
-    public String dateToStr(Date date){
+    /**
+     * 审核闯关流程
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateOrderStatus", method = RequestMethod.POST)
+    public DdResult updateOrderStatus(HttpServletRequest request, Integer order_id, String type, String remark) {
+        DdResult<Boolean> result = DdResult.getSuccessResult();
+        try {
+            Pass pass = new Pass();
+            pass.setId(order_id);
+            switch (type) {
+                case "confirm":
+                    pass.setRemark(remark);
+                    pass.setPassStatus(PassStatusEnum.OK.code());
+                    passService.updatePassStatus(pass);
+                    break;
+                case "refuse":
+                    pass.setRemark(remark);
+                    pass.setPassStatus(PassStatusEnum.NOT_OK.code());
+                    passService.updatePassStatus(pass);
+                    break;
+                case "":
+                    // TODO
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = DdResult.getFailureResult(DdResultCodeEnum.UNKNOW_EXCEPTION.code(), DdResultCodeEnum.UNKNOW_EXCEPTION.name());
+        }
+        return result;
+
+    }
+
+
+    public String dateToStr(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(date);
     }

@@ -14,6 +14,7 @@
         <result column="pass_status" jdbcType="INTEGER" property="passStatus"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
 
     <insert id="insertPass">
@@ -42,7 +43,7 @@
 
     <update id="updatePassStatus">
         update pass set pass_status=#{passStatus}
-        ,gmt_modified = now()
+        ,gmt_modified = now(),remark=#{remark}
         where id = #{id}
     </update>
 

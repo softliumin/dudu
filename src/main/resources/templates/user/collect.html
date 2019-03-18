@@ -164,8 +164,10 @@
 
         <div class="order-handle flex_panel">
             <!-- 闯关审核 -->
-            <a class="handle-btn refuse" data-order_id="153675" href="javascript:void(0);">审核失败</a>
-            <a class="handle-btn confirm" data-order_id="153675" href="javascript:void(0);">审核通过</a>
+            <div >
+
+            <a class="handle-btn refuse"   th:attr="data-order_id=${order.orderId}"  href="javascript:void(0);">审核失败</a>
+            <a class="handle-btn confirm"  th:attr="data-order_id=${order.orderId}"  href="javascript:void(0);">审核通过</a>
             <a class="handle-btn" href="/index.php/Mobile/Order/order_detail/id/153675/type/2.html">查看详情</a>
         </div>
 
@@ -351,7 +353,7 @@
         // 添加默认备注
         $("input[name='remark']").val() == '' ? $("input[name='remark']").val(tmp_remark) : '';
         $.ajax({
-            url: '/index.php/Mobile/Order/UpdateOrderStatus',
+            url: '/order/updateOrderStatus',
             type: 'POST',
             dataType: 'json',
             data: $("#remarkForm").serialize(),
@@ -359,9 +361,10 @@
                 if (res.status == 1) {
                     showErrorMsg(res.msg);
                     if(reamrk_type == "confirm"){
-                        if(res.data == 1){
+                        if(res.code == 1){
                             window.location.reload();
                         }else{
+                            alert();
                             window.location = res.url;
                         }
                     }else{
@@ -371,7 +374,7 @@
                     }
 
                 } else {
-                    showErrorMsg(res.msg);
+                    showErrorMsg(res.message);
                     setTimeout(function() {
                         window.location.reload();
                     }, 1000)

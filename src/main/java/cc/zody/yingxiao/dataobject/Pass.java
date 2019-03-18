@@ -44,14 +44,18 @@ public class Pass implements Serializable {
     /**
      * 发货方式
      */
-    public Integer  expressType;
+    public Integer expressType;
 
     /**
      * 发货状态
      */
-    public Integer  expressStatus;
+    public Integer expressStatus;
 
 
+    /**
+     * 审核备注
+     */
+    public String remark;
 
 
     /**

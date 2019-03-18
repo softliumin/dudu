@@ -83,8 +83,9 @@
 </style>
 
 <div class="order__detail--head">
-    <div class="order__status" style="color:rgba(255, 255, 255, .8);">
-        待确认  </div>
+    <div class="order__status" style="color:rgba(255, 255, 255, .8);" th:if="${orderVO.orderStatus}==1">待确认</div>
+    <div class="order__status" style="color:rgba(255, 255, 255, .8);" th:if="${orderVO.orderStatus}!=1">已经确认</div>
+
 </div>
 
 <ul class="detail-list">

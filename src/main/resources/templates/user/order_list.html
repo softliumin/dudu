@@ -129,7 +129,8 @@
                 <!-- 商品信息 循环开始 -->
                 <div class="order-info flex_panel">
                     闯关时间：<span th:text="${order.gmtCreate}"></span>
-                    <span class="order_status_text">待确认</span>
+                    <span class="order_status_text" th:if="${order.orderStatus}!=1">待确认</span>
+                    <span class="order_status_text" th:if="${order.orderStatus}==1">已确认</span>
                 </div>
                 <div class="goods-info flex_panel">
                     <img class="goods-img" src="/static/img/theme/user68.jpg"  alt="">
@@ -417,38 +418,35 @@
         }
         before_request = 0;
         $("#tip-text").hide();
-        $.ajax({
-            type: "GET",
-            url: "/index.php?m=Mobile&c=Order&a=order_list&type=&is_ajax=1&p=" + page + "&user_id=" + user_ids +"&order_type=" + order_type +"&mobile=" + searchVal, //+tab,
-            success: function(data) {
-                page++;
-                loadingToogle(false);
-                if ($.trim(data) == '' || !data) {
-                    if ($(".orderList-list").children().length == 0) {
-                        $(".to-load").hide();
-                    }
-                    if(option == 1){
-                        $("#tip-text").show();
-                    }else{
-                        $(".orderList-list").empty().html();
-                        $(".empty").show();
-                    }
-                    return false;
-                } else {
-                    before_request = 1;
-                    $("#tip-text").hide();
-                    $(".empty").hide();
-                    if(option == 1){
-                        $(".orderList-list").append(data);
-                    }else{
-                        $(".orderList-list").empty().html(data);
-                    }
-
-                }
-
-            }
-
-        });
+        // $.ajax({
+        //     type: "GET",
+        //     url: "/index.php?m=Mobile&c=Order&a=order_list&type=&is_ajax=1&p=" + page + "&user_id=" + user_ids +"&order_type=" + order_type +"&mobile=" + searchVal, //+tab,
+        //     success: function(data) {
+        //         page++;
+        //         loadingToogle(false);
+        //         if ($.trim(data) == '' || !data) {
+        //             if ($(".orderList-list").children().length == 0) {
+        //                 $(".to-load").hide();
+        //             }
+        //             if(option == 1){
+        //                 $("#tip-text").show();
+        //             }else{
+        //                 $(".orderList-list").empty().html();
+        //                 $(".empty").show();
+        //             }
+        //             return false;
+        //         } else {
+        //             before_request = 1;
+        //             $("#tip-text").hide();
+        //             $(".empty").hide();
+        //             if(option == 1){
+        //                 $(".orderList-list").append(data);
+        //             }else{
+        //                 $(".orderList-list").empty().html(data);
+        //             }
+        //         }
+        //     }
+        // });
     }
 
 

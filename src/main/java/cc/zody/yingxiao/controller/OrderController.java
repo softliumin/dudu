@@ -5,6 +5,7 @@ import cc.zody.yingxiao.dataobject.User;
 import cc.zody.yingxiao.model.OrderVO;
 import cc.zody.yingxiao.model.PassVO;
 import cc.zody.yingxiao.service.PassService;
+import cc.zody.yingxiao.service.UserLevelService;
 import cc.zody.yingxiao.service.UserService;
 import cc.zody.yingxiao.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +72,19 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/order_detail/{passId}")
-    public String order_detail(@PathVariable Integer passId){
-
+    public String order_detail(@PathVariable Integer passId,HttpServletRequest request,Model model){
+        try {
+            Pass pass =  passService.queryById(passId);
+            OrderVO orderVO = new OrderVO();
+            User user = userService.findUserById(pass.getPassUserId());
+            orderVO.setWeChat(user.getWeChat());
+            orderVO.setPassTelNum(user.getTelNum());
+            orderVO.setPassUsername(user.getUsername());
+            orderVO.setPassLevel("第"+pass.getLevelNum()+"关"+ UserLevelService.all_level_info.get(pass.getLevelNum()));
+            model.addAttribute("orderVO",orderVO);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "user/order_detail";
     }
 

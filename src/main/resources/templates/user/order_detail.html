@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8" />
 
@@ -14,11 +13,11 @@
     <script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
 
-    <script src="/template/mobile/rainbow/static/js/style.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/template/mobile/rainbow/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/public/js/global.js"></script>
-    <script src="/template/mobile/rainbow/static/js/layer.js"  type="text/javascript" ></script>
-    <script src="/template/mobile/rainbow/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/global.js"></script>
+    <script src="/static/js/layer.js"  type="text/javascript" ></script>
+    <script src="/static/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2019/02-19/f7fab1ff9dda5f5b41845b23fad3b986.png" media="screen"/>
 </head>
 <body class="g4">
@@ -94,25 +93,25 @@
     </li>
     <li class="detail-item">
         <span class="name">姓名：</span>
-        <span class="content">18961182106</span>
+        <span class="content" th:text="${orderVO.passUsername}"></span>
     </li>
     <li class="detail-item">
         <span class="name">手机号：</span>
-        <span class="content">18961182106</span>
+        <span class="content" th:text="${orderVO.passTelNum}"></span>
     </li>
-    <li class="detail-item">
-        <span class="name">备用手机号：</span>
-        <span class="content">13775033821</span>
-    </li>
+    <!--<li class="detail-item">-->
+        <!--<span class="name">备用手机号：</span>-->
+        <!--<span class="content">13775033821</span>-->
+    <!--</li>-->
     <li class="detail-item">
         <span class="name">微信号：</span>
-        <span class="content">13775033821</span>
+        <span class="content" th:text="${orderVO.weChat}"></span>
     </li>
 </ul>
 <ul class="detail-list">
     <li class="detail-item">
         <span class="name">闯关等级：</span>
-        <span class="content">第1关声名不显</span>
+        <span class="content" th:text="${orderVO.passLevel}">第1关声名不显</span>
     </li>
 </ul>
 

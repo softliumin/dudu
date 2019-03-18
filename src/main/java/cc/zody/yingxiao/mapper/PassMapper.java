@@ -20,6 +20,8 @@ public interface PassMapper {
 
     List<Pass> listByLevel(Pass pss);
 
+    Pass listById(Integer id);
+
 
     Integer updatePassStatus(Pass pss);
 

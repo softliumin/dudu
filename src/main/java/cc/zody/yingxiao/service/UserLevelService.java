@@ -5,7 +5,9 @@ import cc.zody.yingxiao.mapper.UserLevelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +16,11 @@ import java.util.List;
  */
 @Service
 public class UserLevelService {
+
+    /**
+     * 所有的级别信息
+     */
+    public static Map<Integer, String> all_level_info = new HashMap<>();
 
     @Autowired
     UserLevelMapper userLevelMapper;

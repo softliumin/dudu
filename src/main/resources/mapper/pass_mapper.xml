@@ -31,6 +31,9 @@
         select * from pass where pass_user_id = #{id}
     </select>
 
+    <select id="listById" resultMap="passDo">
+        select * from pass where id = #{id} limit 1
+    </select>
 
 
     <select id="listByLevel" resultMap="passDo">

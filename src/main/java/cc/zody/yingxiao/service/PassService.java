@@ -24,6 +24,10 @@ public class PassService {
     }
 
 
+    public Pass queryById(Integer id){
+        return passMapper.listById(id);
+    }
+
     public List<Pass> listByLevel(Pass pass) {
         return passMapper.listByLevel(pass);
     }

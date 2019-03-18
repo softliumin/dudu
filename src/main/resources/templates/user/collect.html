@@ -358,13 +358,12 @@
             dataType: 'json',
             data: $("#remarkForm").serialize(),
             success: function(res) {
-                if (res.status == 1) {
-                    // showErrorMsg(res.msg);
+                if (res.order == 1) {
                     if(reamrk_type == "confirm"){
                         if(res.code == 1){
                             window.location.reload();
                         }else{
-                            alert();
+                            alert(res.message);
                             window.location = res.url;
                         }
                     }else{
@@ -374,7 +373,7 @@
                     }
 
                 } else {
-                    showErrorMsg(res.message);
+                    alert(res.message);
                     setTimeout(function() {
                         window.location.reload();
                     }, 1000)

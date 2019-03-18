@@ -18,6 +18,11 @@ public class OrderVO implements Serializable {
     public Integer orderId;
 
     /**
+     * 审核状态
+     */
+    public Integer orderStatus;
+
+    /**
      * 头像
      */
     public String passUserImg;

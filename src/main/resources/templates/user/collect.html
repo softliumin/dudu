@@ -129,7 +129,8 @@
             <!-- 商品信息 循环开始 -->
             <div class="order-info flex_panel">
                 闯关时间：<span th:text="${order.getGmtCreate()}"></span>
-                <span class="order_status_text">待确认</span>
+                <span class="order_status_text" th:if="${order.orderStatus}!=1">待确认</span>
+                <span class="order_status_text" th:if="${order.orderStatus}==1">已确认</span>
             </div>
             <div class="goods-info flex_panel">
                 <img class="goods-img" src="/static/img/theme/user68.jpg"  alt="">
@@ -164,10 +165,9 @@
 
         <div class="order-handle flex_panel">
             <!-- 闯关审核 -->
-            <div >
+            <a class="handle-btn refuse"  th:if="${order.orderStatus}!=1"  th:attr="data-order_id=${order.orderId}"  href="javascript:void(0);">审核失败</a>
+            <a class="handle-btn confirm" th:if="${order.orderStatus}!=1"  th:attr="data-order_id=${order.orderId}"  href="javascript:void(0);">审核通过</a>
 
-            <a class="handle-btn refuse"   th:attr="data-order_id=${order.orderId}"  href="javascript:void(0);">审核失败</a>
-            <a class="handle-btn confirm"  th:attr="data-order_id=${order.orderId}"  href="javascript:void(0);">审核通过</a>
             <a class="handle-btn" href="/index.php/Mobile/Order/order_detail/id/153675/type/2.html">查看详情</a>
         </div>
 
@@ -359,7 +359,7 @@
             data: $("#remarkForm").serialize(),
             success: function(res) {
                 if (res.status == 1) {
-                    showErrorMsg(res.msg);
+                    // showErrorMsg(res.msg);
                     if(reamrk_type == "confirm"){
                         if(res.code == 1){
                             window.location.reload();

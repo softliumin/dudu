@@ -62,6 +62,8 @@ public class OrderController {
                 vo.setPassLevel("闯关等级：第" + ss.getLevelNum() + "关");
                 vo.setGmtCreate(dateToStr(ss.gmtCreate));
                 vo.setOrderId(ss.getId());
+                // 审核状态
+                vo.setOrderStatus(ss.getPassStatus());
                 passVOList.add(vo);
             }
 

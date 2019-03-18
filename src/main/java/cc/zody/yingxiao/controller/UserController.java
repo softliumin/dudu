@@ -242,13 +242,14 @@ public class UserController {
             List<OrderVO> passVOList = new ArrayList<>();
             for (Pass ss : list) {
                 OrderVO vo = new OrderVO();
-                User passer = userService.findUserById(ss.getPassUserId());
+                User passer = userService.findUserById(ss.getUserId());
                 vo.setPassUserId(user.getId());
                 vo.setPassTelNum(passer.getTelNum());
                 vo.setWeChat("微信号："+passer.getWeChat());
                 vo.setPassLevel("闯关等级：第"+ss.getLevelNum()+"关");
                 vo.setGmtCreate(dateToStr(ss.gmtCreate));
                 vo.setOrderId(ss.getId());
+                vo.setOrderStatus(ss.getPassStatus());
                 passVOList.add(vo);
             }
             model.addAttribute("orderList",passVOList);

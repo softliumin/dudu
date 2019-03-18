@@ -26,3 +26,9 @@ The following guides illustrates how to use certain features concretely:
 
 ### 每日统计信息设计
 
+
+## TODO
+- 每次的闯关升级
+- 页面的显示
+
+
